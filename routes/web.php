@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TwofactorCodeController;
+use App\Http\Controllers\BotManController;
 use Illuminate\Support\Facades\Route;
 
 //rutas de landing page
@@ -19,8 +20,14 @@ Route::get('verify', [TwofactorCodeController::class, 'verify'])->name('verify')
 Route::get('verify/resend', [TwofactorCodeController::class, 'resend'])->name('verify.resend');
 Route::post('verify', [TwofactorCodeController::class, 'verifyPost'])->name('verify.post');
 
+//ruta para el chatbot
+Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 
+//vistas para el dashboard principal
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware(['auth', 'two.factor']);
 
+//vitas para admin/usuarios
+Route::get('/admin/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->name('admin.usuarios.index')->middleware(['auth', 'two.factor']);
 
 
 Route::get('/dashboard', function () {

@@ -44,7 +44,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="assets/img/logo.png" alt="logoBiblioteca"  width="100">
+                <img src="assets/img/logo.png" alt="logoBiblioteca" width="100">
                 <!-- <h1 class="sitename">AgriCulture</h1>  -->
             </a>
             <nav id="navmenu" class="navmenu">
@@ -965,6 +965,14 @@
 
     </footer>
 
+    <style>
+        #scroll-top {
+    bottom: 100px;
+    right: 20px;
+    position: fixed;
+    z-index: 999;
+}
+    </style>
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
@@ -981,6 +989,14 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
+    <!-- Botman Script -->
+    <script src="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js"></script>
+    <script>
+        var botmanWidget = {
+            aboutText: "🤖 ChatBot Biblioteca",
+            introMessage: "✋ ¡Hola! Soy tu asistente virtual de la Biblioteca"
+        };
+    </script>
 
 </body>
 
