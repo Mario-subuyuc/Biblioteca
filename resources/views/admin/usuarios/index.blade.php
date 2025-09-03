@@ -1,4 +1,4 @@
 @extends('layouts.admin')
 @section('content')
-<h1>Panel Usuarios index</h1>
+<h1>Bienvenido {{ Auth::user()->email }} </h1>
 @endsection

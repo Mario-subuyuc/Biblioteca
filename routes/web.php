@@ -15,6 +15,7 @@ Route::get('/testimonials', function () {    return view('testimonials');});
 Route::get('/blog', function () {    return view('blog');});
 Route::get('/contact', function () {    return view('contact');});
 
+
 //rutas de doble factor de autentificacion
 Route::get('verify', [TwofactorCodeController::class, 'verify'])->name('verify');
 Route::get('verify/resend', [TwofactorCodeController::class, 'resend'])->name('verify.resend');
@@ -31,7 +32,7 @@ Route::get('/admin/usuarios', [App\Http\Controllers\UsuarioController::class, 'i
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.index');
 })->middleware(['auth','two.factor'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
