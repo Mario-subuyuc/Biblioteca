@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {   return view('index');});
 //paginas para sobre nosotros, servicios, testimonios, blog y contacto
 Route::get('/about', function () {    return view('about');});
-Route::get('/services', function () {    return view('services');});
-Route::get('/testimonials', function () {    return view('testimonials');});
 Route::get('/blog', function () {    return view('blog');});
+Route::get('/blog-details', function () {    return view('blog-details');});
 Route::get('/contact', function () {    return view('contact');});
+Route::get('/services', function () {    return view('services');});
+
+
 
 
 //rutas de doble factor de autentificacion
@@ -35,6 +37,10 @@ Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth','two.factor'])->name('dashboard');
 
+
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,3 +48,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+

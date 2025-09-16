@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/logo2.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
@@ -29,22 +29,18 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: AgriCulture
-  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- Font Awesome Free CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="blog-page">
 
     <header id="header" class="header d-flex align-items-center position-relative">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between ">
+            <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="assets/img/logo.png" alt="AgriCulture">
+                <img src="assets/img/logo.png" alt="logoBiblioteca" width="100">
                 <!-- <h1 class="sitename">AgriCulture</h1>  -->
             </a>
             <nav id="navmenu" class="navmenu">
@@ -52,29 +48,7 @@
                     <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
                     <li><a href="{{ url('/about') }}">Nosotros</a></li>
                     <li><a href="{{ url('/services') }}">Servicios</a></li>
-                    <li><a href="{{ url('/testimonials') }}">Testimonios</a></li>
                     <li><a href="{{ url('/blog') }}">Blog</a></li>
-                    {{-- Dropdown --}}
-                    <li class="dropdown">
-                        <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown">
-                                <a href="#"><span>Deep Dropdown</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
                     <li><a href="{{ url('/contact') }}">Contacto</a></li>
                     {{-- Autenticación --}}
                     @if (Route::has('login'))
@@ -119,17 +93,8 @@
         <div class="page-title dark-background" data-aos="fade"
             style="background-image: url(assets/img/page-title-bg.webp);">
             <div class="container position-relative">
-                <h1>Blog</h1>
-                <p>
-                    Home
-                    /
-                    Blog</p>
-                <nav class="breadcrumbs">
-                    <ol>
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current">Blog</li>
-                    </ol>
-                </nav>
+                <h1>Activides</h1>
+                <p>brindamos actividades de aprendizaje a gran variedad de publico</p>
             </div>
         </div><!-- End Page Title -->
 
@@ -366,98 +331,19 @@
 
     </main>
 
-    <footer id="footer" class="footer dark-background">
-
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4 col-md-6 footer-about">
-                        <a href="index.html" class="logo d-flex align-items-center">
-                            <span class="sitename">AgriCulture</span>
-                        </a>
-                        <div class="footer-contact pt-3">
-                            <p>A108 Adam Street</p>
-                            <p>New York, NY 535022</p>
-                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                            <p><strong>Email:</strong> <span>info@example.com</span></p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">Product Management</a></li>
-                            <li><a href="#">Marketing</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Hic solutasetp</h4>
-                        <ul>
-                            <li><a href="#">Molestiae accusamus iure</a></li>
-                            <li><a href="#">Excepturi dignissimos</a></li>
-                            <li><a href="#">Suscipit distinctio</a></li>
-                            <li><a href="#">Dilecta</a></li>
-                            <li><a href="#">Sit quas consectetur</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Nobis illum</h4>
-                        <ul>
-                            <li><a href="#">Ipsam</a></li>
-                            <li><a href="#">Laudantium dolorum</a></li>
-                            <li><a href="#">Dinera</a></li>
-                            <li><a href="#">Trodelas</a></li>
-                            <li><a href="#">Flexo</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer id="footer" class="footer dark-background text-light py-4">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2025 Biblioteca Comunitaria Forjando Mentes Brillantes</p>
+            <p class="mb-1">Tel: +502 XXXX XXXX</p>
+            <p class="mb-1">2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+            <p class="mb-0">
+                <a href="https://www.facebook.com/profile.php?id=61553557262587" class="text-light me-3"><i
+                        class="bi bi-facebook"></i></a>
+                <a href="mailto:bibliotecacomunitariaeltejar@gmail.com" class="text-light"><i
+                        class="bi bi-envelope"></i></a>
+            </p>
         </div>
-
-        <div class="copyright text-center">
-            <div
-                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-                <div class="d-flex flex-column align-items-center align-items-lg-start">
-                    <div>
-                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
-                </div>
-
-                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-
-            </div>
-        </div>
-
     </footer>
 
     <!-- Scroll Top -->
