@@ -31,6 +31,30 @@
 
     <!-- Font Awesome Free CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+    <style>
+        .info-card {
+            border: 2px solid #FF5733;
+            /* verde Bootstrap */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s ease-in-out;
+            background: #fff;
+        }
+
+        .info-card:hover {
+            border-color: #6c1603;
+            /* un verde más oscuro al pasar el mouse */
+            transform: translateY(-5px);
+        }
+
+        .page-title.dark-background h1,
+        .page-title.dark-background p {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+            /* opcional para resaltar más */
+        }
+    </style>
 
 </head>
 
@@ -49,7 +73,7 @@
                     <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
                     <li><a href="{{ url('/about') }}">Nosotros</a></li>
                     <li><a href="{{ url('/services') }}">Servicios</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
+                    <li><a href="{{ url('/blog') }}">Actividades</a></li>
                     <li><a href="{{ url('/contact') }}">Contacto</a></li>
                     {{-- Autenticación --}}
                     @if (Route::has('login'))
@@ -91,10 +115,12 @@
     <main class="main">
 
         <!-- Page Title -->
-        <div class="page-title" style="background-image: url(assets/img/contacto.jpg);">
-            <div class="container">
-                <h1 class="fw-bold">Contáctanos</h1>
-                <p class="lead">Será un placer atenderte y apoyarte en tu aprendizaje</p>
+        <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/contacto.jpg);">
+            <div class="container position-relative">
+                <h1>Contáctanos</h1>
+                <br><br>
+                <p>Será un placer atenderte y apoyarte en tu aprendizaje</p>
+
             </div>
         </div><!-- End Page Title -->
 
@@ -144,8 +170,8 @@
 
                             <div class="row gy-3">
                                 <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control" placeholder="Tu Nombre"
-                                        required>
+                                    <input type="text" name="name" class="form-control"
+                                        placeholder="Tu Nombre" required>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="email" class="form-control" name="email"
@@ -158,9 +184,10 @@
                                 <div class="col-12">
                                     <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
                                 </div>
-                                <div class="col-12 text-center">
-                                    <button type="submit">Enviar Mensaje</button>
-                                </div>
+                                <button type="submit"
+                                    style="background-color: #FF5733; color: #fff; border: none; padding: 10px 20px; border-radius: 6px;">
+                                    Enviar Mensaje
+                                </button>
                             </div>
                         </form>
 

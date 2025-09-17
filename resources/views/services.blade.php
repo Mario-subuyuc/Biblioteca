@@ -31,7 +31,14 @@
 
     <!-- Font Awesome Free CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
-
+    <style>
+        .page-title.dark-background h1,
+        .page-title.dark-background p {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.);
+            /* opcional para resaltar más */
+        }
+    </style>
 </head>
 
 <body class="services-page">
@@ -48,7 +55,7 @@
                     <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
                     <li><a href="{{ url('/about') }}">Nosotros</a></li>
                     <li><a href="{{ url('/services') }}">Servicios</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
+                    <li><a href="{{ url('/blog') }}">Actividades</a></li>
                     <li><a href="{{ url('/contact') }}">Contacto</a></li>
                     {{-- Autenticación --}}
                     @if (Route::has('login'))

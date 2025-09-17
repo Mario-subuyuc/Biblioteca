@@ -33,9 +33,12 @@ class TwoFactorCodeNotification extends Notification
     public function toMail(User $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("Tu código para acceder a la aplicación es: {$notifiable->two_factor_code}")
-            ->action('Verificar aquí', route('verify'))
-            ->line('Tu código expira en 10 minutos.');
+        ->subject('Código de verificación') // Título del correo
+        ->greeting('Hola ' . $notifiable->name . '!')
+        ->line('Tu código para acceder a la aplicación es: ' . $notifiable->two_factor_code)
+        ->line('Si no solicitaste este código, puedes ignorar este correo.')
+        ->action('Verificar aquí', route('verify'))
+        ->line('Tu código expira en 10 minutos.');
     }
     /**
      * Get the array representation of the notification.

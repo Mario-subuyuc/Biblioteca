@@ -31,7 +31,14 @@
 
     <!-- Font Awesome Free CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
-
+    <style>
+        .page-title.dark-background h1,
+        .page-title.dark-background p {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.);
+            /* opcional para resaltar más */
+        }
+    </style>
 </head>
 
 <body class="index-page">
@@ -43,12 +50,12 @@
                 <img src="assets/img/logo.png" alt="logoBiblioteca" width="100">
                 <!-- <h1 class="sitename">AgriCulture</h1>  -->
             </a>
-            <nav id="navmenu" class="navmenu" >
+            <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li ><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
+                    <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
                     <li><a href="{{ url('/about') }}">Nosotros</a></li>
                     <li><a href="{{ url('/services') }}">Servicios</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
+                    <li><a href="{{ url('/blog') }}">Actividades</a></li>
                     <li><a href="{{ url('/contact') }}">Contacto</a></li>
                     {{-- Autenticación --}}
                     @if (Route::has('login'))
@@ -159,7 +166,11 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2 style="color: #FF5733">Sistema Dewey</h2>
                 <p>Explora las principales áreas de conocimiento</p>
-            </div><!-- End Section Title -->
+                <p>El Sistema Dewey es una forma estandarizada de organizar los libros según sus temas.
+                    Divide el conocimiento en diez grandes categorías, lo que facilita identificar,
+                    ubicar y acceder rápidamente a la información dentro de la biblioteca.</p>
+            </div>
+            <!-- End Section Title -->
 
             <div class="content">
                 <div class="container">

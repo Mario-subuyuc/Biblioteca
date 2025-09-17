@@ -31,7 +31,14 @@
 
     <!-- Font Awesome Free CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
-
+    <style>
+        .page-title.dark-background h1,
+        .page-title.dark-background p {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+            /* opcional para resaltar más */
+        }
+    </style>
 </head>
 
 <body class="blog-page">
@@ -48,7 +55,7 @@
                     <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
                     <li><a href="{{ url('/about') }}">Nosotros</a></li>
                     <li><a href="{{ url('/services') }}">Servicios</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
+                    <li><a href="{{ url('/blog') }}">Actividades</a></li>
                     <li><a href="{{ url('/contact') }}">Contacto</a></li>
                     {{-- Autenticación --}}
                     @if (Route::has('login'))
@@ -91,9 +98,10 @@
 
         <!-- Page Title -->
         <div class="page-title dark-background" data-aos="fade"
-            style="background-image: url(assets/img/page-title-bg.webp);">
+            style="background-image: url(assets/img/actividades.jpg);">
             <div class="container position-relative">
                 <h1>Activides</h1>
+                <br><br>
                 <p>brindamos actividades de aprendizaje a gran variedad de publico</p>
             </div>
         </div><!-- End Page Title -->
@@ -102,30 +110,31 @@
         <section id="blog-posts-2" class="blog-posts-2 section">
 
             <div class="container">
+
                 <div class="row gy-4">
 
                     <div class="col-lg-4">
                         <article class="position-relative h-100">
 
                             <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/blog-1.jpg" class="img-fluid" alt="">
+                                <img src="assets/img/blog/.jpg" class="img-fluid" alt="">
                             </div>
 
                             <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>12</span>December</span>
+                                <span class="post-date"><span>10</span>Julio</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">John Doe</span>
+                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
                                 </div>
                                 <span class="px-3 text-black-50">/</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">Nutrición</span>
                                 </div>
                             </div>
 
                             <div class="post-content d-flex flex-column">
 
-                                <h3 class="post-title">Dolorum optio tempore voluptas dignissimos</h3>
-                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                                <h3 class="post-title">Programa de estimulacion con orientación en nutrición</h3>
+                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>leer más</span><i
                                         class="bi bi-arrow-right"></i></a>
 
                             </div>
@@ -141,19 +150,19 @@
                             </div>
 
                             <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>19</span>March</span>
+                                <span class="post-date"><span>09</span>julio</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Julia Parker</span>
+                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
                                 </div>
                                 <span class="px-3 text-black-50">/</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Economics</span>
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">Comunidad</span>
                                 </div>
                             </div>
 
                             <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">Nisi magni odit consequatur autem nulla dolorem</h3>
-                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                                <h3 class="post-title">Curso de  elaboracion de velas</h3>
+                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer más</span><i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
 
@@ -167,20 +176,19 @@
                                 <img src="assets/img/blog/blog-3.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>24</span>June</span>
+                                <span class="post-date"><span>11</span>Junio</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Maria Doe</span>
+                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
                                 </div>
                                 <span class="px-3 text-black-50">/</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Sports</span>
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">Comunidad</span>
                                 </div>
                             </div>
 
                             <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">Possimus soluta ut id suscipit ea ut. In quo quia et soluta
-                                    libero sit sint.</h3>
-                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                                <h3 class="post-title">Taller de preparacion de mora.</h3>
+                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
 
@@ -194,20 +202,20 @@
                                 <img src="assets/img/blog/blog-4.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>05</span>August</span>
+                                <span class="post-date"><span>28</span>Abril</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Maria Doe</span>
+                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
                                 </div>
                                 <span class="px-3 text-black-50">/</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Sports</span>
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">Agricultura</span>
                                 </div>
                             </div>
 
                             <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">Non rem rerum nam cum quo minus explicabo eius exercitationem.
+                                <h3 class="post-title">Evento de lanzamiento de huerto vertial.
                                 </h3>
-                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
 
@@ -222,20 +230,20 @@
                             </div>
 
                             <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>17</span>September</span>
+                                <span class="post-date"><span>15</span>Marzo</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">John Parker</span>
+                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
                                 </div>
                                 <span class="px-3 text-black-50">/</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">Niños</span>
                                 </div>
                             </div>
 
                             <div class="post-content d-flex flex-column">
 
-                                <h3 class="post-title">Accusamus quaerat aliquam qui debitis facilis consequatur</h3>
-                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                                <h3 class="post-title">Fauna de Guatemala</h3>
+                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
                                         class="bi bi-arrow-right"></i></a>
 
                             </div>
@@ -251,20 +259,20 @@
                             </div>
 
                             <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>07</span>December</span>
+                                <span class="post-date"><span>10</span>Febrero</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Julia White</span>
+                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
                                 </div>
                                 <span class="px-3 text-black-50">/</span>
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Economics</span>
+                                    <i class="bi bi-folder2"></i> <span class="ps-2">Comunidad</span>
                                 </div>
                             </div>
 
                             <div class="post-content d-flex flex-column">
 
-                                <h3 class="post-title">Distinctio provident quibusdam numquam aperiam aut</h3>
-                                <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                                <h3 class="post-title">Taller sobre clasificación de desechos</h3>
+                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
                                         class="bi bi-arrow-right"></i></a>
 
                             </div>
@@ -273,61 +281,10 @@
                     </div><!-- End post list item -->
 
                 </div>
+
             </div>
 
         </section><!-- /Blog Posts 2 Section -->
-
-        <!-- Blog Pagination Section -->
-        <section id="blog-pagination" class="blog-pagination section">
-
-            <div class="container">
-                <div class="d-flex justify-content-center">
-                    <ul>
-                        <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#" class="active">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li>...</li>
-                        <li><a href="#">10</a></li>
-                        <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </section><!-- /Blog Pagination Section -->
-
-        <!-- Call To Action Section -->
-        <section id="call-to-action" class="call-to-action section light-background">
-
-            <div class="content">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <h3>Subscribe To Our Newsletter</h3>
-                            <p class="opacity-50">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Nesciunt, reprehenderit!
-                            </p>
-                        </div>
-                        <div class="col-lg-6">
-                            <form action="forms/newsletter.php" class="form-subscribe php-email-form">
-                                <div class="form-group d-flex align-items-stretch">
-                                    <input type="email" name="email" class="form-control h-100"
-                                        placeholder="Enter your e-mail">
-                                    <input type="submit" class="btn btn-secondary px-4" value="Subcribe">
-                                </div>
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">
-                                    Your subscription request has been sent. Thank you!
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section><!-- /Call To Action Section -->
 
     </main>
 

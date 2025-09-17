@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/logo2.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
@@ -29,22 +29,25 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: AgriCulture
-  * Template URL: https://bootstrapmade.com/agriculture-bootstrap-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- Font Awesome Free CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+    <style>
+        .page-title.dark-background h1,
+        .page-title.dark-background p {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+            /* opcional para resaltar más */
+        }
+    </style>
 </head>
 
 <body class="blog-details-page">
 
     <header id="header" class="header d-flex align-items-center position-relative">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between ">
+            <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="assets/img/logo.png" alt="AgriCulture">
+                <img src="assets/img/logo.png" alt="logoBiblioteca" width="100">
                 <!-- <h1 class="sitename">AgriCulture</h1>  -->
             </a>
             <nav id="navmenu" class="navmenu">
@@ -52,29 +55,7 @@
                     <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Inicio</a></li>
                     <li><a href="{{ url('/about') }}">Nosotros</a></li>
                     <li><a href="{{ url('/services') }}">Servicios</a></li>
-                    <li><a href="{{ url('/testimonials') }}">Testimonios</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
-                    {{-- Dropdown --}}
-                    <li class="dropdown">
-                        <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown">
-                                <a href="#"><span>Deep Dropdown</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{ url('/blog') }}">Actividades</a></li>
                     <li><a href="{{ url('/contact') }}">Contacto</a></li>
                     {{-- Autenticación --}}
                     @if (Route::has('login'))
@@ -117,23 +98,25 @@
 
         <!-- Page Title -->
         <div class="page-title dark-background" data-aos="fade"
-            style="background-image: url(assets/img/page-title-bg.webp);">
+            style="background-image: url(assets/img/actividades.jpg);">
             <div class="container position-relative">
-                <h1>Blog Details</h1>
-                <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda
-                    numquam molestias.</p>
+                <h1>Detalles de nuestras actividades</h1>
+                <p>Encontraras una amplia varidad de talleres que realizamos con enfoque de apoyo a nuestra comunidad.
+                </p>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current">Blog Details</li>
+                        <li><a href="{{ url('/') }}">Inicio</a></li>
                     </ol>
                 </nav>
             </div>
         </div><!-- End Page Title -->
 
+
+        <!-- Biblioteca page -->
         <div class="container">
             <div class="row">
 
+                <!-- Contenido principal -->
                 <div class="col-lg-8">
 
                     <!-- Blog Details Section -->
@@ -142,88 +125,81 @@
 
                             <article class="article">
 
+                                <!-- Imagen principal -->
                                 <div class="post-img">
-                                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                                    <img src="assets/img/blog/actividades.jpg"
+                                        alt="Actividades en la biblioteca" class="img-fluid">
                                 </div>
 
-                                <h2 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam
-                                    quia</h2>
+                                <h2 class="title">Talleres, Clubes y Cursos en Nuestra Biblioteca</h2>
 
                                 <div class="meta-top">
                                     <ul>
                                         <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
-                                                href="blog-details.html">John Doe</a></li>
+                                                href="#">Equipo de la Biblioteca</a></li>
                                         <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                                href="blog-details.html"><time datetime="2020-01-01">Jan 1,
-                                                    2022</time></a></li>
+                                                href="#"><time datetime="2025-09-16"> 2025</time></a>
+                                        </li>
                                         <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a
-                                                href="blog-details.html">12 Comments</a></li>
+                                                href="#">Comentarios (0)</a></li>
                                     </ul>
                                 </div><!-- End meta top -->
 
                                 <div class="content">
                                     <p>
-                                        Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi
-                                        praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                                        Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde
-                                        soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur
-                                        assumenda perferendis dolore.
+                                        Nuestra biblioteca no solo es un espacio de lectura, sino también un lugar donde
+                                        la comunidad
+                                        puede crecer, aprender y compartir. A lo largo del año ofrecemos
+                                        <strong>talleres interactivos,
+                                            clubes de lectura</strong> y <strong>cursos formativos</strong> pensados
+                                        para todas las edades
+                                        y gustos.
                                     </p>
 
+                                    <h3>Talleres creativos y educativos</h3>
                                     <p>
-                                        Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi
-                                        in accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et
-                                        voluptate cupiditate.
+                                        Cada mes realizamos talleres que abarcan desde <em>escritura creativa</em> y
+                                        <em>literatura infantil</em>,
+                                        hasta <em>alfabetización digital</em>. Estos espacios permiten a los
+                                        participantes desarrollar
+                                        habilidades, expresarse y descubrir nuevas pasiones.
                                     </p>
+                                    <img src="assets/img/blog/talleres.jpg" class="img-fluid"
+                                        alt="Taller en la biblioteca">
 
+                                    <h3>Clubes de lectura</h3>
+                                    <p>
+                                        Nuestros clubes de lectura reúnen a jóvenes y adultos en torno a un libro o
+                                        autor en específico.
+                                        A través de debates, reflexiones y análisis compartidos, fomentamos el amor por
+                                        la lectura y
+                                        creamos una comunidad unida por las letras.
+                                    </p>
                                     <blockquote>
                                         <p>
-                                            Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi
-                                            aut. Aut eos aliquam doloribus minus autem quos.
+                                            “Leer juntos es abrir puertas a mundos que nunca imaginamos, y en el club de
+                                            lectura,
+                                            cada opinión cuenta.”
                                         </p>
                                     </blockquote>
+                                    <img src="assets/img/blog/lectura.jpg" class="img-fluid" alt="Club de lectura" >
+
+                                    <h3>Cursos formativos</h3>
+                                    <p>
+                                        Además de fomentar la lectura, ofrecemos cursos prácticos como
+                                        <strong>investigación bibliográfica,
+                                            redacción académica, uso de bases de datos digitales</strong> y talleres de
+                                        <strong>desarrollo personal</strong>. Estos cursos están diseñados para apoyar
+                                        tanto a estudiantes
+                                        como a la comunidad en general.
+                                    </p>
+                                    <img src="assets/img/blog/cursos.jpg" class="img-fluid"
+                                        alt="Curso en la biblioteca">
 
                                     <p>
-                                        Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore
-                                        tempore provident voluptas mollitia aliquid. Id repellendus quia. Asperiores
-                                        nihil magni dicta est suscipit perspiciatis. Voluptate ex rerum assumenda
-                                        dolores nihil quaerat.
-                                        Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti
-                                        velit quisquam rerum. Omnis dolorum exercitationem harum qui qui blanditiis
-                                        neque.
-                                        Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto
-                                        voluptatem magni. Vel magnam quod et tempora deleniti error rerum nihil tempora.
-                                    </p>
-
-                                    <h3>Et quae iure vel ut odit alias.</h3>
-                                    <p>
-                                        Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit
-                                        ut rerum atque. Optio provident dolores atque voluptatem rem excepturi molestiae
-                                        qui. Voluptatem laborum omnis ullam quibusdam perspiciatis nulla nostrum.
-                                        Voluptatum est libero eum nesciunt aliquid qui.
-                                        Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus
-                                        quia aut ratione aspernatur dolor. Sint harum eveniet dicta exercitationem
-                                        minima. Exercitationem omnis asperiores natus aperiam dolor consequatur id ex
-                                        sed. Quibusdam rerum dolores sint consequatur quidem ea.
-                                        Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit
-                                        voluptatem. Cum quibusdam voluptatem voluptatem accusamus mollitia aut atque
-                                        aut.
-                                    </p>
-                                    <img src="assets/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
-
-                                    <h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
-                                    <p>
-                                        Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum.
-                                        In assumenda quia quae a id praesentium. Quos deleniti libero sed occaecati aut
-                                        porro autem. Consectetur sed excepturi sint non placeat quia repellat incidunt
-                                        labore. Autem facilis hic dolorum dolores vel.
-                                        Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo
-                                        omnis quibusdam esse. Ex libero illum iusto totam et ut aut blanditiis.
-                                        Veritatis numquam ut illum ut a quam vitae.
-                                    </p>
-                                    <p>
-                                        Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa
-                                        voluptas incidunt. Nulla sit eaque mollitia nisi asperiores est veniam.
+                                        Nuestra misión es que la biblioteca sea un espacio vivo, donde los libros
+                                        convivan con la creatividad,
+                                        el aprendizaje colaborativo y la innovación cultural.
                                     </p>
 
                                 </div><!-- End post content -->
@@ -231,14 +207,15 @@
                                 <div class="meta-bottom">
                                     <i class="bi bi-folder"></i>
                                     <ul class="cats">
-                                        <li><a href="#">Business</a></li>
+                                        <li><a href="#">Actividades</a></li>
                                     </ul>
 
                                     <i class="bi bi-tags"></i>
                                     <ul class="tags">
-                                        <li><a href="#">Creative</a></li>
-                                        <li><a href="#">Tips</a></li>
-                                        <li><a href="#">Marketing</a></li>
+                                        <li><a href="#">Talleres</a></li>
+                                        <li><a href="#">Club de Lectura</a></li>
+                                        <li><a href="#">Cursos</a></li>
+                                        <li><a href="#">Biblioteca</a></li>
                                     </ul>
                                 </div><!-- End meta bottom -->
 
@@ -247,287 +224,92 @@
                         </div>
                     </section><!-- /Blog Details Section -->
 
-                    <!-- Blog Comments Section -->
-                    <section id="blog-comments" class="blog-comments section">
-
-                        <div class="container">
-
-                            <h4 class="comments-count">8 Comments</h4>
-
-                            <div id="comment-1" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="assets/img/blog/comments-1.jpg"
-                                            alt=""></div>
-                                    <div>
-                                        <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i
-                                                    class="bi bi-reply-fill"></i> Reply</a></h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad
-                                            aut sapiente quis molestiae est qui cum soluta.
-                                            Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis
-                                            et.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div><!-- End comment #1 -->
-
-                            <div id="comment-2" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="assets/img/blog/comments-2.jpg"
-                                            alt=""></div>
-                                    <div>
-                                        <h5><a href="">Aron Alvarado</a> <a href="#" class="reply"><i
-                                                    class="bi bi-reply-fill"></i> Reply</a></h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet
-                                            saepe. Officiis illo ut beatae.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div id="comment-reply-1" class="comment comment-reply">
-                                    <div class="d-flex">
-                                        <div class="comment-img"><img src="assets/img/blog/comments-3.jpg"
-                                                alt=""></div>
-                                        <div>
-                                            <h5><a href="">Lynda Small</a> <a href="#" class="reply"><i
-                                                        class="bi bi-reply-fill"></i> Reply</a></h5>
-                                            <time datetime="2020-01-01">01 Jan,2022</time>
-                                            <p>
-                                                Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam
-                                                aspernatur ut vitae quia mollitia id non. Qui ad quas nostrum rerum sed
-                                                necessitatibus aut est. Eum officiis sed repellat maxime vero nisi
-                                                natus. Amet nesciunt nesciunt qui illum omnis est et dolor recusandae.
-
-                                                Recusandae sit ad aut impedit et. Ipsa labore dolor impedit et natus in
-                                                porro aut. Magnam qui cum. Illo similique occaecati nihil modi eligendi.
-                                                Pariatur distinctio labore omnis incidunt et illum. Expedita et
-                                                dignissimos distinctio laborum minima fugiat.
-
-                                                Libero corporis qui. Nam illo odio beatae enim ducimus. Harum reiciendis
-                                                error dolorum non autem quisquam vero rerum neque.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div id="comment-reply-2" class="comment comment-reply">
-                                        <div class="d-flex">
-                                            <div class="comment-img"><img src="assets/img/blog/comments-4.jpg"
-                                                    alt=""></div>
-                                            <div>
-                                                <h5><a href="">Sianna Ramsay</a> <a href="#"
-                                                        class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                                                <time datetime="2020-01-01">01 Jan,2022</time>
-                                                <p>
-                                                    Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia
-                                                    dolores cupiditate et. Ut unde qui eligendi sapiente omnis ullam.
-                                                    Placeat porro est commodi est officiis voluptas repellat quisquam
-                                                    possimus. Perferendis id consectetur necessitatibus.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                    </div><!-- End comment reply #2-->
-
-                                </div><!-- End comment reply #1-->
-
-                            </div><!-- End comment #2-->
-
-                            <div id="comment-3" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="assets/img/blog/comments-5.jpg"
-                                            alt=""></div>
-                                    <div>
-                                        <h5><a href="">Nolan Davidson</a> <a href="#" class="reply"><i
-                                                    class="bi bi-reply-fill"></i> Reply</a></h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus
-                                            quia nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem
-                                            aspernatur aut quam ut. Voluptatem est accusamus iste at.
-                                            Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea
-                                            est consequuntur officia beatae ea aut eos soluta. Non qui dolorum
-                                            voluptatibus et optio veniam. Quam officia sit nostrum dolorem.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div><!-- End comment #3 -->
-
-                            <div id="comment-4" class="comment">
-                                <div class="d-flex">
-                                    <div class="comment-img"><img src="assets/img/blog/comments-6.jpg"
-                                            alt=""></div>
-                                    <div>
-                                        <h5><a href="">Kay Duggan</a> <a href="#" class="reply"><i
-                                                    class="bi bi-reply-fill"></i> Reply</a></h5>
-                                        <time datetime="2020-01-01">01 Jan,2022</time>
-                                        <p>
-                                            Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit
-                                            tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in
-                                            fugiat.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div><!-- End comment #4 -->
-
-                        </div>
-
-                    </section><!-- /Blog Comments Section -->
-
-                    <!-- Comment Form Section -->
-                    <section id="comment-form" class="comment-form section">
-                        <div class="container">
-
-                            <form action="">
-
-                                <h4>Post Comment</h4>
-                                <p>Your email address will not be published. Required fields are marked * </p>
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <input name="name" type="text" class="form-control"
-                                            placeholder="Your Name*">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <input name="email" type="text" class="form-control"
-                                            placeholder="Your Email*">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col form-group">
-                                        <input name="website" type="text" class="form-control"
-                                            placeholder="Your Website">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col form-group">
-                                        <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Post Comment</button>
-                                </div>
-
-                            </form>
-
-                        </div>
-                    </section><!-- /Comment Form Section -->
-
                 </div>
 
+                <!-- Sidebar -->
                 <div class="col-lg-4 sidebar">
 
                     <div class="widgets-container">
 
                         <!-- Blog Author Widget -->
                         <div class="blog-author-widget widget-item">
-
                             <div class="d-flex flex-column align-items-center">
                                 <div class="d-flex align-items-center w-100">
-                                    <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0"
-                                        alt="">
+                                    <img src="assets/img/favicon.png" class="rounded-circle flex-shrink-0"
+                                        alt="Bibliotecario">
                                     <div>
-                                        <h4>Jane Smith</h4>
+                                        <h4>Equipo Bibliotecario</h4>
                                         <div class="social-links">
-                                            <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
-                                            <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                                            <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                                            <a href="https://instagram.com/#"><i class="biu bi-linkedin"></i></a>
+                                            <a href="#"><i class="bi bi-facebook"></i></a>
+                                            <a href="#"><i class="bi bi-instagram"></i></a>
+                                            <a href="#"><i class="bi bi-linkedin"></i></a>
                                         </div>
                                     </div>
                                 </div>
-
                                 <p>
-                                    Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus
-                                    accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse
-                                    et accusantium ut unde voluptas.
+                                    Somos un equipo apasionado por los libros y la educación. Nuestra misión es que cada
+                                    visitante
+                                    encuentre en la biblioteca un espacio para aprender, crear y compartir.
                                 </p>
-
                             </div>
-
                         </div><!--/Blog Author Widget -->
 
-                        <!-- Search Widget -->
+                        <!-- Search Widget
                         <div class="search-widget widget-item">
-
-                            <h3 class="widget-title">Search</h3>
+                            <h3 class="widget-title">Buscar</h3>
                             <form action="">
-                                <input type="text">
-                                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                                <input type="text" placeholder="Buscar en el blog...">
+                                <button type="submit" title="Buscar"><i class="bi bi-search"></i></button>
                             </form>
-
-                        </div><!--/Search Widget -->
+                        </div>
+                        /Search Widget -->
 
                         <!-- Categories Widget -->
                         <div class="categories-widget widget-item">
-
-                            <h3 class="widget-title">Categories</h3>
+                            <h3 class="widget-title">Categorías</h3>
                             <ul class="mt-3">
-                                <li><a href="#">General <span>(25)</span></a></li>
-                                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                                <li><a href="#">Travel <span>(5)</span></a></li>
-                                <li><a href="#">Design <span>(22)</span></a></li>
-                                <li><a href="#">Creative <span>(8)</span></a></li>
-                                <li><a href="#">Educaion <span>(14)</span></a></li>
+                                <li><a href="#">Talleres <span>(12)</span></a></li>
+                                <li><a href="#">Clubes de Lectura <span>(8)</span></a></li>
+                                <li><a href="#">Cursos <span>(10)</span></a></li>
+                                <li><a href="#">Eventos Culturales <span>(5)</span></a></li>
                             </ul>
-
                         </div><!--/Categories Widget -->
 
                         <!-- Recent Posts Widget 2 -->
                         <div class="recent-posts-widget-2 widget-item">
-
-                            <h3 class="widget-title">Recent Posts</h3>
-
-                            <div class="post-item">
-                                <h4><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h4>
-                                <time datetime="2020-01-01">Jan 1, 2020</time>
-                            </div><!-- End recent post item-->
+                            <h3 class="widget-title">Publicaciones recientes</h3>
 
                             <div class="post-item">
-                                <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                                <time datetime="2020-01-01">Jan 1, 2020</time>
-                            </div><!-- End recent post item-->
+                                <h4><a href={{"blog-details"}}>Taller de Escritura Creativa</a></h4>
+                                <time datetime="2025-09-01">Sept 1, 2025</time>
+                            </div>
 
                             <div class="post-item">
-                                <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                <time datetime="2020-01-01">Jan 1, 2020</time>
-                            </div><!-- End recent post item-->
+                                <h4><a href={{"blog-details"}}>Club de Lectura: Gabriel García Márquez</a></h4>
+                                <time datetime="2025-08-20">Ago 20, 2025</time>
+                            </div>
 
                             <div class="post-item">
-                                <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                                <time datetime="2020-01-01">Jan 1, 2020</time>
-                            </div><!-- End recent post item-->
-
-                            <div class="post-item">
-                                <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <time datetime="2020-01-01">Jan 1, 2020</time>
-                            </div><!-- End recent post item-->
+                                <h4><a href={{"blog-details"}}>Curso: Uso de Bases de Datos Digitales</a></h4>
+                                <time datetime="2025-08-10">Ago 10, 2025</time>
+                            </div>
 
                         </div><!--/Recent Posts Widget 2 -->
 
-                        <!-- Tags Widget -->
+                        <!-- Tags Widget
                         <div class="tags-widget widget-item">
-
-                            <h3 class="widget-title">Tags</h3>
+                            <h3 class="widget-title">Etiquetas</h3>
                             <ul>
-                                <li><a href="#">App</a></li>
-                                <li><a href="#">IT</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Mac</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Office</a></li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Studio</a></li>
-                                <li><a href="#">Smart</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
+                                <li><a href="#">Literatura</a></li>
+                                <li><a href="#">Cultura</a></li>
+                                <li><a href="#">Educación</a></li>
+                                <li><a href="#">Talleres</a></li>
+                                <li><a href="#">Club</a></li>
+                                <li><a href="#">Cursos</a></li>
+                                <li><a href="#">Biblioteca</a></li>
                             </ul>
-
-                        </div><!--/Tags Widget -->
+                        </div>
+                            Tags Widget -->
 
                     </div>
 
@@ -538,98 +320,19 @@
 
     </main>
 
-    <footer id="footer" class="footer dark-background">
-
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4 col-md-6 footer-about">
-                        <a href="index.html" class="logo d-flex align-items-center">
-                            <span class="sitename">AgriCulture</span>
-                        </a>
-                        <div class="footer-contact pt-3">
-                            <p>A108 Adam Street</p>
-                            <p>New York, NY 535022</p>
-                            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                            <p><strong>Email:</strong> <span>info@example.com</span></p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">Product Management</a></li>
-                            <li><a href="#">Marketing</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Hic solutasetp</h4>
-                        <ul>
-                            <li><a href="#">Molestiae accusamus iure</a></li>
-                            <li><a href="#">Excepturi dignissimos</a></li>
-                            <li><a href="#">Suscipit distinctio</a></li>
-                            <li><a href="#">Dilecta</a></li>
-                            <li><a href="#">Sit quas consectetur</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 footer-links">
-                        <h4>Nobis illum</h4>
-                        <ul>
-                            <li><a href="#">Ipsam</a></li>
-                            <li><a href="#">Laudantium dolorum</a></li>
-                            <li><a href="#">Dinera</a></li>
-                            <li><a href="#">Trodelas</a></li>
-                            <li><a href="#">Flexo</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
+     <!-- Footer -->
+    <footer id="footer" class="footer dark-background text-light py-4">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2025 Biblioteca Comunitaria Forjando Mentes Brillantes</p>
+            <p class="mb-1">Tel: +502 XXXX XXXX</p>
+            <p class="mb-1">2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+            <p class="mb-0">
+                <a href="https://www.facebook.com/profile.php?id=61553557262587" class="text-light me-3"><i
+                        class="bi bi-facebook"></i></a>
+                <a href="mailto:bibliotecacomunitariaeltejar@gmail.com" class="text-light"><i
+                        class="bi bi-envelope"></i></a>
+            </p>
         </div>
-
-        <div class="copyright text-center">
-            <div
-                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-                <div class="d-flex flex-column align-items-center align-items-lg-start">
-                    <div>
-                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
-                </div>
-
-                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-
-            </div>
-        </div>
-
     </footer>
 
     <!-- Scroll Top -->
