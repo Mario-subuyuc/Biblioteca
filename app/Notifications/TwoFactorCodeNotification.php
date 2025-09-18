@@ -34,10 +34,10 @@ class TwoFactorCodeNotification extends Notification
     {
         return (new MailMessage)
         ->subject('Código de verificación') // Título del correo
-        ->greeting('Hola ' . $notifiable->name . '!')
+        ->greeting('Hola ' . $notifiable->name . '.') // Saludo personalizado
         ->line('Tu código para acceder a la aplicación es: ' . $notifiable->two_factor_code)
-        ->line('Si no solicitaste este código, puedes ignorar este correo.')
         ->action('Verificar aquí', route('verify'))
+        ->line('Si no solicitaste este código, puedes ignorar este correo.')
         ->line('Tu código expira en 10 minutos.');
     }
     /**

@@ -5,30 +5,34 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Biblioteca</title>
+    <title>@yield('title', 'Biblioteca')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-        href={{ url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}>
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href={{ url('plugins/fontawesome-free/css/all.min.css') }}>
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href={{ url('dist/css/adminlte.min.css') }}>
-    <!-- iconos de bootstrap -->
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!--para datatable-->
-    <link rel="stylesheet" href="{{ url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ url('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <!-- jQuery -->
-    <script src="{{ url('plugins/jquery/jquery.min.js') }}"></script>
-    <!-- sweetalert2 alertas de pagina-->
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <div class="container">
-        @yield('links')
-    </div>
+    <!-- Favicons por defecto -->
+    <link rel="icon" href="{{ asset('assets/img/logo2.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/img/apple-touch-icon.png') }}">
+
+    @yield('links')   {{-- sección para CSS/links extra --}}
 </head>
+
 
 <!-- sidebar-collapse -->
 
@@ -125,8 +129,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src={{ url('dist/img/lector.png') }} class="img-circle elevation-2"
-                            alt="User Image">
+                        <img src={{ url('dist/img/lector.png') }} class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href={{ url('/') }} class="d-block">{{ Auth::user()->name }}</a>
@@ -162,13 +165,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ url('admin/usuarios/create') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Usuario</p>
+                                        <p>crear usuarios</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a  href="{{ url('admin/usuarios') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Listar Usuarios</p>
                                     </a>
@@ -309,11 +312,11 @@
 
                         <!-- boton en linea -->
                         <li class="nav-item menu">
-                            <a href="#" class="nav-link active bg-cyan">
+                            <a href={{ url('/admin/sesiones') }} class="nav-link active bg-cyan">
                                 <i class="nav-icon fas bi bi-wifi"></i>
                                 <p>
                                     En linea
-                                    <i class="right badge badge-danger">20</i>
+                                    <i class="right badge badge-danger">Activos</i>
                                 </p>
                             </a>
                         </li>
@@ -393,6 +396,27 @@
     <script src={{ url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
     <!-- AdminLTE App -->
     <script src={{ url('dist/js/adminlte.min.js') }}></script>
+
+    <!-- jQuery -->
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- DataTables -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
 </body>
 
 </html>

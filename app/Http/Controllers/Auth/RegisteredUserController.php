@@ -32,13 +32,17 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:20'],
+            'adress' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'adress' => $request->adress,
             'password' => Hash::make($request->password),
         ]);
 
@@ -46,11 +50,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-         // 🔹 Generamos y enviamos el código
-    $user->regenerateTwoFactorCode();
-    $user->notify(new TwoFactorCodeNotification());
+        // 🔹 Generamos y enviamos el código
+        $user->regenerateTwoFactorCode();
+        $user->notify(new TwoFactorCodeNotification());
 
-    // 🔹 Redirigimos al flujo de verificación (ya tienes esta vista y rutas listas)
-    return redirect()->route('verify')->with('success', 'Te enviamos un código a tu correo.');
+        // 🔹 Redirigimos al flujo de verificación (ya tienes esta vista y rutas listas)
+        return redirect()->route('verify')->with('success', 'Te enviamos un código a tu correo.');
     }
 }

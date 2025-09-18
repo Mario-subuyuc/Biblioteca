@@ -21,15 +21,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
         'two_factor_code',
         'two_factor_expires_at',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+     // Relación con visitantes
+     public function visitors()
+    {
+        return $this->hasMany(Visitor::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
