@@ -9,7 +9,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
@@ -30,7 +30,7 @@
     <link rel="icon" href="{{ asset('assets/img/logo2.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/img/apple-touch-icon.png') }}">
 
-    @yield('links')   {{-- sección para CSS/links extra --}}
+    @yield('links') {{-- sección para CSS/links extra --}}
 </head>
 
 
@@ -132,7 +132,7 @@
                         <img src={{ url('dist/img/lector.png') }} class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href={{ url('/') }} class="d-block">{{ Auth::user()->name }}</a>
+                        <a href="{{ route('usuarios.edit', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a  href="{{ url('admin/usuarios') }}" class="nav-link active">
+                                    <a href="{{ url('admin/usuarios') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Listar Usuarios</p>
                                     </a>
@@ -344,6 +344,17 @@
         <!--Sweetalert-->
         @if (($message = Session::get('mensaje')) && ($icono = Session::get('icono')))
             <script>
+                // Crear objeto de audio
+                let audio;
+                @if ($icono == 'success')
+                    audio = new Audio("{{ asset('sounds/success.mp3') }}");
+                @elseif ($icono == 'error')
+                    audio = new Audio("{{ asset('sounds/error.mp3') }}");
+                @endif
+
+                // Reproducir audio
+                audio.play();
+
                 Swal.fire({
                     position: "top-center",
                     icon: "{{ $icono }}",
@@ -377,45 +388,26 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    <!-- dataTable -->
-    <script src="{{ url('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ url('plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ url('plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ url('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ url('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- jQuery -->
-    <script src={{ url('plugins/jquery/jquery.min.js') }}></script>
-    <!-- Bootstrap 4 -->
-    <script src={{ url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
-    <!-- AdminLTE App -->
-    <script src={{ url('dist/js/adminlte.min.js') }}></script>
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
-    <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- DataTables -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
 </body>
 

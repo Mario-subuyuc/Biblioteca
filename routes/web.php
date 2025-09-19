@@ -5,8 +5,10 @@ use App\Http\Controllers\TwofactorCodeController;
 use App\Http\Controllers\BotManController;
 use Illuminate\Support\Facades\Route;
 
+//==============================
 //rutas de landing page
-//pagina principal
+//==============================
+//raiz de proyecto
 Route::get('/', function () {   return view('index');});
 //paginas para sobre nosotros, servicios, testimonios, blog y contacto
 Route::get('/about', function () {    return view('about');});
@@ -17,28 +19,47 @@ Route::get('/services', function () {    return view('services');});
 
 
 
-
+//=========================================
 //rutas de doble factor de autentificacion
+//=========================================
 Route::get('verify', [TwofactorCodeController::class, 'verify'])->name('verify');
 Route::get('verify/resend', [TwofactorCodeController::class, 'resend'])->name('verify.resend');
 Route::post('verify', [TwofactorCodeController::class, 'verifyPost'])->name('verify.post');
 
+
+
+//=====================
 //ruta para el chatbot
+//=====================
 Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 
-//vistas para el dashboard principal
+
+
+//===========================================
+//vistas para el dashboard principal/layoupt
+//===========================================
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware(['auth', 'two.factor']);
 
-//vitas para admin/usuarios
-Route::get('/admin/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->name('admin.usuarios.index')->middleware(['auth', 'two.factor']);
 
+
+//====================================================
+// Ruta para editar el perfil del usuario autenticado
+//====================================================
+Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
+Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
+
+
+//====================================================
 //vitas para dashboard principal
+//====================================================
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth','two.factor'])->name('dashboard');
 
 
-
+//====================================================
+// rutas para la gestion de usuarios
+//====================================================
 // Ruta para admin/usuarios
 Route::get('/admin/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->name('admin.usuarios.index')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de usuarios panel crear
@@ -57,6 +78,10 @@ Route::get('/admin/usuarios/{id}/confirm-delete', [App\Http\Controllers\UsuarioC
 Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy')->middleware(['auth', 'two.factor']);
 
 
+
+//====================================================
+// rutas para la gestion de visitantes
+//====================================================
 // Ruta para admin/visitantes
 Route::get('/admin/visitantes', [App\Http\Controllers\UsuarioController::class, 'index'])->name('admin.visitantes.index')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de visitantes panel crear
@@ -74,7 +99,10 @@ Route::get('/admin/visitantes/{id}/confirm-delete', [App\Http\Controllers\Usuari
 // Ruta para mandar la eliminacion
 Route::delete('/admin/visitantes/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('admin.visitantes.destroy')->middleware(['auth', 'two.factor']);
 
+
+//====================================================
 //rutas para el perfil de usuario autenticado critico
+//====================================================
 Route::middleware('auth','two.factor')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -83,7 +111,9 @@ Route::middleware('auth','two.factor')->group(function () {
 
 require __DIR__.'/auth.php';
 
+//========================================================
 //rutas AJAX -- valida para obtener los usuarios activos
+//========================================================
 Route::get('/admin/sesiones', [App\Http\Controllers\SessionController::class, 'index'])->name('admin.sesiones.index')->middleware(['auth', 'verified', 'two.factor']);
 Route::get('/admin/sesiones/activos', [App\Http\Controllers\SessionController::class, 'obtenerUsuariosActivos'])->name('admin.sesiones.obtener')->middleware(['auth', 'verified', 'two.factor']);
 
