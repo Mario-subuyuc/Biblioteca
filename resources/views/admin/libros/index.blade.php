@@ -1,11 +1,10 @@
 @extends('layouts.admin')
-@section('title', 'Visitantes')
-
+@section('title', 'Libros')
 @section('content')
     <div class="row mb-3">
         <div class="col">
-            <h1>Listado de Visitantes</h1>
-            <p>Listado de todos los visitantes registrados en la biblioteca</p>
+            <h1>Listado de Libros</h1>
+            <p>Listado de todos los libros registrados en la biblioteca</p>
         </div>
     </div>
 
@@ -13,8 +12,8 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header ">
-                    <a href="{{ route('admin.visitantes.create') }}" class="btn btn-primary">
-                        <i class="bi bi-person-plus"></i> Registrar nuevo
+                    <a href="{{ route('admin.libros.create') }}" class="btn btn-primary">
+                        <i class="bi bi-book"></i> Registrar nuevo libro
                     </a>
                 </div>
                 <div class="card-body">
@@ -23,47 +22,40 @@
                             <tr>
                                 <th style="text-align: center">#</th>
                                 <th style="text-align: center">ID</th>
-                                <th style="text-align: center">Nombre</th>
-                                <th style="text-align: center">Ubicación</th>
-                                <th style="text-align: center">Año de nacimiento</th>
-                                <th style="text-align: center">Género</th>
-                                <th style="text-align: center">Etnicidad</th>
-                                <th style="text-align: center">Ocupación</th>
-                                <th style="text-align: center">Fecha visita</th>
-                                <th style="text-align: center">Hora visita</th>
-                                <th style="text-align: center">Usuario asociado</th>
+                                <th style="text-align: center">Título</th>
+                                <th style="text-align: center">Autor</th>
+                                <th style="text-align: center">Editorial</th>
+                                <th style="text-align: center">Páginas</th>
+                                <th style="text-align: center">Dewey</th>
+                                <th style="text-align: center">Edición</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($visitantes as $visitante)
+                            @foreach ($books as $book)
                                 <tr>
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
-                                    <td style="text-align: center">{{ $visitante->id }}</td>
-                                    <td style="text-align: center">{{ $visitante->name }}</td>
-                                    <td style="text-align: center">{{ $visitante->location ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $visitante->birth_year ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $visitante->gender ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $visitante->ethnicity ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $visitante->occupation ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $visitante->visit_date }}</td>
-                                    <td style="text-align: center">{{ $visitante->visit_time }}</td>
-                                    <td style="text-align: center">
-                                        {{ $visitante->user ? $visitante->user->name : '—' }}
-                                    </td>
+                                    <td style="text-align: center">{{ $book->id }}</td>
+                                    <td style="text-align: center">{{ $book->title }}</td>
+                                    <td style="text-align: center">{{ $book->author }}</td>
+                                    <td style="text-align: center">{{ $book->publisher ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $book->pages ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $book->dewey_classification ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $book->edition ?? '—' }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('admin.visitantes.show', $visitante->id) }}"
+                                            <a href="{{ route('admin.libros.show', $book->id) }}"
                                                 class="btn btn-info btn-sm">
                                                 <i class="bi bi-eye"></i> Ver
                                             </a>
-                                            <a href="{{ route('admin.visitantes.edit', $visitante->id) }}"
+                                            <a href="{{ route('admin.libros.edit', $book->id) }}"
                                                 class="btn btn-success btn-sm">
                                                 <i class="bi bi-pencil"></i> Editar
                                             </a>
-                                            <a href="{{ url('admin/visitantes/' . $visitante->id . '/confirm-delete') }}"
-                                                type="button" class="btn btn-danger btn-sm"><i
-                                                    class="bi bi-trash3"></i>Borrar</a>
+                                            <a href="{{ url('admin/libros/' . $book->id . '/confirm-delete') }}"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash3"></i> Borrar
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -86,10 +78,10 @@
                 ],
                 "language": {
                     "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Visitantes",
-                    "infoEmpty": "Mostrando 0 a 0 de 0 Visitantes",
-                    "infoFiltered": "(filtrado de _MAX_ visitantes)",
-                    "lengthMenu": "Mostrar _MENU_ visitantes",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Libros",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Libros",
+                    "infoFiltered": "(filtrado de _MAX_ libros)",
+                    "lengthMenu": "Mostrar _MENU_ libros",
                     "loadingRecords": "Cargando...",
                     "processing": "Procesando...",
                     "search": "Buscador:",

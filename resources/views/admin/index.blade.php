@@ -13,13 +13,13 @@
         <div class="col-lg-4 col-4">
             <div class="small-box bg-lightblue">
                 <div class="inner">
-                    <h3>{{ 10 }}</h3>
+                    <h3>{{$total_visitantes??'0'}}</h3>
                     <p>Visitantes</p>
                 </div>
                 <div class="icon">
                     <i class="ion fas bi bi-person-arms-up"></i>
                 </div>
-                <a href="{{ url('admin/ventas') }}" class="small-box-footer">Más Información <i
+                <a href="{{ url('admin/visitantes') }}" class="small-box-footer">Más Información <i
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>

@@ -5,59 +5,65 @@ namespace App\Http\Controllers;
 use App\Models\Visitor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
     // Mostrar todos los visitantes
     public function index()
     {
-        $visitors = Visitor::with('user')->paginate(10);
-        return view('visitors.index', compact('visitors'));
+        $visitantes = Visitor::all();
+        return view('admin.visitantes.index', compact('visitantes'));
     }
 
     // Mostrar formulario de creación
     public function create()
     {
-        $users = User::all(); // para asignar un usuario opcional
-        return view('visitors.create', compact('users'));
+        $usuarios = User::all();
+        return view('admin.visitantes.create', compact('usuarios'));
     }
 
     // Guardar un nuevo visitante
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'birth_year' => 'nullable|digits:4|integer',
-            'gender' => 'nullable|string|max:50',
-            'ethnicity' => 'nullable|string|max:100',
+            'name'       => 'required|string|max:255',
+            'location'   => 'nullable|string|max:255',
+            'birth_year' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'gender'     => 'nullable|string|max:50',
+            'ethnicity'  => 'nullable|string|max:100',
             'occupation' => 'nullable|string|max:100',
             'visit_date' => 'required|date',
             'visit_time' => 'required',
-            'user_id' => 'nullable|exists:users,id',
+            'user_id'    => 'nullable|exists:users,id',
         ]);
 
         Visitor::create($request->all());
 
-        return redirect()->route('visitors.index')->with('success', 'Visitante creado correctamente.');
+        return redirect()->route('admin.visitantes.index')
+            ->with('icono', 'success')
+            ->with('mensaje', 'Visitante registrado correctamente');
     }
-
     // Mostrar un visitante específico
-    public function show(Visitor $visitor)
+    public function show($id)
     {
-        return view('visitors.show', compact('visitor'));
+        $visitante = Visitor::findOrFail($id);
+        return view('admin.visitantes.show', compact('visitante'));
     }
 
     // Formulario para editar visitante
-    public function edit(Visitor $visitor)
+    public function edit($id)
     {
-        $users = User::all();
-        return view('visitors.edit', compact('visitor', 'users'));
+        $visitante = Visitor::findOrFail($id);
+        $usuarios = User::all(); // para el select de usuario asociado
+        return view('admin.visitantes.edit', compact('visitante', 'usuarios'));
     }
 
     // Actualizar visitante
-    public function update(Request $request, Visitor $visitor)
+    public function update(Request $request, $id)
     {
+         $visitor = Visitor::findOrFail($id);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
@@ -70,15 +76,49 @@ class VisitorController extends Controller
             'user_id' => 'nullable|exists:users,id',
         ]);
 
-        $visitor->update($request->all());
+        $visitor->update($request->only([
+            'name',
+            'location',
+            'birth_year',
+            'gender',
+            'ethnicity',
+            'occupation',
+            'visit_date',
+            'visit_time',
+            'user_id',
+        ]));
 
-        return redirect()->route('visitors.index')->with('success', 'Visitante actualizado correctamente.');
+        return redirect()->route('admin.visitantes.index')
+            ->with('icono', 'success')
+            ->with('mensaje', 'Visitante actualizado correctamente');
     }
 
-    // Eliminar visitante
-    public function destroy(Visitor $visitor)
+    public function confirmDelete($id)
     {
-        $visitor->delete();
-        return redirect()->route('visitors.index')->with('success', 'Visitante eliminado correctamente.');
+        $visitante = Visitor::findOrFail($id);
+        return view('admin.visitantes.delete', compact('visitante'));
+    }
+
+    /**
+     * Eliminar usuario de la base de datos.
+     */
+    public function destroy($id)
+    {
+        $usuarioAutenticado = Auth::user();
+
+        // Evitar que un usuario se elimine a sí mismo
+        if ($usuarioAutenticado->id == $id) {
+            return redirect()->route('admin.visitantes.index')
+                ->with('mensaje', 'No puedes eliminar tu propia cuenta.')
+                ->with('icono', 'error');
+        }
+
+        // Buscar y eliminar usuario
+        $visitante = Visitor::findOrFail($id);
+        $visitante->delete();
+
+        return redirect()->route('admin.visitantes.index')
+            ->with('mensaje', 'Se eliminó al usuario correctamente.')
+            ->with('icono', 'success');
     }
 }

@@ -4,9 +4,9 @@
     <h1>Usuarios Activos Ahora</h1>
 </div>
 <hr>
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-10">
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-info center">
             <div class="card-header">
                 <h3 class="card-title">Usuarios Online</h3>
             </div>

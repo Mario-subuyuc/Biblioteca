@@ -54,28 +54,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
@@ -105,6 +83,7 @@
                     </div>
                 </li>
 
+                 <!-- full scream -->
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -165,15 +144,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/usuarios/create') }}" class="nav-link active">
+                                    <a href="{{ url('admin/admin') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>crear usuarios</p>
+                                        <p>Lista administradores</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('admin/lectores') }}" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Listar lectores</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('admin/usuarios') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Usuarios</p>
+                                        <p>Listar usuarios</p>
                                     </a>
                                 </li>
                             </ul>
@@ -216,23 +201,9 @@
                                 <i class="nav-icon fas bi bi-file-bar-graph"></i>
                                 <p>
                                     Reportes
-                                    <i class="right fas fa-angle-down"></i>
+                                    <i class="right fas fa-angle-right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Anual</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Mensual</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
                         <!-- boton Recomendaciones -->
@@ -271,13 +242,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href={{ url('admin/libros') }} class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Libros</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href={{ url('admin/materiales') }} class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Material</p>
                                     </a>
@@ -291,23 +262,9 @@
                                 <i class="nav-icon fas bi bi-calendar-week"></i>
                                 <p>
                                     Eventos
-                                    <i class="right fas fa-angle-down"></i>
+                                    <i class="right fas fa-angle-right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Externos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Internos</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
                         <!-- boton en linea -->

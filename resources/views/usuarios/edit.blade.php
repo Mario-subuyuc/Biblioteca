@@ -5,7 +5,7 @@
         <div class="col-md-3">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>{{ 0 }}</h3>
+                    <h3>{{ $visitas ? $visitas : '0' }}</h3>
                     <p>Visitas</p>
                 </div>
                 <div class="icon"><i class="fas fa-door-open"></i></div>
@@ -43,14 +43,14 @@
         </div>
     </div>
     <hr>
-    <div class="card card-primary card-outline">
+    <div class="card card-primary card-outline collapsed-card">
         <div class="card-header">
             <h3 class="card-title">Editar Perfil</h3>
 
             <div class="card-tools">
                 <!-- Botón para colapsar -->
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
-                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-plus"></i>
                 </button>
             </div>
         </div>
