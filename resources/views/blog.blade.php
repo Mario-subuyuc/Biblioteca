@@ -171,16 +171,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($events as $event)
+                                    @foreach ($tableEvents as $event)
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::parse($event['start'])->format('d M, Y') }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($event['end'])->format('d M, Y') }}</td>
+                                            <td>{{ $event['start'] }}</td>
+                                            <td>{{ $event['end'] }}</td>
                                             <td>{{ $event['title'] }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#eventModal" data-title="{{ $event['title'] }}"
-                                                    data-description="{{ $event['extendedProps']['description'] ?? 'Sin descripción' }}"
-                                                    data-image="{{ $event['extendedProps']['image'] ?? '' }}">
+                                                    data-description="{{ $event['description'] }}">
                                                     Ver
                                                 </button>
                                             </td>

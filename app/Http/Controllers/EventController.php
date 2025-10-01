@@ -82,6 +82,23 @@ class EventController extends Controller
     // Función para la vista del blog con eventos landing
     public function landingBlog()
     {
+
+        $tableEvents = Event::paginate(7)->through(function ($event) {
+            return [
+                'title'       => $event->title,
+                // Para la tabla: fecha y hora legibles
+                'start'       => $event->start
+                    ? \Carbon\Carbon::parse($event->start)->format('d M, Y H:i')
+                    : null,
+                'end'         => $event->end
+                    ? \Carbon\Carbon::parse($event->end)->format('d M, Y H:i')
+                    : ($event->start
+                        ? \Carbon\Carbon::parse($event->start)->format('d M, Y H:i')
+                        : null),
+                'description' => $event->description ?? 'Sin descripción',
+            ];
+        });
+
         $events = Event::all()->map(function ($event) {
             return [
                 'title' => $event->title,
@@ -96,6 +113,6 @@ class EventController extends Controller
             ];
         });
 
-        return view('blog', compact('events'));
+        return view('blog', compact('events', 'tableEvents'));
     }
 }

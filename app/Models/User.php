@@ -71,5 +71,8 @@ class User extends Authenticatable
 {
     return $this->belongsToMany(Event::class, 'event_user')->withTimestamps();
 }
-
+public function reader()
+{
+    return $this->hasOne(Reader::class);
+}
 }

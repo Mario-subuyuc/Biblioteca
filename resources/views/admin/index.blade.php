@@ -13,7 +13,7 @@
         <div class="col-lg-4 col-4">
             <div class="small-box bg-lightblue">
                 <div class="inner">
-                    <h3>{{$total_visitantes??'0'}}</h3>
+                    <h3>{{ $total_visitantes ?? '0' }}</h3>
                     <p>Visitantes</p>
                 </div>
                 <div class="icon">
@@ -48,7 +48,7 @@
                 <div class="icon">
                     <i class="ion fas bi bi-piggy-bank"></i>
                 </div>
-                <a href="{{ url('admin/sesiones') }}" class="small-box-footer">Más Información <i
+                <a href="{{ url('admin/donaciones') }}" class="small-box-footer">Más Información <i
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
@@ -106,61 +106,70 @@
     </div>
 
     <div class="row">
-    <div class="col-12"> <!-- Esto hace que ocupe todo el ancho -->
-        <div class="card">
-            <div class="card-header ui-sortable-handle" style="cursor: move;">
-                <h3 class="card-title">
-                    <i class="fas fa bi bi-person-heart mr-1"></i>
-                    Visitantes
-                </h3>
-            </div><!-- /.card-header -->
-            <div class="card-body">
-                <div class="tab-content p-0">
-                    <!-- Gráfico de Área -->
-                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                        <canvas id="revenue-chart-canvas"></canvas>
+        <div class="col-12"> <!-- Esto hace que ocupe todo el ancho -->
+            <div class="card">
+                <div class="card-header ui-sortable-handle" style="cursor: move;">
+                    <h3 class="card-title">
+                        <i class="fas fa bi bi-person-heart mr-1"></i>
+                        Visitantes
+                    </h3>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                    <div class="tab-content p-0">
+                        <!-- Gráfico de Área -->
+                        <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
+                            <canvas id="revenue-chart-canvas"></canvas>
+                        </div>
                     </div>
-                </div>
-            </div><!-- /.card-body -->
+                </div><!-- /.card-body -->
+            </div>
         </div>
     </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // === Gráfico de Área (Visita por mes) ===
-    var ctxRevenue = document.getElementById('revenue-chart-canvas').getContext('2d');
-    new Chart(ctxRevenue, {
-        type: 'line',
-        data: {
-            labels: [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ],
-            datasets: [{
-                label: 'Visitas',
-                data: [120, 150, 180, 90, 200, 250, 300, 280, 260, 310, 400, 500],
-                borderColor: 'rgba(75,192,192,1)',
-                backgroundColor: 'rgba(75,192,192,0.2)',
-                fill: true,
-                tension: 0.3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true
+    <div class="watermark-container"
+        style="
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: url('{{ asset('assets/img/logo.png') }}') no-repeat center center;
+    background-size: contain;
+    opacity: 0.4;
+">
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // === Gráfico de Área (Visita por mes) ===
+            var ctxRevenue = document.getElementById('revenue-chart-canvas').getContext('2d');
+            new Chart(ctxRevenue, {
+                type: 'line',
+                data: {
+                    labels: [
+                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    ],
+                    datasets: [{
+                        label: 'Visitas',
+                        data: [120, 150, 180, 90, 200, 250, 300, 280, 260, 310, 400, 500],
+                        borderColor: 'rgba(75,192,192,1)',
+                        backgroundColor: 'rgba(75,192,192,0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-});
-</script>
+            });
+        });
+    </script>
 @endsection

@@ -81,6 +81,45 @@ Route::get('/admin/usuarios/{id}/confirm-delete', [App\Http\Controllers\UsuarioC
 // Ruta para mandar la eliminacion
 Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy')->middleware(['auth', 'two.factor']);
 
+//====================================================
+// rutas para la gestion de lectores
+//====================================================
+// Ruta para admin/lectores
+Route::get('/admin/lectores', [App\Http\Controllers\ReaderController::class, 'index'])->name('admin.lectores.index')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de lectores panel crear
+Route::get('/admin/lectores/create', [App\Http\Controllers\ReaderController::class, 'create'])->name('admin.lectores.create')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de envio de formulario crear
+Route::post('/admin/lectores/create', [App\Http\Controllers\ReaderController::class, 'store'])->name('admin.lectores.store')->middleware(['auth', 'two.factor']);
+// Ruta para ver usuario por id
+Route::get('/admin/lectores/{id}', [App\Http\Controllers\ReaderController::class, 'show'])->name('admin.lectores.show')->middleware(['auth', 'two.factor']);
+// Ruta para ver editar usuario
+Route::get('/admin/lectores/{id}/edit', [App\Http\Controllers\ReaderController::class, 'edit'])->name('admin.lectores.edit')->middleware(['auth', 'two.factor']);
+// Ruta para enviar la actualizacion de usuario
+Route::put('/admin/lectores/{id}', [App\Http\Controllers\ReaderController::class, 'update'])->name('admin.lectores.update')->middleware(['auth', 'two.factor']);
+// Ruta para ver eliminar usuario
+Route::get('/admin/lectores/{id}/confirm-delete', [App\Http\Controllers\ReaderController::class, 'confirmDelete'])->name('admin.lectores.confirmDelete')->middleware(['auth', 'two.factor']);
+// Ruta para mandar la eliminacion
+Route::delete('/admin/lectores/{id}', [App\Http\Controllers\ReaderController::class, 'destroy'])->name('admin.lectores.destroy')->middleware(['auth', 'two.factor']);
+
+//====================================================
+// rutas para la gestion de directores
+//====================================================
+// Ruta para admin/directores
+Route::get('/admin/directores', [App\Http\Controllers\DirectiveController::class, 'index'])->name('admin.directores.index')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de directores panel crear
+Route::get('/admin/directores/create', [App\Http\Controllers\DirectiveController::class, 'create'])->name('admin.directores.create')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de envio de formulario crear
+Route::post('/admin/directores/create', [App\Http\Controllers\DirectiveController::class, 'store'])->name('admin.directores.store')->middleware(['auth', 'two.factor']);
+// Ruta para ver usuario por id
+Route::get('/admin/directores/{id}', [App\Http\Controllers\DirectiveController::class, 'show'])->name('admin.directores.show')->middleware(['auth', 'two.factor']);
+// Ruta para ver editar usuario
+Route::get('/admin/directores/{id}/edit', [App\Http\Controllers\DirectiveController::class, 'edit'])->name('admin.directores.edit')->middleware(['auth', 'two.factor']);
+// Ruta para enviar la actualizacion de usuario
+Route::put('/admin/directores/{id}', [App\Http\Controllers\DirectiveController::class, 'update'])->name('admin.directores.update')->middleware(['auth', 'two.factor']);
+// Ruta para ver eliminar usuario
+Route::get('/admin/directores/{id}/confirm-delete', [App\Http\Controllers\DirectiveController::class, 'confirmDelete'])->name('admin.directores.confirmDelete')->middleware(['auth', 'two.factor']);
+// Ruta para mandar la eliminacion
+Route::delete('/admin/directores/{id}', [App\Http\Controllers\DirectiveController::class, 'destroy'])->name('admin.directores.destroy')->middleware(['auth', 'two.factor']);
 
 
 //====================================================
@@ -101,6 +140,25 @@ Route::put('/admin/visitantes/{id}', [App\Http\Controllers\VisitorController::cl
 Route::get('/admin/visitantes/{id}/confirm-delete', [App\Http\Controllers\VisitorController::class, 'confirmDelete'])->name('admin.visitantes.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('/admin/visitantes/{id}', [App\Http\Controllers\VisitorController::class, 'destroy'])->name('admin.visitantes.destroy')->middleware(['auth', 'two.factor']);
+
+//====================================================
+// rutas para la gestion de donaciones
+//====================================================
+Route::get('/admin/donaciones', [App\Http\Controllers\DonationController::class, 'index'])->name('admin.donaciones.index')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de donaciones panel crear
+Route::get('/admin/donaciones/create', [App\Http\Controllers\DonationController::class, 'create'])->name('admin.donaciones.create')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de envio de formulario crear
+Route::post('/admin/donaciones/create', [App\Http\Controllers\DonationController::class, 'store'])->name('admin.donaciones.store')->middleware(['auth', 'two.factor']);
+// Ruta para ver visitante por id
+Route::get('/admin/donaciones/{id}', [App\Http\Controllers\DonationController::class, 'show'])->name('admin.donaciones.show')->middleware(['auth', 'two.factor']);
+// Ruta para ver editar visitante
+Route::get('/admin/donaciones/{id}/edit', [App\Http\Controllers\DonationController::class, 'edit'])->name('admin.donaciones.edit')->middleware(['auth', 'two.factor']);
+// Ruta para enviar la actualizacion de visitante
+Route::put('/admin/donaciones/{id}', [App\Http\Controllers\DonationController::class, 'update'])->name('admin.donaciones.update')->middleware(['auth', 'two.factor']);
+// Ruta para ver eliminar visitante
+Route::get('/admin/donaciones/{id}/confirm-delete', [App\Http\Controllers\DonationController::class, 'confirmDelete'])->name('admin.donaciones.confirmDelete')->middleware(['auth', 'two.factor']);
+// Ruta para mandar la eliminacion
+Route::delete('/admin/donaciones/{id}', [App\Http\Controllers\DonationController::class, 'destroy'])->name('admin.donaciones.destroy')->middleware(['auth', 'two.factor']);
 
 //====================================================
 // rutas para la gestion de libros
