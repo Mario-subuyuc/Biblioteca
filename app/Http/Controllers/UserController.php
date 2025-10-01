@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Visitor;
@@ -18,7 +19,7 @@ class UserController extends Controller
         $visitas = Visitor::where('user_id', $user->id)->count();
         $librosPrestados = 0;
         $multas = 0;
-        $eventos = 0;
+        $eventos = $user->events()->count();
 
         // Validar que el usuario autenticado solo edite su perfil
         if (Auth::id() != $id) {

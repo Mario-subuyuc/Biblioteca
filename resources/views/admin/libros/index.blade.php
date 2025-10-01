@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 @section('title', 'Libros')
 @section('content')
-    <div class="row mb-3">
-        <div class="col">
-            <h1>Listado de Libros</h1>
-            <p>Listado de todos los libros registrados en la biblioteca</p>
-        </div>
+    <div class="col">
+        <h1>Listado de Libros</h1>
     </div>
-
+    <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header ">
-                    <a href="{{ route('admin.libros.create') }}" class="btn btn-primary">
-                        <i class="bi bi-book"></i> Registrar nuevo libro
-                    </a>
+                    <h3 class="card-title">Libros Registrados</h3>
+                    <div class="card-tools">
+                        <a href="{{ route('admin.libros.create') }}" class="btn btn-primary">
+                             Registrar nuevo
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-striped table-bordered table-hover table-sm">
@@ -100,12 +100,41 @@
                         extend: 'collection',
                         text: '<i class="bi bi-file-earmark-text"></i> Reportes',
                         orientation: 'landscape',
-                        buttons: [
-                            { text: 'Copiar', extend: 'copy', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'PDF', extend: 'pdf', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'CSV', extend: 'csv', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'Excel', extend: 'excel', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'Imprimir', extend: 'print', exportOptions: { columns: ':visible:not(.no-export)' }}
+                        buttons: [{
+                                text: 'Copiar',
+                                extend: 'copy',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'PDF',
+                                extend: 'pdf',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'CSV',
+                                extend: 'csv',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'Excel',
+                                extend: 'excel',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'Imprimir',
+                                extend: 'print',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            }
                         ]
                     },
                     {

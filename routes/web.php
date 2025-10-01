@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TwofactorCodeController;
 use App\Http\Controllers\BotManController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 //==============================
 //rutas de landing page
@@ -12,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {   return view('index');});
 //paginas para sobre nosotros, servicios, testimonios, blog y contacto
 Route::get('/about', function () {    return view('about');});
-Route::get('/blog', function () {    return view('blog');});
+//Route::get('/blog', function () {    return view('blog');});
+Route::get('/blog', [App\Http\Controllers\EventController::class, 'landingBlog'])->name('blog');
 Route::get('/blog-details', function () {    return view('blog-details');});
 Route::get('/contact', function () {    return view('contact');});
 Route::get('/services', function () {    return view('services');});
@@ -143,22 +145,19 @@ Route::delete('admin/materiales/{id}', [App\Http\Controllers\MaterialController:
 //====================================================
 // rutas para la gestion de eventos
 //====================================================
-// Ruta para admin/eventos
-Route::get('/admin/eventos', [App\Http\Controllers\VisitorController::class, 'index'])->name('admin.eventos.index')->middleware(['auth', 'two.factor']);
-// Ruta para gestión de eventos panel crear
-Route::get('/admin/eventos/create', [App\Http\Controllers\VisitorController::class, 'create'])->name('admin.eventos.create')->middleware(['auth', 'two.factor']);
-// Ruta para gestión de envio de formulario crear
-Route::post('/admin/eventos/create', [App\Http\Controllers\VisitorController::class, 'store'])->name('admin.eventos.store')->middleware(['auth', 'two.factor']);
-// Ruta para ver usuario por id
-Route::get('/admin/eventos/{id}', [App\Http\Controllers\VisitorController::class, 'show'])->name('admin.eventos.show')->middleware(['auth', 'two.factor']);
-// Ruta para ver editar usuario
-Route::get('/admin/eventos/{id}/edit', [App\Http\Controllers\VisitorController::class, 'edit'])->name('admin.eventos.edit')->middleware(['auth', 'two.factor']);
-// Ruta para enviar la actualizacion de usuario
-Route::put('/admin/eventos/{id}', [App\Http\Controllers\VisitorController::class, 'update'])->name('admin.eventos.update')->middleware(['auth', 'two.factor']);
-// Ruta para ver eliminar usuario
-Route::get('/admin/eventos/{id}/confirm-delete', [App\Http\Controllers\VisitorController::class, 'confirmDelete'])->name('admin.eventos.confirmDelete')->middleware(['auth', 'two.factor']);
-// Ruta para mandar la eliminacion
-Route::delete('/admin/eventos/{id}', [App\Http\Controllers\VisitorController::class, 'destroy'])->name('admin.eventos.destroy')->middleware(['auth', 'two.factor']);
+//ruta para ver todos los eventos en admin
+Route::get('admin/eventos', [App\Http\Controllers\EventController::class, 'indexx'])->name('admin.Eventos.index')->middleware(['auth', 'two.factor']);
+//ruta abierta para ver todos los eventos
+Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->middleware(['auth', 'two.factor']);
+// Crear y actualizar ya existentes
+Route::post('events/create', [App\Http\Controllers\EventController::class, 'store'])->name('admin.events.store')->middleware(['auth', 'two.factor']);
+Route::post('events/{id}/update', [App\Http\Controllers\EventController::class, 'update'])->name('admin.events.update')->middleware(['auth', 'two.factor']);
+// Nueva ruta para eliminar
+Route::delete('events/{id}/delete', [App\Http\Controllers\EventController::class, 'destroy'])->name('admin.events.destroy');
+// Asignar usuario a evento
+Route::post('events/{id}/assign-user', [App\Http\Controllers\EventController::class, 'assignUser'])->name('events.assignUser')->middleware(['auth', 'two.factor']);
+// Eliminar usuario de evento
+Route::delete('events/{id}/remove-user', [App\Http\Controllers\EventController::class, 'removeUser'])->name('events.removeUser')->middleware(['auth', 'two.factor']);
 
 //====================================================
 //rutas para el perfil de usuario autenticado critico
@@ -174,7 +173,7 @@ require __DIR__.'/auth.php';
 //========================================================
 //rutas AJAX -- valida para obtener los usuarios activos
 //========================================================
-Route::get('/admin/sesiones', [App\Http\Controllers\SessionController::class, 'index'])->name('admin.sesiones.index')->middleware(['auth', 'verified', 'two.factor']);
-Route::get('/admin/sesiones/activos', [App\Http\Controllers\SessionController::class, 'obtenerUsuariosActivos'])->name('admin.sesiones.obtener')->middleware(['auth', 'verified', 'two.factor']);
-
-
+Route::get('/admin/sesiones', [App\Http\Controllers\SessionController::class, 'index'])->name('admin.sesiones.index')->middleware(['auth', 'two.factor']);
+Route::get('/admin/sesiones/activos', [App\Http\Controllers\SessionController::class, 'obtenerUsuariosActivos'])->name('admin.sesiones.obtener')->middleware(['auth', 'two.factor']);
+//ruta para obtener usuarios resumen metricas
+Route::get('/admin/resumen-usuarios', [App\Http\Controllers\SessionController::class, 'resumenUsuarios'])->name('admin.resumen.usuarios')->middleware(['auth', 'two.factor']);

@@ -39,6 +39,13 @@
             /* opcional para resaltar más */
         }
     </style>
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
 </head>
 
 <body class="blog-page">
@@ -95,7 +102,6 @@
     </header>
 
     <main class="main">
-
         <!-- Page Title -->
         <div class="page-title dark-background" data-aos="fade"
             style="background-image: url(assets/img/actividades.jpg);">
@@ -106,185 +112,88 @@
             </div>
         </div><!-- End Page Title -->
 
-        <!-- Blog Posts 2 Section -->
-        <section id="blog-posts-2" class="blog-posts-2 section">
+        <!-- Modal -->
+        <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary text-white">
+                        <h5 class="modal-title" id="eventTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body" id="eventDescription"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Sección Calendario y Tabla de Eventos -->
+        <section id="calendario-blog" class="section my-5">
             <div class="container">
-
                 <div class="row gy-4">
 
-                    <div class="col-lg-4">
-                        <article class="position-relative h-100">
+                    <!-- Columna Calendario -->
+                    <div class="col-12 col-md-6">
+                        <h2 class="mb-4 text-center">Calendario de Eventos</h2>
+                        <div id="blogCalendar" class="bg-white border rounded p-3"
+                            style="height: 600px; overflow-y: auto;"></div>
+                    </div>
 
-                            <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/.jpg" class="img-fluid" alt="">
-                            </div>
-
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>10</span>Julio</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
+                    <!-- Modal de Evento -->
+                    <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header bg-secondary text-white">
+                                    <h5 class="modal-title" id="eventTitle"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Cerrar"></button>
                                 </div>
-                                <span class="px-3 text-black-50">/</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Nutrición</span>
-                                </div>
-                            </div>
-
-                            <div class="post-content d-flex flex-column">
-
-                                <h3 class="post-title">Programa de estimulacion con orientación en nutrición</h3>
-                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>leer más</span><i
-                                        class="bi bi-arrow-right"></i></a>
-
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
-
-                    <div class="col-lg-4">
-                        <article class="position-relative h-100">
-
-                            <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt="">
-                            </div>
-
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>09</span>julio</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
-                                </div>
-                                <span class="px-3 text-black-50">/</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Comunidad</span>
+                                <div class="modal-body" id="eventDescription"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">Curso de  elaboracion de velas</h3>
-                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer más</span><i
-                                        class="bi bi-arrow-right"></i></a>
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
-
-                    <div class="col-lg-4">
-                        <article class="position-relative h-100">
-
-                            <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/blog-3.jpg" class="img-fluid" alt="">
-                            </div>
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>11</span>Junio</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
-                                </div>
-                                <span class="px-3 text-black-50">/</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Comunidad</span>
-                                </div>
-                            </div>
-
-                            <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">Taller de preparacion de mora.</h3>
-                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
-                                        class="bi bi-arrow-right"></i></a>
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
-
-                    <div class="col-lg-4">
-                        <article class="position-relative h-100">
-
-                            <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/blog-4.jpg" class="img-fluid" alt="">
-                            </div>
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>28</span>Abril</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
-                                </div>
-                                <span class="px-3 text-black-50">/</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Agricultura</span>
-                                </div>
-                            </div>
-
-                            <div class="post-content d-flex flex-column">
-                                <h3 class="post-title">Evento de lanzamiento de huerto vertial.
-                                </h3>
-                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
-                                        class="bi bi-arrow-right"></i></a>
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
-
-                    <div class="col-lg-4">
-                        <article class="position-relative h-100">
-
-                            <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/blog-5.jpg" class="img-fluid" alt="">
-                            </div>
-
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>15</span>Marzo</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
-                                </div>
-                                <span class="px-3 text-black-50">/</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Niños</span>
-                                </div>
-                            </div>
-
-                            <div class="post-content d-flex flex-column">
-
-                                <h3 class="post-title">Fauna de Guatemala</h3>
-                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
-                                        class="bi bi-arrow-right"></i></a>
-
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
-
-                    <div class="col-lg-4">
-                        <article class="position-relative h-100">
-
-                            <div class="post-img position-relative overflow-hidden">
-                                <img src="assets/img/blog/blog-6.jpg" class="img-fluid" alt="">
-                            </div>
-
-                            <div class="meta d-flex align-items-end">
-                                <span class="post-date"><span>10</span>Febrero</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person"></i> <span class="ps-2">Biblioteca</span>
-                                </div>
-                                <span class="px-3 text-black-50">/</span>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-folder2"></i> <span class="ps-2">Comunidad</span>
-                                </div>
-                            </div>
-
-                            <div class="post-content d-flex flex-column">
-
-                                <h3 class="post-title">Taller sobre clasificación de desechos</h3>
-                                <a href={{ 'blog-details' }} class="readmore stretched-link"><span>Leer Más</span><i
-                                        class="bi bi-arrow-right"></i></a>
-
-                            </div>
-
-                        </article>
-                    </div><!-- End post list item -->
+                    <div class="col-12 col-md-6">
+                        <h2 class="mb-4 text-center">Eventos</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Inicio</th>
+                                        <th>Fin</th>
+                                        <th>Caterogia</th>
+                                        <th>Detalles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($events as $event)
+                                        <tr>
+                                            <td>{{ \Carbon\Carbon::parse($event['start'])->format('d M, Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($event['end'])->format('d M, Y') }}</td>
+                                            <td>{{ $event['title'] }}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#eventModal" data-title="{{ $event['title'] }}"
+                                                    data-description="{{ $event['extendedProps']['description'] ?? 'Sin descripción' }}"
+                                                    data-image="{{ $event['extendedProps']['image'] ?? '' }}">
+                                                    Ver
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                 </div>
-
             </div>
-
-        </section><!-- /Blog Posts 2 Section -->
+        </section>
 
     </main>
 
@@ -321,5 +230,60 @@
     <script src="assets/js/main.js"></script>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('blogCalendar');
+
+        const events = @json($events);
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            themeSystem: 'bootstrap5',
+            events: events,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                list: 'Lista'
+            },
+            editable: false,
+            selectable: false,
+            dayMaxEvents: true,
+
+            // ← Aquí va el eventClick
+            eventClick: function(info) {
+                document.getElementById('eventTitle').innerText = info.event.title;
+                document.getElementById('eventDescription').innerText = info.event.extendedProps
+                    .description || 'Sin descripción';
+
+                var eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+                eventModal.show();
+            }
+        });
+
+        calendar.render();
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var eventModal = document.getElementById('eventModal');
+        eventModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget; // Botón que abrió el modal
+            var title = button.getAttribute('data-title');
+            var description = button.getAttribute('data-description');
+
+            // Rellenar el modal
+            eventModal.querySelector('#eventTitle').textContent = title;
+            eventModal.querySelector('#eventDescription').textContent = description;
+        });
+    });
+</script>
 
 </html>

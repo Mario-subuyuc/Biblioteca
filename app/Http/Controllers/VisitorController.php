@@ -104,15 +104,6 @@ class VisitorController extends Controller
      */
     public function destroy($id)
     {
-        $usuarioAutenticado = Auth::user();
-
-        // Evitar que un usuario se elimine a sí mismo
-        if ($usuarioAutenticado->id == $id) {
-            return redirect()->route('admin.visitantes.index')
-                ->with('mensaje', 'No puedes eliminar tu propia cuenta.')
-                ->with('icono', 'error');
-        }
-
         // Buscar y eliminar usuario
         $visitante = Visitor::findOrFail($id);
         $visitante->delete();

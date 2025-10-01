@@ -35,7 +35,7 @@
         <div class="col-md-3">
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{ 0 }}</h3>
+                    <h3>{{ $eventos ? $eventos : '0'}}</h3>
                     <p>Eventos</p>
                 </div>
                 <div class="icon"><i class="fas fa-calendar-alt"></i></div>

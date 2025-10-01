@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Material;
+use Illuminate\Http\Request;
 
 class MaterialController extends Controller
 {
     public function index()
     {
-        $materials = Material::all();
-        return view('admin.materiales.index', compact('materials'));
+        $materiales = Material::all();
+        return view('admin.materiales.index', compact('materiales'));
     }
 
     public function create()
@@ -21,25 +21,19 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:0',
-            'donation' => 'required|boolean',
-            'category' => 'nullable|string|max:100',
-            'unit' => 'nullable|string|max:50',
-            'description' => 'nullable|string',
+            'name'        => 'required|string|max:255',
+            'quantity'    => 'required|integer|min:1',
+            'donation'    => 'required|string|max:10',
+            'category'    => 'nullable|string|max:255',
+            'unit'        => 'nullable|string|max:50',
+            'description' => 'nullable|string|max:500',
         ]);
 
-        $material = new Material();
-        $material->name = $request->name;
-        $material->quantity = $request->quantity;
-        $material->donation = $request->donation;
-        $material->category = $request->category;
-        $material->unit = $request->unit;
-        $material->description = $request->description;
-        $material->save();
+        Material::create($request->all());
 
         return redirect()->route('admin.materiales.index')
-            ->with(['mensaje' => 'Material registrado correctamente', 'icono' => 'success']);
+            ->with('icono', 'success')
+            ->with('mensaje', 'Material registrado correctamente');
     }
 
     public function show($id)
@@ -56,26 +50,22 @@ class MaterialController extends Controller
 
     public function update(Request $request, $id)
     {
+        $material = Material::findOrFail($id);
+
         $request->validate([
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:0',
-            'donation' => 'required|boolean',
-            'category' => 'nullable|string|max:100',
-            'unit' => 'nullable|string|max:50',
-            'description' => 'nullable|string',
+            'name'        => 'required|string|max:255',
+            'quantity'    => 'required|integer|min:1',
+            'donation'    => 'required|string|max:10',
+            'category'    => 'nullable|string|max:255',
+            'unit'        => 'nullable|string|max:50',
+            'description' => 'nullable|string|max:500',
         ]);
 
-        $material = Material::findOrFail($id);
-        $material->name = $request->name;
-        $material->quantity = $request->quantity;
-        $material->donation = $request->donation;
-        $material->category = $request->category;
-        $material->unit = $request->unit;
-        $material->description = $request->description;
-        $material->save();
+        $material->update($request->all());
 
         return redirect()->route('admin.materiales.index')
-            ->with(['mensaje' => 'Material actualizado correctamente', 'icono' => 'success']);
+            ->with('icono', 'success')
+            ->with('mensaje', 'Material actualizado correctamente');
     }
 
     public function confirmDelete($id)
@@ -87,7 +77,9 @@ class MaterialController extends Controller
     public function destroy($id)
     {
         Material::destroy($id);
+
         return redirect()->route('admin.materiales.index')
-            ->with(['mensaje' => 'Material eliminado correctamente', 'icono' => 'success']);
+            ->with('icono', 'success')
+            ->with('mensaje', 'Material eliminado correctamente');
     }
 }

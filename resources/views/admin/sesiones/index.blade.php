@@ -1,65 +1,115 @@
 @extends('layouts.admin')
+@section('title', 'Resumen de Usuarios')
 @section('content')
-<div class="row">
-    <h1>Usuarios Activos Ahora</h1>
-</div>
-<hr>
-<div class="row justify-content-center">
-    <div class="col-md-10">
-        <div class="card card-outline card-info center">
+    <div class="row mb-3">
+        <h1>Sessiones 2025</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <!-- Usuarios Online -->
+        <div class="col-md-6 mb-3">
+            <div class="card card-outline card-info h-100">
+                <div class="card-header">
+                    <h3 class="card-title">Usuarios Online</h3>
+                </div>
+                <div class="card-body">
+                    <table id="example1" class="table table-striped table-bordered table-hover table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-center">Nro</th>
+                                <th scope="col" class="text-center">Nombre</th>
+                                <th scope="col" class="text-center">Correo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuarios_online">
+                            @foreach ($usuarios as $usuario)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $usuario->name }}</td>
+                                    <td class="text-center">{{ $usuario->email }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuarios por Día -->
+        <div class="col-md-2 mb-3">
+        <div class="card card-outline card-info h-100 collapsed-card">
             <div class="card-header">
-                <h3 class="card-title">Usuarios Online</h3>
+                <h3 class="card-title">Usuarios por Día</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i> <!-- Icono inicial fa-plus porque está colapsada -->
+                    </button>
+                </div>
             </div>
             <div class="card-body">
-                <table id="example1" class="table table-striped table-bordered table-hover table-sm">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col" style="text-align: center">Nro</th>
-                            <th scope="col" style="text-align: center">Nombre</th>
-                            <th scope="col" style="text-align: center">Correo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usuarios_online">
-                        <!-- Aquí se actualizarán los usuarios activos -->
-                        @foreach($usuarios as $usuario)
-                            <tr>
-                                <td style="text-align: center">{{$loop->iteration}}</td>
-                                <td style="text-align: center">{{$usuario->name}}</td>
-                                <td style="text-align: center">{{$usuario->email}}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <ul class="list-group">
+                    @foreach ($usuariosPorDia as $item)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ $item->fecha }}
+                            <span class="badge badge-primary badge-pill">{{ $item->cantidad }}</span>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
-</div>
 
-@section('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    // Hacer la petición AJAX cada 10 segundos
-    setInterval(function() {
-        $.ajax({
-            url: "{{ route('admin.sesiones.obtener') }}", // La ruta para obtener los usuarios activos
-            method: "GET",
-            dataType: "json",
-            success: function(data) {
-                // Limpiar la tabla actual
-                $('#usuarios_online').empty();
 
-                // Agregar los usuarios actualizados
-                $.each(data, function(index, usuario) {
-                    $('#usuarios_online').append(`
-                        <tr>
-                            <td style="text-align: center">${index + 1}</td>
-                            <td style="text-align: center">${usuario.name}</td>
-                            <td style="text-align: center">${usuario.email}</td>
-                        </tr>
-                    `);
-                });
-            }
-        });
-    }, 10000);
-@endsection
+        <!-- Usuarios por Semana -->
+        <div class="col-md-2 mb-3">
+            <div class="card card-outline card-success h-100 collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Usuarios por Semana</h3>
+                    <div class="card-tools">
+                        <!-- Botón para colapsar/expandir -->
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach ($usuariosPorSemana as $item)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Año {{ $item->anio }}, Semana {{ $item->semana }}
+                                <span class="badge badge-success badge-pill">{{ $item->cantidad }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Usuarios por Mes -->
+        <div class="col-md-2 mb-3">
+            <div class="card card-outline card-warning h-100 collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Usuarios por Mes</h3>
+                    <div class="card-tools">
+                        <!-- Botón para colapsar/expandir -->
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach ($usuariosPorMes as $item)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ $item->mes }}
+                                <span class="badge badge-warning badge-pill">{{ $item->cantidad }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
 @endsection

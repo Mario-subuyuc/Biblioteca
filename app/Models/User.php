@@ -66,4 +66,10 @@ class User extends Authenticatable
         $this->two_factor_expires_at = null;
         $this->save();
     }
+
+    public function events()
+{
+    return $this->belongsToMany(Event::class, 'event_user')->withTimestamps();
+}
+
 }
