@@ -31,6 +31,10 @@
                     <dt class="col-sm-4">Dirección</dt>
                     <dd class="col-sm-8">{{ $usuario->address ?? '—' }}</dd>
 
+                    <dt class="col-sm-4">Género</dt>
+                    <dd class="col-sm-8">{{ $usuario->gender ?? '—' }}</dd>
+
+
                     <dt class="col-sm-4">Fecha de creación</dt>
                     <dd class="col-sm-8">{{ $usuario->created_at->format('d/m/Y H:i:s') }}</dd>
 

@@ -11,7 +11,7 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::withTrashed()->get(); // Incluye usuarios deshabilitados
         return view('admin.usuarios.index', compact('usuarios'));
     }
 
@@ -28,6 +28,7 @@ class UsuarioController extends Controller
             'password'                 => 'required|min:8|confirmed',
             'phone'                    => 'nullable|string|max:20',
             'address'                   => 'nullable|string|max:255',
+            'gender' => ['nullable', 'in:masculino,femenino,otro']
         ]);
 
         User::create([
@@ -36,6 +37,7 @@ class UsuarioController extends Controller
             'password'                 => Hash::make($request->password),
             'phone'                    => $request->phone,
             'address'                   => $request->address,
+            'gender'                    => $request->gender
         ]);
 
         return redirect()->route('admin.usuarios.index')
@@ -65,6 +67,7 @@ class UsuarioController extends Controller
             'phone'    => 'nullable|string|max:20',
             'address'  => 'nullable|string|max:255',
             'password' => 'nullable|min:6|confirmed',
+            'gender' => ['nullable', 'in:masculino,femenino,otro']
         ]);
 
         $usuario->update([
@@ -72,6 +75,7 @@ class UsuarioController extends Controller
             'email'    => $request->email,
             'phone'    => $request->phone,
             'address'  => $request->address,
+            'gender' => $request->gender,
             'password' => $request->password ? Hash::make($request->password) : $usuario->password,
         ]);
 
@@ -110,6 +114,24 @@ class UsuarioController extends Controller
 
         return redirect()->route('admin.usuarios.index')
             ->with('mensaje', 'El usuario fue deshabilitado correctamente')
+            ->with('icono', 'success');
+    }
+
+    public function enable($id)
+    {
+        $usuario = User::withTrashed()->findOrFail($id);
+
+        if ($usuario->trashed()) {
+            $usuario->restore();
+        }
+
+        $usuario->disabled_at = null;
+        $usuario->disabled_by = null;
+        $usuario->disabled_by = null;
+        $usuario->save();
+
+        return redirect()->route('admin.usuarios.index')
+            ->with('mensaje', 'El usuario fue habilitado correctamente')
             ->with('icono', 'success');
     }
 }

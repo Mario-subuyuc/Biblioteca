@@ -37,10 +37,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone' => ['required', 'string', 'max:20'],
             'address' => ['required', 'string', 'max:255'],
+            'gender' => ['nullable', 'in:masculino,femenino,otro'],
 
             // Datos de lector
-            'birth_date' => ['nullable', 'date'],
-            'gender' => ['nullable', 'in:masculino,femenino,mestizo,otro'],
+            'birth_date' => ['nullable', 'date','regex:/^(1[1-9]{3}|[2-9][0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/'],
             'dpi' => ['required', 'unique:readers,dpi'],
             'occupation' => ['nullable', 'string'],
            'ethnicity' => ['nullable', 'in:maya,ladina,garifuna,xinca,mestizo,otro'],
@@ -51,13 +51,13 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'gender' => $request->gender,
             'password' => Hash::make($request->password),
         ]);
 
         Reader::create([
             'user_id' => $user->id,
             'birth_date' => $request->birth_date,
-            'gender' => $request->gender,
             'dpi' => $request->dpi,
             'occupation' => $request->occupation,
             'ethnicity' => $request->ethnicity,

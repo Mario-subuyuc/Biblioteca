@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('birth_date')->nullable();
-            $table->enum('gender', ['masculino', 'femenino', 'otro'])->nullable();
             $table->string('dpi')->unique();
             $table->string('occupation')->nullable();
             $table->string('ethnicity')->nullable();

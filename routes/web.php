@@ -53,8 +53,8 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 //====================================================
 // Ruta para editar el perfil del usuario autenticado
 //====================================================
-Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
-Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
+Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit')->middleware(['auth', 'two.factor']);
+Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update')->middleware(['auth', 'two.factor']);
 
 
 
@@ -77,6 +77,8 @@ Route::put('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::clas
 Route::get('/admin/usuarios/{id}/confirm-delete', [App\Http\Controllers\UsuarioController::class, 'confirmDelete'])->name('admin.usuarios.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy')->middleware(['auth', 'two.factor']);
+//ruta para deshabilitar usuario
+Route::patch('/admin/usuarios/{id}/enable', [App\Http\Controllers\UsuarioController::class, 'enable'])->name('admin.usuarios.enable')->middleware(['auth', 'two.factor']);
 
 //====================================================
 // rutas para la gestion de lectores
@@ -93,10 +95,8 @@ Route::get('/admin/lectores/{id}', [App\Http\Controllers\ReaderController::class
 Route::get('/admin/lectores/{id}/edit', [App\Http\Controllers\ReaderController::class, 'edit'])->name('admin.lectores.edit')->middleware(['auth', 'two.factor']);
 // Ruta para enviar la actualizacion de usuario
 Route::put('/admin/lectores/{id}', [App\Http\Controllers\ReaderController::class, 'update'])->name('admin.lectores.update')->middleware(['auth', 'two.factor']);
-// Ruta para ver eliminar usuario
-Route::get('/admin/lectores/{id}/confirm-delete', [App\Http\Controllers\ReaderController::class, 'confirmDelete'])->name('admin.lectores.confirmDelete')->middleware(['auth', 'two.factor']);
-// Ruta para mandar la eliminacion
-Route::delete('/admin/lectores/{id}', [App\Http\Controllers\ReaderController::class, 'destroy'])->name('admin.lectores.destroy')->middleware(['auth', 'two.factor']);
+
+
 
 //====================================================
 // rutas para la gestion de directores
@@ -113,10 +113,6 @@ Route::get('/admin/directores/{id}', [App\Http\Controllers\DirectiveController::
 Route::get('/admin/directores/{id}/edit', [App\Http\Controllers\DirectiveController::class, 'edit'])->name('admin.directores.edit')->middleware(['auth', 'two.factor']);
 // Ruta para enviar la actualizacion de usuario
 Route::put('/admin/directores/{id}', [App\Http\Controllers\DirectiveController::class, 'update'])->name('admin.directores.update')->middleware(['auth', 'two.factor']);
-// Ruta para ver eliminar usuario
-Route::get('/admin/directores/{id}/confirm-delete', [App\Http\Controllers\DirectiveController::class, 'confirmDelete'])->name('admin.directores.confirmDelete')->middleware(['auth', 'two.factor']);
-// Ruta para mandar la eliminacion
-Route::delete('/admin/directores/{id}', [App\Http\Controllers\DirectiveController::class, 'destroy'])->name('admin.directores.destroy')->middleware(['auth', 'two.factor']);
 
 
 //====================================================

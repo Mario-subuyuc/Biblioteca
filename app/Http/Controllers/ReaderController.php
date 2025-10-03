@@ -5,82 +5,115 @@ namespace App\Http\Controllers;
 use App\Models\Reader;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class ReaderController extends Controller
 {
+    // Listar todos los lectores
     public function index()
     {
-        $readers = Reader::whereHas('user')->with('user')->get();// Trae todos los registros
+        $readers = Reader::whereHas('user')->with('user')->get(); // Trae todos los registros
         return view('admin.lectores.index', compact('readers'));
     }
 
     // Mostrar formulario de creación
     public function create()
     {
-        // Trae solo usuarios que no tienen lector asociado
-        $users = User::doesntHave('reader')->get();
 
-        // Opciones de etnia
-        $ethnicities = ['Maya', 'Ladina', 'Garífuna', 'Xinca', 'Otro'];
+        $ethnicities = ['Maya', 'Ladina', 'Garífuna', 'Xinca', 'Otro']; // Opciones de etnia
 
-        return view('admin.lectores.create', compact('users', 'ethnicities'));
+        return view('admin.lectores.create', compact('ethnicities'));
     }
 
     // Guardar nuevo lector
     public function store(Request $request)
     {
+
         $request->validate([
-            'user_id' => 'required|exists:users,id|unique:readers,user_id',
-            'birth_date' => 'nullable|date',
-            'gender' => 'nullable|in:male,female,other',
-            'dpi' => 'required|unique:readers,dpi',
-            'occupation' => 'nullable|string|max:100',
-            'ethnicity' => 'nullable|string|max:100',
-        ], [
-            'user_id.required' => 'Debes seleccionar un usuario.',
-            'user_id.exists' => 'El usuario seleccionado no existe.',
-            'user_id.unique' => 'El usuario ya tiene un lector asociado.',
-            'birth_date.date' => 'La fecha de nacimiento no es válida.',
-            'gender.in' => 'El género seleccionado no es válido.',
-            'dpi.required' => 'El DPI es obligatorio.',
-            'dpi.unique' => 'Este DPI ya está registrado.',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:20'],
+            'address' => ['required', 'string', 'max:255'],
+            'gender' => ['nullable', 'in:masculino,femenino,otro'],
+
+            // Datos de lector
+            'birth_date' => ['nullable', 'date'],
+            'dpi' => ['required', 'unique:readers,dpi'],
+            'occupation' => ['nullable', 'string'],
+            'ethnicity' => ['nullable', 'in:maya,ladina,garifuna,xinca,mestizo,otro'],
         ]);
 
-        Reader::create($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Reader::create([
+            'user_id' => $user->id,
+            'birth_date' => $request->birth_date,
+            'dpi' => $request->dpi,
+            'occupation' => $request->occupation,
+            'ethnicity' => $request->ethnicity,
+        ]);
 
         return redirect()->route('admin.lectores.index')
-            ->with('success', 'Lector registrado correctamente.')
-            ->with('icon', 'success');
+            ->with('mensaje', 'Lector registrado correctamente.')
+            ->with('icono', 'success');
     }
 
-    public function show(Reader $reader)
+    // Mostrar detalles de un lector
+    public function show($id)
     {
-        return view('readers.show', compact('reader'));
+        $lector = Reader::findOrFail($id);
+        return view('admin.lectores.show', compact('lector'));
     }
 
-    public function edit(Reader $reader)
+    // Mostrar formulario de edición
+    public function edit($id)
     {
-        return view('readers.edit', compact('reader'));
+        $lector = Reader::with('user')->findOrFail($id);
+        return view('admin.lectores.edit', compact('lector'));
     }
 
-    public function update(Request $request, Reader $reader)
+    public function update(Request $request, $id)
     {
+        $lector = Reader::with('user')->findOrFail($id);
+
         $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $lector->user_id,
+            'password' => 'nullable|confirmed|min:8',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
             'birth_date' => 'nullable|date',
-            'gender' => 'nullable|in:male,female,other',
-            'dpi' => 'required|unique:readers,dpi,' . $reader->id,
+            'gender' => 'nullable|in:masculino,femenino,otro',
+            'dpi' => 'required|unique:readers,dpi,' . $lector->id,
             'occupation' => 'nullable|string',
-            'ethnicity' => 'nullable|string',
+            'ethnicity' => 'nullable|in:maya,ladina,garifuna,xinca,mestizo,otro',
         ]);
 
-        $reader->update($request->all());
+        // Actualizar usuario
+        $lector->user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'password' => $request->password ? Hash::make($request->password) : $lector->user->password,
+        ]);
 
-        return redirect()->route('readers.index')->with('success', 'Reader updated successfully.');
+        // Actualizar lector
+        $lector->update($request->only('birth_date', 'dpi', 'occupation', 'ethnicity'));
+
+        return redirect()->route('admin.lectores.index')
+            ->with('mensaje', 'Lector actualizado correctamente.')
+            ->with('icono', 'success');
     }
 
-    public function destroy(Reader $reader)
-    {
-        $reader->delete();
-        return redirect()->route('readers.index')->with('success', 'Reader deleted successfully.');
-    }
 }

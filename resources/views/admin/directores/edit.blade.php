@@ -43,6 +43,7 @@
                             @enderror
                         </div>
 
+                        {{-- Contraseña (opcional) --}}
                         <div class="flex-fill col-md-6">
                             <label for="password" class="form-label">Contraseña</label>
                             <input type="password" id="password" name="password" class="form-control">
@@ -79,10 +80,10 @@
                          <div class="flex-fill col-md-6">
                             <label for="gender" class="form-label">Género</label>
                             <select id="gender" name="gender" class="form-control">
-                                <option value="" disabled selected>-- Selecciona un género --</option>
-                                <option value="masculino" {{ old('gender', $lector->user->gender) == 'masculino' ? 'selected' : '' }}>Masculino</option>
-                                <option value="femenino" {{ old('gender', $lector->user->gender) == 'femenino' ? 'selected' : '' }}>Femenino</option>
-                                <option value="otro" {{ old('gender', $lector->user->gender) == 'otro' ? 'selected' : '' }}>Otro</option>
+                                <option value="">-- Selecciona un género --</option>
+                                <option value="masculino" {{ old('gender', $lector->gender) == 'masculino' ? 'selected' : '' }}>Masculino</option>
+                                <option value="femenino" {{ old('gender', $lector->gender) == 'femenino' ? 'selected' : '' }}>Femenino</option>
+                                <option value="otro" {{ old('gender', $lector->gender) == 'otro' ? 'selected' : '' }}>Otro</option>
                             </select>
                             @error('gender')
                                 <small class="text-danger">{{ $message }}</small>

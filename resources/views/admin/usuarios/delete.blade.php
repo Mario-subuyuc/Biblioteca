@@ -45,6 +45,12 @@
                     <textarea class="form-control" disabled>{{ $usuario->address ?? '—' }}</textarea>
                 </div>
 
+                {{-- Género --}}
+                <div class="d-flex flex-column">
+                    <label><b>Género</b></label>
+                    <textarea class="form-control" disabled>{{ $usuario->gender ?? '—' }}</textarea>
+                </div>
+
                 <hr>
 
                 {{-- Botones --}}
@@ -53,7 +59,7 @@
                         Cancelar
                     </a>
                     <button type="submit" class="btn btn-danger">
-                        <i class="bi bi-trash3"></i> Eliminar Usuario
+                        <i class="bi bi-trash3"></i> Deshabilitar Usuario
                     </button>
                 </div>
             </form>

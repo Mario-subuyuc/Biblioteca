@@ -13,10 +13,9 @@ class Reader extends Model
     protected $fillable = [
         'user_id',
         'birth_date',
-        'gender',
         'dpi',
         'occupation',
-        'ethnicity',
+        'ethnicity'
     ];
 
     // Relación con Tabla/User

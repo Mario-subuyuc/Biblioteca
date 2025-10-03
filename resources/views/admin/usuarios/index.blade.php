@@ -25,30 +25,57 @@
                                 <th style="text-align: center">Email</th>
                                 <th style="text-align: center">Teléfono</th>
                                 <th style="text-align: center">Dirección</th>
+                                <th style="text-align: center">Género</th>
+                                <th style="text-align: center">Estado</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($usuarios as $usuario)
-                                <tr>
+                                <tr
+                                    class="{{ $usuario->deleted_at || $usuario->disabled_at ? 'table-danger' : 'table-success' }}">
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
                                     <td style="text-align: center">{{ $usuario->name }}</td>
                                     <td style="text-align: center">{{ $usuario->email }}</td>
                                     <td style="text-align: center">{{ $usuario->phone ?? '—' }}</td>
                                     <td style="text-align: center">{{ $usuario->address ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $usuario->gender ?? '—' }}</td>
+                                    <td style="text-align: center">
+                                        @if ($usuario->deleted_at || $usuario->disabled_at)
+                                            <span class="badge bg-danger">Deshabilitado</span>
+                                        @else
+                                            <span class="badge bg-success">Habilitado</span>
+                                        @endif
+                                    </td>
+
                                     <td style="text-align: center">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('admin.usuarios.show', $usuario->id) }}"
-                                                class="btn btn-info btn-sm">
-                                                <i class="bi bi-eye"></i> Ver
-                                            </a>
-                                            <a href="{{ route('admin.usuarios.edit', $usuario->id) }}"
-                                                class="btn btn-success btn-sm">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ url('admin/usuarios/' . $usuario->id . '/confirm-delete') }}"
-                                                type="button" class="btn btn-danger btn-sm"><i
-                                                    class="bi bi-trash3"></i>Borrar</a>
+                                            {{-- Solo se permite editar si está habilitado --}}
+                                            @if (!($usuario->deleted_at || $usuario->disabled_at))
+                                                <a href="{{ route('admin.usuarios.show', $usuario->id) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    <i class="bi bi-eye"></i> Ver
+                                                </a>
+
+                                                <a href="{{ route('admin.usuarios.edit', $usuario->id) }}"
+                                                    class="btn btn-success btn-sm">
+                                                    <i class="bi bi-pencil"></i> Editar
+                                                </a>
+                                                <a href="{{ url('admin/usuarios/' . $usuario->id . '/confirm-delete') }}"
+                                                    type="button" class="btn btn-danger btn-sm">
+                                                    <i class="bi bi-person-x"></i> Deshabilitar
+                                                </a>
+                                            @else
+                                                {{-- Si el usuario está deshabilitado, solo mostrar botón habilitar --}}
+                                                <form action="{{ route('admin.usuarios.enable', $usuario->id) }}"
+                                                    method="POST" style="display:inline">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                        <i class="bi bi-person-check"></i> Habilitar
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

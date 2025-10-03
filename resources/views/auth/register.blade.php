@@ -34,6 +34,18 @@
                     required />
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
             </div>
+
+            <!-- Género -->
+            <div>
+                <x-input-label for="gender" :value="__('Género')" />
+                <select id="gender" name="gender" class="block mt-1 w-full border-gray-300 rounded-md">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="masculino" {{ old('gender') == 'masculino' ? 'selected' : '' }}>Masculino</option>
+                    <option value="femenino" {{ old('gender') == 'femenino' ? 'selected' : '' }}>Femenino</option>
+                    <option value="otro" {{ old('gender') == 'otro' ? 'selected' : '' }}>Otro</option>
+                </select>
+                <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+            </div>
         </div>
 
         <hr class="my-6">
@@ -49,21 +61,9 @@
                 <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
             </div>
 
-            <!-- Género -->
-            <div>
-                <x-input-label for="gender" :value="__('Género')" />
-                <select id="gender" name="gender" class="block mt-1 w-full border-gray-300 rounded-md">
-                    <option value="">Selecciona...</option>
-                    <option value="masculino" {{ old('gender') == 'masculino' ? 'selected' : '' }}>Masculino</option>
-                    <option value="femenino" {{ old('gender') == 'femenino' ? 'selected' : '' }}>Femenino</option>
-                    <option value="otro" {{ old('gender') == 'otro' ? 'selected' : '' }}>Otro</option>
-                </select>
-                <x-input-error :messages="$errors->get('gender')" class="mt-2" />
-            </div>
-
             <!-- DPI -->
             <div>
-                <x-input-label for="dpi" :value="__('DPI')" />
+                <x-input-label for="dpi" :value="__('DPI/CUI')" />
                 <x-text-input id="dpi" class="block mt-1 w-full" type="text" name="dpi" :value="old('dpi')"
                     required />
                 <x-input-error :messages="$errors->get('dpi')" class="mt-2" />
@@ -81,7 +81,7 @@
             <div>
                 <x-input-label for="ethnicity" :value="__('Etnia')" />
                 <select id="ethnicity" name="ethnicity" class="block mt-1 w-full border-gray-300 rounded-md">
-                    <option value="">Selecciona...</option>
+                    <option value="" disabled selected>Selecciona...</option>
                     <option value="maya" {{ old('ethnicity') == 'maya' ? 'selected' : '' }}>Maya</option>
                     <option value="ladina" {{ old('ethnicity') == 'ladina' ? 'selected' : '' }}>Ladina</option>
                     <option value="garifuna" {{ old('ethnicity') == 'garifuna' ? 'selected' : '' }}>Garífuna</option>

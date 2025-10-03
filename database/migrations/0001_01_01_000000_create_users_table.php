@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->enum('gender', ['masculino', 'femenino', 'otro'])->nullable();
             $table->softDeletes(); // agrega deleted_at para borrado lógico
             $table->unsignedBigInteger('disabled_by')->nullable(); //quien deshabilitó
             $table->timestamp('disabled_at')->nullable(); //cuando deshabilitó

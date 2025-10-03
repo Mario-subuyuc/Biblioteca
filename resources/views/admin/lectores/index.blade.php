@@ -38,7 +38,7 @@
                                     <td style="text-align: center">{{ $reader->user?->name ?? '—' }}</td>
                                     <td style="text-align: center">{{ $reader->user?->email ?? '—' }}</td>
                                     <td style="text-align: center">{{ $reader->birth_date ?? '—' }}</td>
-                                    <td style="text-align: center">{{ ucfirst($reader->gender) ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $reader->user?->gender ?? '—' }}</td>
                                     <td style="text-align: center">{{ $reader->dpi }}</td>
                                     <td style="text-align: center">{{ $reader->occupation ?? '—' }}</td>
                                     <td style="text-align: center">{{ $reader->ethnicity ?? '—' }}</td>
@@ -51,10 +51,6 @@
                                             <a href="{{ route('admin.lectores.edit', $reader->id) }}"
                                                 class="btn btn-success btn-sm">
                                                 <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ url('admin/lectores/' . $reader->id . '/confirm-delete') }}"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash3"></i> Borrar
                                             </a>
                                         </div>
                                     </td>

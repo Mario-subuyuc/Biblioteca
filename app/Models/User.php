@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'address',
+        'gender',
         'two_factor_code',
         'two_factor_expires_at',
     ];
@@ -41,11 +42,18 @@ class User extends Authenticatable
         return $this->hasOne(Reader::class);
     }
 
+    // Relación con directivos de 1a1
+    public function directive()
+    {
+        return $this->hasOne(Directive::class);
+    }
+
     // Relación con visitantes
     public function visitors()
     {
         return $this->hasMany(Visitor::class);
     }
+
     // Relación con visitantes
     public function events()
     {
