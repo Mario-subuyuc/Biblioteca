@@ -196,12 +196,13 @@
 
     </main>
 
+
     <!-- Footer -->
     <footer id="footer" class="footer dark-background text-light py-4">
         <div class="container text-center">
             <p class="mb-1">&copy; 2025 Biblioteca Comunitaria Forjando Mentes Brillantes</p>
-            <p class="mb-1">Tel: +502 XXXX XXXX</p>
-            <p class="mb-1">2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+            <p class="mb-1">Tel: +502 5077 0085</p>
+            <p class="mb-1">Residencial los Naranjales, El Tejar, Chimaltenango, Guatemala</p>
             <p class="mb-0">
                 <a href="https://www.facebook.com/profile.php?id=61553557262587" class="text-light me-3"><i
                         class="bi bi-facebook"></i></a>

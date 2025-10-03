@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Notifications\TwoFactorCodeNotification;
+use App\Models\Reader;
 
 class RegisteredUserController extends Controller
 {
@@ -35,15 +36,31 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone' => ['required', 'string', 'max:20'],
-            'adress' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+
+            // Datos de lector
+            'birth_date' => ['nullable', 'date'],
+            'gender' => ['nullable', 'in:masculino,femenino,mestizo,otro'],
+            'dpi' => ['required', 'unique:readers,dpi'],
+            'occupation' => ['nullable', 'string'],
+           'ethnicity' => ['nullable', 'in:maya,ladina,garifuna,xinca,mestizo,otro'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'adress' => $request->adress,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
+        ]);
+
+        Reader::create([
+            'user_id' => $user->id,
+            'birth_date' => $request->birth_date,
+            'gender' => $request->gender,
+            'dpi' => $request->dpi,
+            'occupation' => $request->occupation,
+            'ethnicity' => $request->ethnicity,
         ]);
 
         event(new Registered($user));

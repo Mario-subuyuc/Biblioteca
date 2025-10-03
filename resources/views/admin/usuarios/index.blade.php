@@ -4,10 +4,10 @@
     <div class="row mb-3">
         <div class="col">
             <h1>Listado de Usuarios</h1>
-            <p>Listado de todos los usuarios registrados en la biblioteca</p>
         </div>
     </div>
-
+    <p>Listado de todos los usuarios registrados en la biblioteca</p>
+    <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
@@ -21,7 +21,6 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
-                                <th style="text-align: center">ID</th>
                                 <th style="text-align: center">Nombre</th>
                                 <th style="text-align: center">Email</th>
                                 <th style="text-align: center">Teléfono</th>
@@ -33,7 +32,6 @@
                             @foreach ($usuarios as $usuario)
                                 <tr>
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
-                                    <td style="text-align: center">{{ $usuario->id }}</td>
                                     <td style="text-align: center">{{ $usuario->name }}</td>
                                     <td style="text-align: center">{{ $usuario->email }}</td>
                                     <td style="text-align: center">{{ $usuario->phone ?? '—' }}</td>
@@ -95,12 +93,41 @@
                         extend: 'collection',
                         text: '<i class="bi bi-file-earmark-text"></i> Reportes',
                         orientation: 'landscape',
-                        buttons: [
-                            { text: 'Copiar', extend: 'copy', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'PDF', extend: 'pdf', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'CSV', extend: 'csv', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'Excel', extend: 'excel', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'Imprimir', extend: 'print', exportOptions: { columns: ':visible:not(.no-export)' }}
+                        buttons: [{
+                                text: 'Copiar',
+                                extend: 'copy',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'PDF',
+                                extend: 'pdf',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'CSV',
+                                extend: 'csv',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'Excel',
+                                extend: 'excel',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'Imprimir',
+                                extend: 'print',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            }
                         ]
                     },
                     {

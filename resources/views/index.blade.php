@@ -263,7 +263,7 @@
                         <!-- Filosofía y Psicología -->
                         <div class="col-lg-3 col-md-6">
                             <div class="service-item">
-                                <span class="number">Φ</span>
+                                <span class="number">100</span>
                                 <div class="service-item-icon">
                                     <i class="fas fa-brain" style="color: #FF5733"></i>
                                 </div>
@@ -305,7 +305,7 @@
                         <!-- Tecnología -->
                         <div class="col-lg-3 col-md-6">
                             <div class="service-item">
-                                <span class="number">T</span>
+                                <span class="number">600</span>
                                 <div class="service-item-icon">
                                     <i class="fas fa-microchip" style="color: #FF5733"></i>
                                 </div>
@@ -319,7 +319,7 @@
                         <!-- Cocina y Manualidades -->
                         <div class="col-lg-3 col-md-6">
                             <div class="service-item">
-                                <span class="number">C</span>
+                                <span class="number">630</span>
                                 <div class="service-item-icon">
                                     <i class="fas fa-utensils" style="color: #FF5733"></i>
                                 </div>
@@ -626,8 +626,8 @@
     <footer id="footer" class="footer dark-background text-light py-4">
         <div class="container text-center">
             <p class="mb-1">&copy; 2025 Biblioteca Comunitaria Forjando Mentes Brillantes</p>
-            <p class="mb-1">Tel: +502 XXXX XXXX</p>
-            <p class="mb-1">2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+            <p class="mb-1">Tel: +502 5077 0085</p>
+            <p class="mb-1">Residencial los Naranjales, El Tejar, Chimaltenango, Guatemala</p>
             <p class="mb-0">
                 <a href="https://www.facebook.com/profile.php?id=61553557262587" class="text-light me-3"><i
                         class="bi bi-facebook"></i></a>

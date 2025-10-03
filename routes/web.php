@@ -15,7 +15,7 @@ Route::get('/', function () {   return view('index');});
 Route::get('/about', function () {    return view('about');});
 //Route::get('/blog', function () {    return view('blog');});
 Route::get('/blog', [App\Http\Controllers\EventController::class, 'landingBlog'])->name('blog');
-Route::get('/blog-details', function () {    return view('blog-details');});
+//Route::get('/blog-details', function () {    return view('blog-details');});
 Route::get('/contact', function () {    return view('contact');});
 Route::get('/services', function () {    return view('services');});
 
@@ -36,20 +36,17 @@ Route::post('verify', [TwofactorCodeController::class, 'verifyPost'])->name('ver
 Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 
 
+//====================================================
+//vitas para dashboard principal
+//====================================================
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])
+    ->middleware(['auth','two.factor'])
+    ->name('dashboard');
 
 //===========================================
 //vistas para el dashboard principal/layoupt
 //===========================================
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware(['auth', 'two.factor']);
-
-
-
-//====================================================
-//vitas para dashboard principal
-//====================================================
-Route::get('/dashboard', function () {
-    return view('admin.index');
-})->middleware(['auth','two.factor'])->name('dashboard');
 
 
 

@@ -144,18 +144,21 @@
 
                     <!-- Servicio 3 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm text-center p-4">
+                        <div class="card h-100 shadow-sm text-center p-4 rounded-3">
                             <div class="icon mb-3 text-danger fs-1">
                                 <i class="bi bi-people-fill"></i>
                             </div>
-                            <h5 class="fw-bold">Mentes Brillantes</h5>
+                            <h5 class="fw-bold text-dark">Programa de Becas BFB</h5>
                             <p class="text-muted">
-                                Grupo de mujeres <strong>Forjando Mentes Brillantes</strong> que desarrollan proyectos
-                                de empoderamiento
-                                comunitario y aprendizaje colectivo.
+                                Iniciativa solidaria de la biblioteca que brinda apoyo a estudiantes con recursos
+                                limitados,
+                                facilitando <span class="fw-semibold">materiales, recursos académicos y oportunidades de
+                                    aprendizaje</span>
+                                para impulsar su desarrollo educativo y personal.
                             </p>
                         </div>
                     </div>
+
 
                     <!-- Servicio 4 -->
                     <div class="col-md-6 col-lg-4">
@@ -187,6 +190,22 @@
                         </div>
                     </div>
 
+                    <!-- Servicio 6 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm text-center p-4 rounded-3">
+                            <div class="icon mb-3 text-warning fs-1">
+                                <i class="bi bi-person-standing-dress"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark">Capacitación para Mujeres</h5>
+                            <p class="text-muted">
+                                Programa dedicado al <span class="fw-semibold">empoderamiento femenino</span> mediante
+                                talleres y cursos que
+                                fortalecen sus <span class="fw-semibold">habilidades, liderazgo y oportunidades de
+                                    desarrollo personal y profesional</span>.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
 
@@ -199,7 +218,7 @@
         <section class="testimonials-12 testimonials section" id="testimonials">
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <p>APORTE A NUESTRA COMUNIDAD</p>
+                <p>Casos de exito</p>
             </div><!-- End Section Title -->
 
             <div class="testimonial-wrap">
@@ -207,12 +226,13 @@
                     <div class="row">
                         <div class="col-md-6 mb-4 mb-md-4">
                             <div class="testimonial">
-                                <img src="assets/img/testimonials/testimonials-1.jpg" alt="Testimonio de estudiante">
+                                <img src="assets/img/testimonials/testimonials-7.png" alt="Testimonio de estudiante">
                                 <blockquote>
-                                    <p>
-                                        “Gracias a la biblioteca, pude acceder a material especializado que me ayudó a
-                                        preparar mi tesis.
-                                        El ambiente de estudio es perfecto y muy inspirador.”
+                                    <p style="text-align: justify;">
+                                        “Gracias al apoyo de la biblioteca y la fundación de becas BFB, me siento más
+                                        tranquila y
+                                        confiada en mi capacidad para seguir adelante con mis estudios y alcanzar mis
+                                        metas.”
                                     </p>
                                 </blockquote>
                                 <p class="client-name">– Estudiante Universitario</p>
@@ -220,41 +240,51 @@
                         </div>
                         <div class="col-md-6 mb-4 mb-md-4">
                             <div class="testimonial">
-                                <img src="assets/img/testimonials/testimonials-2.jpg" alt="Testimonio de docente">
+                                <img src="assets/img/testimonials/testimonials-5.png" alt="Testimonio de docente">
                                 <blockquote>
-                                    <p>
-                                        “La colección digital de la biblioteca ha sido una herramienta clave para mis
-                                        clases.
-                                        Ahora mis estudiantes tienen acceso a fuentes confiables y actualizadas.”
+                                    <p style="text-align: justify;">
+                                        “Por medio de los talleres y cursos que se imparten en la biblioteca he
+                                        aprendido a convivir,
+                                        mantengo relaciones amigables con otros niños. He mejorado en la lectura, es más
+                                        fluida ya
+                                        que cada semana llevo un libro distinto. ”
                                     </p>
                                 </blockquote>
-                                <p class="client-name"> – Docente</p>
+                                <p class="client-name"> – Estudiante escolar</p>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4 mb-md-4">
                             <div class="testimonial">
-                                <img src="assets/img/testimonials/testimonials-3.jpg"
+                                <img src="assets/img/testimonials/testimonials-6.png"
                                     alt="Testimonio de investigador">
                                 <blockquote>
-                                    <p>
-                                        “Encontré en la biblioteca un espacio de investigación con recursos que no había
-                                        en otros lugares.
-                                        Me apoyaron en todo momento con orientación y talleres.”
+                                    <p style="text-align: justify;">
+                                        “Desde la apertura de la biblioteca he participado en sus programas y talleres.
+                                        Al inicio mi mamá me motivó a asistir porque me costaba mucho usar la
+                                        computadora
+                                        y entender las clases de inglés en la escuela.
+                                        En la biblioteca recibí cursos de tecnología básica (Word, Excel y Canva) y
+                                        también
+                                        de inglés. Gracias a ellos he mejorado en mis trabajos escolares y mis
+                                        calificaciones.”
                                     </p>
                                 </blockquote>
-                                <p class="client-name">– Investigadora</p>
+                                <p class="client-name">– Estudiante escolar</p>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4 mb-md-4">
                             <div class="testimonial">
-                                <img src="assets/img/testimonials/testimonials-4.jpg" alt="Testimonio de niño lector">
+                                <img src="assets/img/testimonials/testimonials-3.jpg" alt="Testimonio de niño lector">
                                 <blockquote>
-                                    <p>
-                                        “Me encanta venir a los clubes de lectura de la biblioteca.
-                                        He descubierto nuevos libros y ahora la lectura es una de mis pasiones.”
+                                    <p style="text-align: justify;">
+                                        “Antes de venir a la biblioteca no me sentía capaz, ni me valoraba a mi misma.
+                                        Cuando empecé a recibir las charlas en el grupo de mujeres, me ayudo a darme
+                                        cuenta de lo capaz que soy y emprender.
+                                        Y ver cuánto valgo como mujer.
+                                        ”
                                     </p>
                                 </blockquote>
-                                <p class="client-name">– Joven Lector</p>
+                                <p class="client-name">–Mujer Empoderada</p>
                             </div>
                         </div>
                     </div>
@@ -266,12 +296,13 @@
 
     </main>
 
+
     <!-- Footer -->
     <footer id="footer" class="footer dark-background text-light py-4">
         <div class="container text-center">
             <p class="mb-1">&copy; 2025 Biblioteca Comunitaria Forjando Mentes Brillantes</p>
-            <p class="mb-1">Tel: +502 XXXX XXXX</p>
-            <p class="mb-1">2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+            <p class="mb-1">Tel: +502 5077 0085</p>
+            <p class="mb-1">Residencial los Naranjales, El Tejar, Chimaltenango, Guatemala</p>
             <p class="mb-0">
                 <a href="https://www.facebook.com/profile.php?id=61553557262587" class="text-light me-3"><i
                         class="bi bi-facebook"></i></a>

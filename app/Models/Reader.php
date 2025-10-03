@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ class Reader extends Model
         'ethnicity',
     ];
 
-    // Relación con User
+    // Relación con Tabla/User
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -13,7 +13,7 @@
         <div class="col-lg-4 col-4">
             <div class="small-box bg-lightblue">
                 <div class="inner">
-                    <h3>{{ $total_visitantes ?? '0' }}</h3>
+                    <h3>{{ $total_visitantes?? '0' }}</h3>
                     <p>Visitantes</p>
                 </div>
                 <div class="icon">

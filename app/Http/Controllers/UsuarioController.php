@@ -39,8 +39,8 @@ class UsuarioController extends Controller
         ]);
 
         return redirect()->route('admin.usuarios.index')
-        ->with('icono', 'success')
-        ->with('mensaje', 'Usuario creado correctamente');
+            ->with('icono', 'success')
+            ->with('mensaje', 'Usuario creado correctamente');
     }
 
     public function show($id)
@@ -76,8 +76,8 @@ class UsuarioController extends Controller
         ]);
 
         return redirect()->route('admin.usuarios.index')
-        ->with('icono', 'success')
-        ->with('mensaje', 'Usuario actualizado correctamente');
+            ->with('icono', 'success')
+            ->with('mensaje', 'Usuario actualizado correctamente');
     }
 
     public function confirmDelete($id)
@@ -86,20 +86,30 @@ class UsuarioController extends Controller
         return view('admin.usuarios.delete', compact('usuario'));
     }
 
-        public function destroy($id){
+    public function destroy($id)
+    {
         $usuarioAutenticado = Auth::user();
 
-    // Verificar si el usuario autenticado intenta eliminarse a sí mismo
-    if ($usuarioAutenticado->id == $id) {
+        // Verificar si el usuario autenticado intenta eliminarse a sí mismo
+        if ($usuarioAutenticado->id == $id) {
+            return redirect()->route('admin.usuarios.index')
+                ->with('mensaje', 'No puedes eliminar tu propia cuenta.')
+                ->with('icono', 'error');
+        }
+
+        //User::destroy($id);
+        $usuario = User::findOrFail($id);
+
+        // Registrar quién deshabilitó
+        $usuario->disabled_by = Auth::id();
+        $usuario->disabled_at = now();
+
+        // Guardar y aplicar soft delete
+        $usuario->save();
+        $usuario->delete();
+
         return redirect()->route('admin.usuarios.index')
-            ->with('mensaje', 'No puedes eliminar tu propia cuenta.')
-            ->with('icono', 'error');
-    }
-
-        User::destroy($id);
-
-        return redirect()->route(route:'admin.usuarios.index')
-        ->with('mensaje','Se elimino al usuario correctamente')
-        ->with('icono','success');
+            ->with('mensaje', 'El usuario fue deshabilitado correctamente')
+            ->with('icono', 'success');
     }
 }

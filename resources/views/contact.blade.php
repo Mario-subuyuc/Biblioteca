@@ -134,7 +134,7 @@
                         <div class="info-card">
                             <i class="bi bi-geo-alt"></i>
                             <h5>Ubicación</h5>
-                            <p>2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+                            <p>Recidencial los Naranjos, El Tejar, Chimaltenango</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -148,7 +148,7 @@
                         <div class="info-card">
                             <i class="bi bi-phone"></i>
                             <h5>Teléfono</h5>
-                            <p>+502 XXXX XXXX</p>
+                            <p>+502 5077 0085</p>
                         </div>
                     </div>
                 </div>
@@ -203,8 +203,8 @@
     <footer id="footer" class="footer dark-background text-light py-4">
         <div class="container text-center">
             <p class="mb-1">&copy; 2025 Biblioteca Comunitaria Forjando Mentes Brillantes</p>
-            <p class="mb-1">Tel: +502 XXXX XXXX</p>
-            <p class="mb-1">2ª Calle, El Tejar, Chimaltenango, Guatemala</p>
+            <p class="mb-1">Tel: +502 5077 0085</p>
+            <p class="mb-1">Recidenciales los naranjos, El Tejar, Chimaltenango, Guatemala</p>
             <p class="mb-0">
                 <a href="https://www.facebook.com/profile.php?id=61553557262587" class="text-light me-3"><i
                         class="bi bi-facebook"></i></a>

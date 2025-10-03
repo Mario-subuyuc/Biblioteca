@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->softDeletes(); // agrega deleted_at para borrado lógico
+            $table->unsignedBigInteger('disabled_by')->nullable(); //quien deshabilitó
+            $table->timestamp('disabled_at')->nullable(); //cuando deshabilitó
+            $table->foreign('disabled_by')->references('id')->on('users')->nullOnDelete();// Clave foránea a la misma tabla (quién deshabilitó)
             $table->rememberToken();
             $table->timestamps();
         });
