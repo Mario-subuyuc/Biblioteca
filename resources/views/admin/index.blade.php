@@ -8,7 +8,7 @@
         <h1>Bienvenido {{ Auth::user()->email }}</h1>
     </div>
     <hr>
-    <!-- cards -->
+    <!-- resumen libros -->
     <div class="row">
         <!-- Ventas del Día -->
         <div class="col-md-3 col-sm-6 col-12">
@@ -57,10 +57,8 @@
             </div>
         </div>
     </div>
-    <!-- resumen libros -->
+    <!-- cards -->
     <div class="row">
-
-
         <div class="col-lg-4 col-4">
             <div class="small-box bg-lightblue">
                 <div class="inner">
@@ -80,10 +78,10 @@
             <div class="small-box bg-olive">
                 <div class="inner">
                     <h3>{{ 10 }}</h3>
-                    <p>Reservas</p>
+                    <p>Servicios computadora</p>
                 </div>
                 <div class="icon">
-                    <i class="ion fas bi bi-clock-history"></i>
+                    <i class="ion fas bi bi-pc-display"></i>
                 </div>
                 <a href="{{ url('admin/usuarios') }}" class="small-box-footer">Más Información <i
                         class="fas fa-arrow-circle-right"></i></a>

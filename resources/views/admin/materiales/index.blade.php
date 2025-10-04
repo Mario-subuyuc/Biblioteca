@@ -22,23 +22,32 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
+                                <th style="text-align: center">Código</th>
                                 <th style="text-align: center">Nombre</th>
-                                <th style="text-align: center">Cantidad</th>
-                                <th style="text-align: center">Donación</th>
-                                <th style="text-align: center">Categoría</th>
-                                <th style="text-align: center">Unidad</th>
+                                <th style="text-align: center">Descripción</th>
+                                <th style="text-align: center">Ubicación</th>
+                                <th style="text-align: center">Responsable</th>
+                                <th style="text-align: center">Estado</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($materiales as $material)
-                                <tr>
+                                <tr
+                                    class="{{ $material->discard_or_sale ||$material->discard_or_sale_date|| $material->deleted_at ? 'table-danger' : 'table-success' }}">
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
+                                    <td style="text-align: center">{{ $material->code }}</td>
                                     <td style="text-align: center">{{ $material->name }}</td>
-                                    <td style="text-align: center">{{ $material->quantity }}</td>
-                                    <td style="text-align: center">{{ $material->donation ? 'Sí' : 'No' }}</td>
-                                    <td style="text-align: center">{{ $material->category }}</td>
-                                    <td style="text-align: center">{{ $material->unit }}</td>
+                                    <td style="text-align: center">{{ $material->description  }}</td>
+                                    <td style="text-align: center">{{ $material->location }}</td>
+                                    <td style="text-align: center">{{ $material->responsible }}</td>
+                                    <td style="text-align: center">
+                                        @if ($material->discard_or_sale || $material->discard_or_sale_date|| $material->deleted_at )
+                                            <span class="badge bg-danger">Deshabilitado</span>
+                                        @else
+                                            <span class="badge bg-success">Habilitado</span>
+                                        @endif
+                                    </td>
                                     <td style="text-align: center">
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('admin.materiales.show', $material->id) }}"

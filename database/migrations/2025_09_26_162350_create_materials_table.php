@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Nombre del material
-            $table->integer('quantity')->default(0); // Cantidad disponible
-            $table->boolean('donation')->default(false); // Si es donativo
-            $table->string('category')->nullable(); // Tipo: insumo, mobiliario, etc.
-            $table->string('unit')->nullable(); // Unidad de medida (piezas, cajas, litros)
-            $table->text('description')->nullable(); // Detalles adicionales
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('location')->nullable();
+            $table->string('acquisition_type')->nullable();
+            $table->string('responsible')->nullable();
+            $table->string('discard_or_sale')->nullable();
+            $table->date('discard_or_sale_date')->nullable();
+            $table->softDeletes(); // esto crea la columna deleted_at nullable
             $table->timestamps();
         });
     }

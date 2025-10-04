@@ -132,14 +132,20 @@
 
                                                 <div class="modal-body" id="modalBody{{ $event->id }}">
                                                     @if ($event->users->count() > 0)
-                                                      <p><strong>Total de inscritos:</strong> {{ $event->users->count() }}</p>
+                                                        <p><strong>Total de inscritos:</strong>
+                                                            {{ $event->users->count() }}</p>
+                                                        <p><strong>Total de inscritos mujeres:</strong>
+                                                            {{ $event->users->where('gender', 'femenino')->count() }}</p>
+                                                        <p><strong>Total de inscritos hombres:</strong>
+                                                            {{ $event->users->where('gender', 'masculino')->count() }}</p>
                                                         <ul class="list-group">
                                                             @foreach ($event->users as $user)
                                                                 <li class="list-group-item d-flex justify-content-between">
                                                                     <div>
                                                                         <strong>{{ $user->name }}</strong><br>
                                                                         correo: 📧 {{ $user->email }}<br>
-                                                                        telefono: 📞 {{ $user->phone ?? 'No registrado' }}<br>
+                                                                        telefono: 📞
+                                                                        {{ $user->phone ?? 'No registrado' }}<br>
                                                                         género: ⚥ {{ $user->gender ?? 'Sin especificar' }}
                                                                     </div>
                                                                 </li>

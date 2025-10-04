@@ -7,7 +7,7 @@
 <hr>
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-outline card-primary">
+        <div class="card card-warning">
             <div class="card-header">
                 <h3 class="card-title">Actualice los datos del libro</h3>
             </div>
@@ -85,7 +85,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <a href="{{ route('admin.libros.index') }}" class="btn btn-secondary">Cancelar</a>
-                                <button type="submit" class="btn btn-primary">Actualizar Libro</button>
+                                <button type="submit" class="btn btn-warning">Actualizar Libro</button>
                             </div>
                         </div>
                     </div>
