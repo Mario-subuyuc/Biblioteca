@@ -44,29 +44,16 @@
 
                     <div class="row">
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="pages">Páginas</label>
-                                <input type="number" name="pages" class="form-control" value="{{ old('pages') }}" min="1">
-                                @error('pages') <small style="color:red">{{ $message }}</small> @enderror
-                            </div>
-                        </div>
+
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="dewey_classification">Clasificación Dewey</label>
-                                <input type="text" name="dewey_classification" class="form-control" value="{{ old('dewey_classification') }}">
-                                @error('dewey_classification') <small style="color:red">{{ $message }}</small> @enderror
+                                <label for="dewey">Clasificación Dewey</label>
+                                <input type="text" name="dewey" class="form-control" value="{{ old('dewey') }}">
+                                @error('dewey') <small style="color:red">{{ $message }}</small> @enderror
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="edition">Edición</label>
-                                <input type="text" name="edition" class="form-control" value="{{ old('edition') }}">
-                                @error('edition') <small style="color:red">{{ $message }}</small> @enderror
-                            </div>
-                        </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
@@ -76,33 +63,18 @@
                             </div>
                         </div>
 
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ubication">Ubicación</label>
+                                <input type="text" name="ubication" class="form-control" value="{{ old('ubication') }}">
+                                @error('ubication') <small style="color:red">{{ $message }}</small> @enderror
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="row">
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="published_year">Año de Publicación</label>
-                                <input type="number" name="published_year" class="form-control" value="{{ old('published_year') }}" min="0">
-                                @error('published_year') <small style="color:red">{{ $message }}</small> @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="total_copies">Total de Copias</label><b>*</b>
-                                <input type="number" name="total_copies" class="form-control" value="{{ old('total_copies') }}" min="1" required>
-                                @error('total_copies') <small style="color:red">{{ $message }}</small> @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="available_copies">Copias Disponibles</label><b>*</b>
-                                <input type="number" name="available_copies" class="form-control" value="{{ old('available_copies') }}" min="0" required>
-                                @error('available_copies') <small style="color:red">{{ $message }}</small> @enderror
-                            </div>
-                        </div>
 
                     </div>
 

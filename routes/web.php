@@ -172,6 +172,8 @@ Route::put('admin/libros/{id}', [App\Http\Controllers\BookController::class, 'up
 Route::get('admin/libros/{id}/confirm-delete', [App\Http\Controllers\BookController::class, 'confirmDelete'])->name('admin.libros.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('admin/libros/{id}', [App\Http\Controllers\BookController::class, 'destroy'])->name('admin.libros.destroy')->middleware(['auth', 'two.factor']);
+//ruta para deshabilitar usuario
+Route::patch('/admin/libros/{id}/enable', [App\Http\Controllers\BookController::class, 'enable'])->name('admin.libros.enable')->middleware(['auth', 'two.factor']);
 
 //====================================================
 // rutas para la gestion de materiales

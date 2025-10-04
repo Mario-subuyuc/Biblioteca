@@ -31,6 +31,7 @@ class EventController extends Controller
             'event' => $event
         ]);
     }
+
     //actualizar evento
     public function update(Request $request, $id)
     {
@@ -43,6 +44,7 @@ class EventController extends Controller
             'event' => $event
         ]);
     }
+
     // Eliminar evento
     public function destroy($id)
     {
@@ -55,7 +57,7 @@ class EventController extends Controller
         ]);
     }
 
-
+    // asignar y eliminar usuarios a eventos
     public function assignUser(Request $request, $id)
     {
         $request->validate([
@@ -68,6 +70,7 @@ class EventController extends Controller
         return back()->with('success', 'Usuario asignado correctamente al evento.');
     }
 
+    // eliminar usuario de evento
     public function removeUser(Request $request, $id)
     {
         $request->validate([
@@ -79,6 +82,7 @@ class EventController extends Controller
 
         return back()->with('success', 'Usuario eliminado correctamente del evento.');
     }
+
     // Función para la vista del blog con eventos landing
     public function landingBlog()
     {

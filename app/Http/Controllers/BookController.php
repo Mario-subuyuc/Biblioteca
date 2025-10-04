@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     // Mostrar todos los libros
     public function index()
     {
-        $books = Book::all();
+        $books = Book::with(['disabledBy', 'enabledBy'])->withTrashed()->get();// Incluye libros eliminados con SoftDeletes
         return view('admin.libros.index', compact('books'));
     }
 
@@ -27,12 +28,8 @@ class BookController extends Controller
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'publisher' => 'nullable|string|max:255',
-            'pages' => 'nullable|integer|min:1',
-            'dewey_classification' => 'nullable|string|max:50',
-            'edition' => 'nullable|string|max:50',
-            'isbn' => 'nullable|string|unique:books,isbn',
-            'total_copies' => 'required|integer|min:1',
-            'available_copies' => 'required|integer|min:0',
+            'dewey' => 'nullable|string|max:50',
+            'isbn' => 'nullable|string|unique:books,isbn'
         ]);
 
         Book::create($request->all());
@@ -65,12 +62,8 @@ class BookController extends Controller
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'publisher' => 'nullable|string|max:255',
-            'pages' => 'nullable|integer|min:1',
-            'dewey_classification' => 'nullable|string|max:50',
-            'edition' => 'nullable|string|max:50',
+            'dewey' => 'nullable|string|max:50',
             'isbn' => 'nullable|string|unique:books,isbn,' . $book->id,
-            'total_copies' => 'required|integer|min:1',
-            'available_copies' => 'required|integer|min:0',
         ]);
 
         $book->update($request->all());
@@ -90,10 +83,34 @@ class BookController extends Controller
     // Eliminar libro
     public function destroy($id)
     {
-        Book::destroy($id);
+        $book = Book::findOrFail($id);
+        $book->delete(); // SoftDelete aplicado al libro
+        $book->disabled_at = now();
+        $book->disabled_by = auth()->id();
+        $book->save();
 
         return redirect()->route('admin.libros.index')
             ->with('icono', 'success')
             ->with('mensaje', 'Libro eliminado correctamente');
+    }
+
+    //habilitar libro
+    public function enable($id)
+    {
+        $book = Book::withTrashed()->findOrFail($id);
+
+        $book->disabled_at = null;
+        $book->disabled_by = null;
+        $book->enabled_at = now();
+        $book->enabled_by = auth()->id();
+
+        // Si estaba softdeleted, restaurarlo
+        if ($book->trashed()) {
+            $book->restore();
+        }
+
+        $book->save();
+
+        return back()->with('icono', 'success')->with('mensaje', 'Libro habilitado nuevamente');
     }
 }

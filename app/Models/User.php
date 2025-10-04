@@ -48,13 +48,13 @@ class User extends Authenticatable
         return $this->hasOne(Directive::class);
     }
 
-    // Relación con visitantes
+    // Relación con visitantes de 1 a muchos
     public function visitors()
     {
         return $this->hasMany(Visitor::class);
     }
 
-    // Relación con visitantes
+    // Relación con eventos de muchos a muchos
     public function events()
     {
         return $this->belongsToMany(Event::class, 'event_user')->withTimestamps();

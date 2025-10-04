@@ -21,9 +21,11 @@ class Visitor extends Model
         'user_id', // Para relacionar con usuario,
     ];
 
-    // Relación con usuario
+    // Relación opcional con User
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'name' => 'Visitante no registrado',
+        ]);
     }
 }

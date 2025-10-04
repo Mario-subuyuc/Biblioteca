@@ -51,29 +51,9 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="pages">Páginas</label>
-                                <input type="number" name="pages" value="{{ old('pages', $book->pages) }}" class="form-control">
-                                @error('pages')
-                                    <small style="color: red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="dewey_classification">Clasificación Dewey</label>
-                                <input type="text" name="dewey_classification" value="{{ old('dewey_classification', $book->dewey_classification) }}" class="form-control">
-                                @error('dewey_classification')
-                                    <small style="color: red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="edition">Edición</label>
-                                <input type="text" name="edition" value="{{ old('edition', $book->edition) }}" class="form-control">
-                                @error('edition')
+                                <label for="dewey">Clasificación Dewey</label>
+                                <input type="text" name="dewey" value="{{ old('dewey', $book->dewey) }}" class="form-control">
+                                @error('dewey')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -88,34 +68,12 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="published_year">Año de Publicación</label>
-                                <input type="number" name="published_year" value="{{ old('published_year', $book->published_year) }}" class="form-control"  min="1500" max="{{ date('Y') }}">
-                                @error('published_year')
-                                    <small style="color: red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="total_copies">Total de Copias</label>
-                                <input type="number" name="total_copies" value="{{ old('total_copies', $book->total_copies) }}" class="form-control">
-                                @error('total_copies')
-                                    <small style="color: red">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="available_copies">Copias Disponibles</label>
-                                <input type="number" name="available_copies" value="{{ old('available_copies', $book->available_copies) }}" class="form-control">
-                                @error('available_copies')
+                                <label for="ubication">Ubicación</label>
+                                <input type="text" name="ubication" value="{{ old('ubication', $book->ubication) }}" class="form-control">
+                                @error('ubication')
                                     <small style="color: red">{{ $message }}</small>
                                 @enderror
                             </div>

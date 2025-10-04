@@ -12,9 +12,7 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header ">
-                    <a href="{{ route('admin.usuarios.create') }}" class="btn btn-primary">
-                        <i class="bi bi-person-plus"></i> Registrar nuevo
-                    </a>
+
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-striped table-bordered table-hover table-sm">
@@ -25,7 +23,7 @@
                                 <th style="text-align: center">Email</th>
                                 <th style="text-align: center">Teléfono</th>
                                 <th style="text-align: center">Dirección</th>
-                                <th style="text-align: center">Género</th>
+                                <th style="text-align: center">Rol</th>
                                 <th style="text-align: center">Estado</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
@@ -39,7 +37,9 @@
                                     <td style="text-align: center">{{ $usuario->email }}</td>
                                     <td style="text-align: center">{{ $usuario->phone ?? '—' }}</td>
                                     <td style="text-align: center">{{ $usuario->address ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $usuario->gender ?? '—' }}</td>
+                                    <td style="text-align: center">
+                                         {{ $usuario->reader ? 'Lector' : ($usuario->directive ? 'Director' : '—') }}
+                                    </td>
                                     <td style="text-align: center">
                                         @if ($usuario->deleted_at || $usuario->disabled_at)
                                             <span class="badge bg-danger">Deshabilitado</span>

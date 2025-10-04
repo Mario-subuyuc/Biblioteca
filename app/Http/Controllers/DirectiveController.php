@@ -8,6 +8,7 @@ use App\Models\Directive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 
 class DirectiveController  extends Controller
 {
@@ -67,49 +68,57 @@ class DirectiveController  extends Controller
     // Mostrar detalles de un lector
     public function show($id)
     {
-        $lector = Reader::findOrFail($id);
-        return view('admin.lectores.show', compact('lector'));
+        $director = Directive::findOrFail($id);
+        $users = User::all();
+        return view('admin.directores.show', compact('director', 'users'));
     }
 
     // Mostrar formulario de edición
     public function edit($id)
     {
-        $lector = Reader::with('user')->findOrFail($id);
-        return view('admin.lectores.edit', compact('lector'));
+        $director = Directive::findOrFail($id);
+        $users = User::all();
+        return view('admin.directores.edit', compact('director', 'users'));
     }
 
     public function update(Request $request, $id)
     {
-        $lector = Reader::with('user')->findOrFail($id);
+        $director = Directive::with('user')->findOrFail($id);
 
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $lector->user_id,
-            'password' => 'nullable|confirmed|min:8',
-            'phone' => 'required|string|max:20',
-            'address' => 'required|string|max:255',
-            'birth_date' => 'nullable|date',
-            'gender' => 'nullable|in:masculino,femenino,otro',
-            'dpi' => 'required|unique:readers,dpi,' . $lector->id,
-            'occupation' => 'nullable|string',
-            'ethnicity' => 'nullable|in:maya,ladina,garifuna,xinca,mestizo,otro',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($director->user->id),
+            ],
+            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:20'],
+            'address' => ['required', 'string', 'max:255'],
+            'gender' => ['nullable', 'in:masculino,femenino,otro'],
+
+            // Director
+            'department' => 'required|string|max:255',
+            'hours' => 'required|numeric|min:1',
         ]);
 
         // Actualizar usuario
-        $lector->user->update([
+        $director->user->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'gender' => $request->gender,
-            'password' => $request->password ? Hash::make($request->password) : $lector->user->password,
+            'password' => $request->password ? Hash::make($request->password) : $director->user->password,
         ]);
 
         // Actualizar lector
-        $lector->update($request->only('birth_date', 'dpi', 'occupation', 'ethnicity'));
+        $director->update($request->only('department', 'hours'));
 
-        return redirect()->route('admin.lectores.index')
-            ->with('mensaje', 'Lector actualizado correctamente.')
+        return redirect()->route('admin.directores.index')
+            ->with('mensaje', 'Director actualizado correctamente.')
             ->with('icono', 'success');
     }
 }

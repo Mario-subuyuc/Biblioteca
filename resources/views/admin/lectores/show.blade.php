@@ -62,6 +62,17 @@
                         <dd class="col-sm-8">{{ ucfirst($lector->ethnicity ?? '—') }}</dd>
                     </dl>
 
+                    {{-- Estadísticas --}}
+                    <hr class="my-4">
+                    <h5 class="mb-3">📊 Estadísticas</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Número de visitantes registrados</dt>
+                        <dd class="col-sm-8">{{ $lector->user->visitors()->count() }}</dd>
+
+                        <dt class="col-sm-4">Número de eventos asistidos</dt>
+                        <dd class="col-sm-8">{{ $lector->user->events()->count() }}</dd>
+                    </dl>
+
                     {{-- FECHAS --}}
                     <hr class="my-4">
                     <h5 class="mb-3">⏱️ Fechas</h5>

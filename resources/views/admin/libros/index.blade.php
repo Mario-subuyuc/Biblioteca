@@ -12,7 +12,7 @@
                     <h3 class="card-title">Libros Registrados</h3>
                     <div class="card-tools">
                         <a href="{{ route('admin.libros.create') }}" class="btn btn-primary">
-                             Registrar nuevo
+                            Registrar nuevo
                         </a>
                     </div>
                 </div>
@@ -21,41 +21,61 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
-                                <th style="text-align: center">ID</th>
                                 <th style="text-align: center">Título</th>
                                 <th style="text-align: center">Autor</th>
                                 <th style="text-align: center">Editorial</th>
-                                <th style="text-align: center">Páginas</th>
                                 <th style="text-align: center">Dewey</th>
-                                <th style="text-align: center">Edición</th>
+                                <th style="text-align: center">ISBN</th>
+                                <th style="text-align: center">Estado</th>
                                 <th style="text-align: center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($books as $book)
-                                <tr>
+                                <tr
+                                    class="{{ $book->deleted_at || $book->disabled_at ? 'table-danger' : 'table-success' }}">
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
-                                    <td style="text-align: center">{{ $book->id }}</td>
                                     <td style="text-align: center">{{ $book->title }}</td>
                                     <td style="text-align: center">{{ $book->author }}</td>
                                     <td style="text-align: center">{{ $book->publisher ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $book->pages ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $book->dewey_classification ?? '—' }}</td>
-                                    <td style="text-align: center">{{ $book->edition ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $book->dewey ?? '—' }}</td>
+                                    <td style="text-align: center">{{ $book->isbn ?? '—' }}</td>
+
+                                    <td style="text-align: center">
+                                        @if ($book->deleted_at || $book->disabled_at)
+                                            <span class="badge bg-danger">Deshabilitado</span>
+                                        @else
+                                            <span class="badge bg-success">Habilitado</span>
+                                        @endif
+                                    </td>
+
                                     <td style="text-align: center">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('admin.libros.show', $book->id) }}"
-                                                class="btn btn-info btn-sm">
-                                                <i class="bi bi-eye"></i> Ver
-                                            </a>
-                                            <a href="{{ route('admin.libros.edit', $book->id) }}"
-                                                class="btn btn-success btn-sm">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ url('admin/libros/' . $book->id . '/confirm-delete') }}"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash3"></i> Borrar
-                                            </a>
+                                            {{-- Solo se permite editar si está habilitado --}}
+                                            @if (!($book->deleted_at || $book->disabled_at))
+                                                <a href="{{ route('admin.libros.show', $book->id) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    <i class="bi bi-eye"></i> Ver
+                                                </a>
+                                                <a href="{{ route('admin.libros.edit', $book->id) }}"
+                                                    class="btn btn-success btn-sm">
+                                                    <i class="bi bi-pencil"></i> Editar
+                                                </a>
+                                                <a href="{{ url('admin/libros/' . $book->id . '/confirm-delete') }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="bi bi-journal-x"></i> Deshabilitar
+                                                </a>
+                                            @else
+                                                {{-- Si el libro está deshabilitado, solo mostrar botón habilitar --}}
+                                                <form action="{{ route('admin.libros.enable', $book->id) }}"
+                                                    method="POST" style="display:inline">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                        <i class="bi bi-journal-check"></i> Habilitar
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

@@ -154,19 +154,19 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/directores') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista administradores</p>
+                                        <p>Administradores</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('admin/lectores') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar lectores</p>
+                                        <p>Lectores</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('admin/usuarios') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar usuarios</p>
+                                        <p>Todos los usuarios</p>
                                     </a>
                                 </li>
                             </ul>
@@ -307,7 +307,7 @@
                 audio.play();
 
                 Swal.fire({
-                    position: "top-center",
+                    position: "center",
                     icon: "{{ $icono }}",
                     title: "{{ $message }}",
                     showConfirmButton: false,

@@ -22,7 +22,6 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
-                                <th style="text-align: center">ID</th>
                                 <th style="text-align: center">Nombre</th>
                                 <th style="text-align: center">Ubicación</th>
                                 <th style="text-align: center">Año de nacimiento</th>
@@ -39,7 +38,6 @@
                             @foreach ($visitantes as $visitante)
                                 <tr>
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
-                                    <td style="text-align: center">{{ $visitante->id }}</td>
                                     <td style="text-align: center">{{ $visitante->name }}</td>
                                     <td style="text-align: center">{{ $visitante->location ?? '—' }}</td>
                                     <td style="text-align: center">{{ $visitante->birth_year ?? '—' }}</td>

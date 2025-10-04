@@ -132,10 +132,16 @@
 
                                                 <div class="modal-body" id="modalBody{{ $event->id }}">
                                                     @if ($event->users->count() > 0)
+                                                      <p><strong>Total de inscritos:</strong> {{ $event->users->count() }}</p>
                                                         <ul class="list-group">
                                                             @foreach ($event->users as $user)
                                                                 <li class="list-group-item d-flex justify-content-between">
-                                                                    {{ $user->name }} ({{ $user->email }})
+                                                                    <div>
+                                                                        <strong>{{ $user->name }}</strong><br>
+                                                                        correo: 📧 {{ $user->email }}<br>
+                                                                        telefono: 📞 {{ $user->phone ?? 'No registrado' }}<br>
+                                                                        género: ⚥ {{ $user->gender ?? 'Sin especificar' }}
+                                                                    </div>
                                                                 </li>
                                                             @endforeach
                                                         </ul>

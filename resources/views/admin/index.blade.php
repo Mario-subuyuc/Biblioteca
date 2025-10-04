@@ -8,54 +8,7 @@
         <h1>Bienvenido {{ Auth::user()->email }}</h1>
     </div>
     <hr>
-    <div class="row">
-
-        <div class="col-lg-4 col-4">
-            <div class="small-box bg-lightblue">
-                <div class="inner">
-                    <h3>{{ $total_visitantes?? '0' }}</h3>
-                    <p>Visitantes</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fas bi bi-person-arms-up"></i>
-                </div>
-                <a href="{{ url('admin/visitantes') }}" class="small-box-footer">Más Información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-4">
-            <div class="small-box bg-olive">
-                <div class="inner">
-                    <h3>{{ 10 }}</h3>
-                    <p>Reservas</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fas bi bi-clock-history"></i>
-                </div>
-                <a href="{{ url('admin/usuarios') }}" class="small-box-footer">Más Información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-4">
-            <div class="small-box bg-gray">
-                <div class="inner">
-                    <h3>{{ 10 }}</h3>
-                    <p>Donaciones</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fas bi bi-piggy-bank"></i>
-                </div>
-                <a href="{{ url('admin/donaciones') }}" class="small-box-footer">Más Información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
+    <!-- cards -->
     <div class="row">
         <!-- Ventas del Día -->
         <div class="col-md-3 col-sm-6 col-12">
@@ -104,9 +57,58 @@
             </div>
         </div>
     </div>
-
+    <!-- resumen libros -->
     <div class="row">
-        <div class="col-12"> <!-- Esto hace que ocupe todo el ancho -->
+
+
+        <div class="col-lg-4 col-4">
+            <div class="small-box bg-lightblue">
+                <div class="inner">
+                    <h3>{{ $total_visitantes ?? '0' }}</h3>
+                    <p>Visitantes</p>
+                </div>
+                <div class="icon">
+                    <i class="ion fas bi bi-person-arms-up"></i>
+                </div>
+                <a href="{{ url('admin/visitantes') }}" class="small-box-footer">Más Información <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 col-4">
+            <div class="small-box bg-olive">
+                <div class="inner">
+                    <h3>{{ 10 }}</h3>
+                    <p>Reservas</p>
+                </div>
+                <div class="icon">
+                    <i class="ion fas bi bi-clock-history"></i>
+                </div>
+                <a href="{{ url('admin/usuarios') }}" class="small-box-footer">Más Información <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 col-4">
+            <div class="small-box bg-gray">
+                <div class="inner">
+                    <h3>{{ 10 }}</h3>
+                    <p>Donaciones</p>
+                </div>
+                <div class="icon">
+                    <i class="ion fas bi bi-piggy-bank"></i>
+                </div>
+                <a href="{{ url('admin/donaciones') }}" class="small-box-footer">Más Información <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- grafico -->
+    <div class="row">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header ui-sortable-handle" style="cursor: move;">
                     <h3 class="card-title">
@@ -125,21 +127,25 @@
             </div>
         </div>
     </div>
+
+    <!-- marca de agua -->
     <div class="watermark-container"
         style="
-    position: relative;
-    width: 100%;
-    height: 300px;
-    background: url('{{ asset('assets/img/logo.png') }}') no-repeat center center;
-    background-size: contain;
-    opacity: 0.4;
-">
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background: url('{{ asset('assets/img/logo.png') }}') no-repeat center center;
+        background-size: contain;
+        opacity: 0.4;
+    ">
     </div>
+    <!--chartjs -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // === Gráfico de Área (Visita por mes) ===
-            var ctxRevenue = document.getElementById('revenue-chart-canvas').getContext('2d');
-            new Chart(ctxRevenue, {
+            // === Gráfico de Área (Visitas por mes) ===
+            var ctx = document.getElementById('revenue-chart-canvas').getContext('2d');
+
+            new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: [
@@ -148,11 +154,13 @@
                     ],
                     datasets: [{
                         label: 'Visitas',
-                        data: [120, 150, 180, 90, 200, 250, 300, 280, 260, 310, 400, 500],
-                        borderColor: 'rgba(75,192,192,1)',
-                        backgroundColor: 'rgba(75,192,192,0.2)',
+                        data: @json(array_values($datos)), // Valores del controlador
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         fill: true,
-                        tension: 0.3
+                        tension: 0.3, // Curvatura de la línea
+                        pointRadius: 5, // Tamaño de los puntos
+                        pointHoverRadius: 7
                     }]
                 },
                 options: {
@@ -160,12 +168,28 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: true
+                            display: true,
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
                         }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        intersect: false
                     },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 10 // Ajusta según tus visitas
+                            }
                         }
                     }
                 }

@@ -4,21 +4,35 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'title',
         'author',
         'publisher',
-        'pages',
-        'dewey_classification',
-        'edition',
+        'dewey',
         'isbn',
-        'published_year',
-        'total_copies',
-        'available_copies',
+        'ubication',
+        'disabled_at',
+        'disabled_by',
+        'enabled_at',
+        'enabled_by'
     ];
+
+    protected $dates = ['deleted_at']; // importante para usar SoftDeletes
+
+        // Relaciones con usuarios
+    public function disabledBy()
+    {
+        return $this->belongsTo(Directive::class, 'disabled_by');
+    }
+
+    public function enabledBy()
+    {
+        return $this->belongsTo(Directive::class, 'enabled_by');
+    }
 }

@@ -46,15 +46,6 @@
                                                 class="btn btn-success btn-sm">
                                                 <i class="bi bi-pencil"></i> Editar
                                             </a>
-                                            <form action="{{ route('admin.directores.update', $directive->id) }}"
-                                                  method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('¿Seguro que deseas eliminar este director?')">
-                                                    <i class="bi bi-trash"></i> Eliminar
-                                                </button>
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -99,12 +90,41 @@
                         extend: 'collection',
                         text: '<i class="bi bi-file-earmark-text"></i> Reportes',
                         orientation: 'landscape',
-                        buttons: [
-                            { text: 'Copiar', extend: 'copy', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'PDF', extend: 'pdf', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'CSV', extend: 'csv', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'Excel', extend: 'excel', exportOptions: { columns: ':visible:not(.no-export)' }},
-                            { text: 'Imprimir', extend: 'print', exportOptions: { columns: ':visible:not(.no-export)' }}
+                        buttons: [{
+                                text: 'Copiar',
+                                extend: 'copy',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'PDF',
+                                extend: 'pdf',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'CSV',
+                                extend: 'csv',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'Excel',
+                                extend: 'excel',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            },
+                            {
+                                text: 'Imprimir',
+                                extend: 'print',
+                                exportOptions: {
+                                    columns: ':visible:not(.no-export)'
+                                }
+                            }
                         ]
                     },
                     {
