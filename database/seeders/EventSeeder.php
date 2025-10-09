@@ -15,28 +15,53 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-                $faker = Faker::create();
-
         $users = User::all();
 
-        foreach (range(1, 20) as $i) {
-            $startDateTime = $faker->dateTimeBetween('now', '+1 month');
-            $endDateTime = (clone $startDateTime)->modify('+'.rand(1,3).' hours');
+        $events = [
+            [
+                'title' => 'Feria del Libro Universitario',
+                'description' => 'Evento anual para promover la lectura y el intercambio de obras literarias.',
+                'start' => now()->subDays(5)->setTime(9, 0),
+                'end' => now()->subDays(5)->setTime(17, 0),
+                'color' => '#007bff',
+            ],
+            [
+                'title' => 'Taller de Escritura Creativa',
+                'description' => 'Sesión interactiva para desarrollar habilidades narrativas y poéticas.',
+                'start' => now()->addDays(3)->setTime(14, 0),
+                'end' => now()->addDays(3)->setTime(17, 0),
+                'color' => '#28a745',
+            ],
+            [
+                'title' => 'Charla: El Futuro de la Inteligencia Artificial',
+                'description' => 'Conferencia impartida por expertos en IA aplicada a la educación y la bibliotecología.',
+                'start' => now()->addDays(10)->setTime(10, 0),
+                'end' => now()->addDays(10)->setTime(12, 0),
+                'color' => '#ffc107',
+            ],
+            [
+                'title' => 'Concurso de Poesía Estudiantil',
+                'description' => 'Competencia literaria abierta para estudiantes de todas las carreras.',
+                'start' => now()->addDays(15)->setTime(9, 0),
+                'end' => now()->addDays(15)->setTime(15, 0),
+                'color' => '#dc3545',
+            ],
+            [
+                'title' => 'Cine Foro: Clásicos del Realismo Mágico',
+                'description' => 'Proyección y análisis de películas inspiradas en obras latinoamericanas.',
+                'start' => now()->addDays(20)->setTime(18, 0),
+                'end' => now()->addDays(20)->setTime(21, 0),
+                'color' => '#6f42c1',
+            ],
+        ];
 
-            $event = Event::create([
-                'title'       => $faker->sentence(3),
-                'description' => $faker->paragraph,
-                'start'       => $startDateTime,
-                'end'         => $endDateTime,
-                'color'       => $faker->randomElement(['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1']),
-            ]);
+        foreach ($events as $data) {
+            $event = Event::create($data);
 
-            // Relacionar el evento con 1 a 3 usuarios aleatorios
-            if ($users->count() > 0) {
-                $event->users()->attach(
-                    $users->random(rand(1, min(3, $users->count())))->pluck('id')->toArray()
-                );
-            }
+            // Asignar entre 2 y 5 usuarios aleatorios al evento
+            $event->users()->syncWithoutDetaching(
+                $users->random(rand(2, 5))->pluck('id')->toArray()
+            );
         }
     }
 }

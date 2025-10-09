@@ -17,7 +17,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Libros</span>
-                    <span class="info-box-number">1474</span>
+                    <span class="info-box-number">{{ $total_libros ?? '0' }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -29,7 +29,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Disponibles</span>
-                    <span class="info-box-number">760</span>
+                    <span class="info-box-number">{{ $libros_disponibles ?? '0' }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -40,7 +40,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Prestados</span>
-                    <span class="info-box-number">60</span>
+                    <span class="info-box-number">{{ $libros_prestados ?? '0' }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -51,12 +51,13 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Retrasos</span>
-                    <span class="info-box-number">2</span>
+                    <span class="info-box-number">{{ $libros_atrasados ?? '0' }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
         </div>
     </div>
+
     <!-- cards -->
     <div class="row">
         <div class="col-lg-4 col-4">
@@ -83,7 +84,7 @@
                 <div class="icon">
                     <i class="ion fas bi bi-pc-display"></i>
                 </div>
-                <a href="{{ url('admin/usuarios') }}" class="small-box-footer">Más Información <i
+                <a href="{{ url('admin/computadoras') }}" class="small-box-footer">Más Información <i
                         class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>

@@ -6,20 +6,15 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Visitor;
+use App\Models\Loan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function edit(string $id)
+        public function edit(string $id)
     {
         $user = Auth::user();
-
-        // Contar las visitas asociadas al usuario logeado
-        $visitas = Visitor::where('user_id', $user->id)->count();
-        $librosPrestados = 0;
-        $multas = 0;
-        $eventos = $user->events()->count();
 
         // Validar que el usuario autenticado solo edite su perfil
         if (Auth::id() != $id) {
@@ -27,6 +22,17 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail($id);
+
+        // Contar las visitas asociadas al usuario logeado
+        $visitas = Visitor::where('user_id', $user->id)->count();
+
+        // Contar los libros prestados del usuario
+        $librosPrestados = Loan::whereHas('reader', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->count();
+
+        $multas = 0; // aquí puedes agregar la lógica para contar multas si la tienes
+        $eventos = $user->events()->count();
 
         return view('usuarios.edit', compact(
             'user',

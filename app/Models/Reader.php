@@ -23,4 +23,10 @@ class Reader extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Relación con préstamos
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'reader_id');
+    }
 }

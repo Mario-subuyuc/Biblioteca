@@ -2,34 +2,37 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
+use App\Models\Directive;
 use Faker\Factory as Faker;
 
 class BookSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $faker = Faker::create();
+        $faker = Faker::create('es_ES'); // o 'en_US' según prefieras
+        $directives = Directive::all();
 
-        // Crear 50 libros de prueba
-        for ($i = 0; $i < 50; $i++) {
-            Book::create([
-                'title' => $faker->sentence(3), // título de 3 palabras
-                'author' => $faker->name,
-                'publisher' => $faker->company,
-                'pages' => $faker->numberBetween(50, 1000),
-                'dewey_classification' => $faker->numberBetween(000, 999) . '.' . $faker->numberBetween(0, 99),
-                'edition' => $faker->numberBetween(1, 10) . 'th',
-                'isbn' => $faker->unique()->isbn13,
-                'published_year' => $faker->year,
-                'total_copies' => $faker->numberBetween(1, 10),
-                'available_copies' => $faker->numberBetween(0, 5),
+        for ($i = 1; $i <= 2000; $i++) {
+            $book = Book::create([
+                'title'       => $faker->sentence(3), // título aleatorio de 3 palabras
+                'author'      => $faker->name,
+                'publisher'   => $faker->company,
+                'dewey'       => $faker->randomFloat(3, 800, 899), // ejemplo: 813.542
+                'isbn'        => $faker->isbn13,
+                'ubication'   => 'Estante ' . chr(65 + rand(0, 5)) . '-' . rand(1, 20),
+                'enabled_at'  => now()->subDays(rand(0, 30)),
+                'enabled_by'  => $directives->random()->id ?? null,
             ]);
+
+            // Simular libros deshabilitados
+            if ($i % 4 === 0) {
+                $book->update([
+                    'disabled_at' => now()->subDays(rand(1, 10)),
+                    'disabled_by' => $directives->random()->id ?? null,
+                ]);
+            }
         }
     }
 }

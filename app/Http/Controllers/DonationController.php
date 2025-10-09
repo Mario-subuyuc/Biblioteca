@@ -4,37 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donation;
+use App\Models\Reader;
 use App\Models\User;
 
 class DonationController extends Controller
 {
-     public function index()
+    public function index()
     {
-        $donations = Donation::with(['reader', 'directive'])->paginate(10);
+        $donations = Donation::all();
         return view('admin.donaciones.index', compact('donations'));
     }
 
+        // Mostrar formulario de creación
     public function create()
     {
-        $readers = User::role('reader')->get();       // usando Spatie roles
-        $directives = User::role('directive')->get();
-        return view('admin.donations.create', compact('readers', 'directives'));
+        $usuarios = User::all();
+        return view('admin.visitantes.create', compact('usuarios'));
     }
 
+    // Guardar un nuevo visitante
     public function store(Request $request)
     {
         $request->validate([
-            'reader_id' => 'required|exists:users,id',
-            'directive_id' => 'required|exists:users,id',
-            'amount' => 'required|numeric|min:0.01',
-            'method' => 'required|string|max:50',
-            'donation_date' => 'required|date',
-            'note' => 'nullable|string',
+            'name'       => 'required|string|max:255',
+            'location'   => 'nullable|string|max:255',
+            'birth_year' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'gender'     => 'nullable|string|max:50',
+            'ethnicity'  => 'nullable|string|max:100',
+            'occupation' => 'nullable|string|max:100',
+            'visit_date' => 'required|date',
+            'visit_time' => 'required',
+            'user_id'    => 'nullable|exists:users,id',
         ]);
 
-        Donation::create($request->all());
+        Visitor::create($request->all());
 
-        return redirect()->route('admin.donations.index')
-                         ->with('success', 'Donation registered successfully!');
+        return redirect()->route('admin.visitantes.index')
+            ->with('icono', 'success')
+            ->with('mensaje', 'Visitante registrado correctamente');
     }
 }

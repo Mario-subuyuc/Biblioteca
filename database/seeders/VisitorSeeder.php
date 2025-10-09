@@ -15,21 +15,35 @@ class VisitorSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        $users = User::all();
 
-        $users = User::pluck('id')->toArray(); // IDs de usuarios
-
-        foreach (range(1, 50) as $i) {
+        // === Visitantes registrados (asociados a usuarios) ===
+        foreach ($users->take(8) as $user) {
             Visitor::create([
-                'name'       => $faker->name,
-                'location'   => $faker->city,
-                'birth_year' => $faker->numberBetween(1960, 2010),
-                'gender'     => $faker->randomElement(['Masculino', 'Femenino', 'Otro']),
-                'ethnicity'  => $faker->randomElement(['Mestizo', 'Indígena', 'Afrodescendiente', 'Otro']),
-                'occupation' => $faker->jobTitle,
-                'visit_date' => $faker->dateTimeBetween('-6 months', 'now')->format('Y-m-d'),
-                'visit_time' => $faker->time('H:i:s'),
-                'user_id'    => $faker->randomElement($users), // Relacionado con un usuario
+                'name' => $user->name,
+                'location' => 'Zona ' . rand(1, 12) . ', Ciudad',
+                'birth_year' => rand(1965, 2005),
+                'gender' => $user->gender,
+                'ethnicity' => ['Mestizo', 'Indígena', 'Afrodescendiente', 'Otro'][rand(0, 3)],
+                'occupation' => ['Estudiante', 'Profesor', 'Investigador', 'Empleado público'][rand(0, 3)],
+                'visit_date' => now()->subDays(rand(0, 15))->format('Y-m-d'),
+                'visit_time' => now()->subHours(rand(0, 8))->format('H:i:s'),
+                'user_id' => $user->id,
+            ]);
+        }
+
+        // === Visitantes no registrados (sin user_id) ===
+        for ($i = 1; $i <= 7; $i++) {
+            Visitor::create([
+                'name' => "Visitante Anónimo $i",
+                'location' => 'Aldea ' . ['Las Flores', 'El Carmen', 'San Pedro', 'La Esperanza'][rand(0, 3)],
+                'birth_year' => rand(1970, 2010),
+                'gender' => $i % 2 == 0 ? 'female' : 'male',
+                'ethnicity' => ['Mestizo', 'Indígena', 'Afrodescendiente', 'Otro'][rand(0, 3)],
+                'occupation' => ['Agricultor', 'Estudiante', 'Ama de casa', 'Comerciante'][rand(0, 3)],
+                'visit_date' => now()->subDays(rand(0, 30))->format('Y-m-d'),
+                'visit_time' => now()->subHours(rand(1, 12))->format('H:i:s'),
+                'user_id' => null,
             ]);
         }
 

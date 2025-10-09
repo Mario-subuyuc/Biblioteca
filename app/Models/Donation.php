@@ -22,7 +22,7 @@ class Donation extends Model
 
     public function reader()
     {
-        return $this->belongsTo(User::class, 'reader_id');
+        return $this->belongsTo(User::class, 'reader_id')->withDefault(); // evita errores si es null
     }
 
     public function directive()

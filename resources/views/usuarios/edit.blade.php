@@ -15,7 +15,7 @@
         <div class="col-md-3">
             <div class="small-box bg-primary">
                 <div class="inner">
-                    <h3>{{ 0 }}</h3>
+                    <h3>{{ $librosPrestados?$librosPrestados:'0' }}</h3>
                     <p>Libros Prestados</p>
                 </div>
                 <div class="icon"><i class="fas fa-book"></i></div>

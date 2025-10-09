@@ -35,4 +35,10 @@ class Book extends Model
     {
         return $this->belongsTo(Directive::class, 'enabled_by');
     }
+
+    // Relación con préstamos
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

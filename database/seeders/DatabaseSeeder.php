@@ -17,19 +17,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-         User::factory()->create([
-            'name' => 'mario Subuyuc',
-            'email' => 'mariosubuyucfb@gmail.com',
-            'password' => Hash::make('12345678'),
-        ]);
-
 
         $this->call([
         UserSeeder::class,
         VisitorSeeder::class,
         BookSeeder::class,
         MaterialSeeder::class,
-        EventSeeder::class
+        EventSeeder::class,
+        ReservationSeeder::class,
+        LoanSeeder::class,
     ]);
     }
 }

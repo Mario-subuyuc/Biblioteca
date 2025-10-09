@@ -42,7 +42,7 @@ class BotManController extends Controller
 
         // contacto por whatsapp
         $botman->hears('(contacto|whatsapp|hablar con alguien)', function ($bot) {
-            $numero = '50245967221'; // tu número con código de país
+            $numero = '50250770085'; // número con código de país
             $mensaje = urlencode("Hola, quiero más información sobre la Biblioteca.");
             $link = "https://wa.me/$numero?text=$mensaje";
 

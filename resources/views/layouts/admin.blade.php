@@ -183,21 +183,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a  href={{ url('admin/multas') }}  class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Multas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a  href={{ url('admin/reservaciones') }}  class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Reservas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a  href={{ url('admin/prestamos') }}  class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Devolucion</p>
+                                        <p>Prestamos</p>
                                     </a>
                                 </li>
                             </ul>
@@ -205,7 +205,7 @@
 
                         <!-- boton Reportes -->
                         <li class="nav-item menu">
-                            <a href="#" class="nav-link active bg-indigo">
+                            <a  href={{ url('admin/reportes') }}  class="nav-link active bg-indigo">
                                 <i class="nav-icon fas bi bi-file-bar-graph"></i>
                                 <p>
                                     Reportes
@@ -216,7 +216,7 @@
 
                         <!-- boton Recomendaciones -->
                         <li class="nav-item menu">
-                            <a href="#" class="nav-link active bg-purple">
+                            <a  href={{ url('admin/recomendaciones') }}  class="nav-link active bg-purple">
                                 <i class="nav-icon fas bi-hand-thumbs-up"></i>
                                 <p>
                                     Recomendaciones

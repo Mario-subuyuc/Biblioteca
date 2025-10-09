@@ -175,6 +175,7 @@ Route::delete('admin/libros/{id}', [App\Http\Controllers\BookController::class, 
 //ruta para deshabilitar usuario
 Route::patch('/admin/libros/{id}/enable', [App\Http\Controllers\BookController::class, 'enable'])->name('admin.libros.enable')->middleware(['auth', 'two.factor']);
 
+
 //====================================================
 // rutas para la gestion de materiales
 //====================================================
@@ -194,6 +195,71 @@ Route::put('admin/materiales/{id}', [App\Http\Controllers\MaterialController::cl
 Route::get('admin/materiales/{id}/confirm-delete', [App\Http\Controllers\MaterialController::class, 'confirmDelete'])->name('admin.materiales.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('admin/materiales/{id}', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('admin.materiales.destroy')->middleware(['auth', 'two.factor']);
+
+
+//====================================================
+// rutas para la gestion de reservas
+//====================================================
+// Ruta para inventario/reservas
+Route::get('admin/reservaciones', [App\Http\Controllers\ReservationController::class, 'index'])->name('admin.reservaciones.index')->middleware(['auth', 'two.factor']);
+// Ruta para crear reserva desde el modal
+Route::post('admin/reservas', [App\Http\Controllers\ReservationController::class, 'store'])->name('admin.reservas.store')->middleware(['auth', 'two.factor']);
+//ruta para cancelar
+Route::post('admin/reservas/{reservation}/cancel', [App\Http\Controllers\ReservationController::class, 'cancel'])->name('admin.reservas.cancel')->middleware(['auth', 'two.factor']);
+//cambiar estado historial
+Route::post('admin/reservas/{reservation}/update-state', [App\Http\Controllers\ReservationController::class, 'updateState'])->name('admin.reservas.updateState')->middleware(['auth', 'two.factor']);
+//editar fecha reserva
+Route::put('admin/reservas/{reservation}', [App\Http\Controllers\ReservationController::class, 'update'])->name('admin.reservas.update')->middleware(['auth', 'two.factor']);
+
+
+// =============================================
+// RUTAS PARA GESTIÓN DE PRÉSTAMOS
+// =============================================
+
+// Página principal
+Route::get('admin/prestamos', [App\Http\Controllers\LoanController::class, 'index'])->name('admin.prestamos.index');
+// Crear préstamo (desde modal)
+Route::post('admin/prestamos', [App\Http\Controllers\LoanController::class, 'store'])->name('admin.prestamos.store');
+// Cancelar préstamo
+Route::post('admin/prestamos/{loan}/cancel', [App\Http\Controllers\LoanController::class, 'cancel'])->name('admin.prestamos.cancel');
+// Cambiar estado desde historial
+Route::post('admin/prestamos/{loan}/update-state', [App\Http\Controllers\LoanController::class, 'updateState'])->name('admin.prestamos.updateState');
+// Editar préstamo (solo fecha de devolución)
+Route::put('admin/prestamos/{loan}', [App\Http\Controllers\LoanController::class, 'update'])->name('admin.prestamos.update');
+
+
+//====================================================
+// rutas para la gestion de multas
+//====================================================
+// Ruta para inventario/multas
+Route::get('admin/multas', [App\Http\Controllers\FineController::class, 'index'])->name('admin.multas.index')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de multas actuaizar
+Route::patch('admin/fines/{fine}/status', [App\Http\Controllers\FineController::class, 'updateStatus'])->name('admin.fines.updateStatus');
+//ruta de trabajo de multas
+Route::get('/admin/multas/generar', [App\Http\Controllers\FineController::class, 'generateFines'])->name('admin.multas.generar');
+
+//====================================================
+// rutas para la gestion de computadoras
+//====================================================
+// Ruta para inventario/computadoras
+Route::get('admin/computadoras', [App\Http\Controllers\MaterialController::class, 'index'])->name('admin.computadoras.index')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de computadoras panel crear
+Route::get('admin/computadoras/create', [App\Http\Controllers\MaterialController::class, 'create'])->name('admin.computadoras.create')->middleware(['auth', 'two.factor']);
+// Ruta para gestión de envio de formulario crear
+
+//====================================================
+// rutas para la gestion de reportes
+//====================================================
+// Ruta para Reporte
+Route::get('admin/reportes', [App\Http\Controllers\ReportController::class, 'index'])->name('admin.reportes.index')->middleware(['auth', 'two.factor']);
+
+
+//====================================================
+// rutas para la gestion de recomendaciones
+//====================================================
+// Ruta para Reporte
+Route::get('admin/recomendaciones', [App\Http\Controllers\RecomendationController::class, 'index'])->name('admin.reportes.index')->middleware(['auth', 'two.factor']);
+
 
 //====================================================
 // rutas para la gestion de eventos

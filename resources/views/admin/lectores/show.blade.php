@@ -67,10 +67,13 @@
                     <h5 class="mb-3">📊 Estadísticas</h5>
                     <dl class="row">
                         <dt class="col-sm-4">Número de visitantes registrados</dt>
-                        <dd class="col-sm-8">{{ $lector->user->visitors()->count() }}</dd>
+                        <dd class="col-sm-8">{{ $lector->user->visitors()->count() ?? 0}}</dd>
 
                         <dt class="col-sm-4">Número de eventos asistidos</dt>
-                        <dd class="col-sm-8">{{ $lector->user->events()->count() }}</dd>
+                        <dd class="col-sm-8">{{ $lector->user->events()->count() ?? 0}}</dd>
+
+                        <dt class="col-sm-4">Número de libros Prestados</dt>
+                        <dd class="col-sm-8"> {{ $lector->user->reader->loans()->count() ?? 0 }}</dd>
                     </dl>
 
                     {{-- FECHAS --}}
