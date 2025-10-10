@@ -187,33 +187,37 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2>Equipo</h2>
                 <p>Conoce a nuestro equipo de trabajo</p>
-            </div><!-- End Section Title -->
+            </div>
 
             <div class="content">
                 <div class="container">
                     <div class="row justify-content-center">
 
+                        <!-- Miembro 1 -->
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="person">
-                                <figure>
-                                    <img src="assets/img/team/team-2.jpg" alt="Image" class="img-fluid">
+                            <div class="person text-center">
+                                <figure class="person-figure">
+                                    <img src="assets/img/team/team-1.jpg" alt="Image"
+                                        class="img-fluid team-photo">
                                     <div class="social">
-                                        <a href="#"><span class="bi bi-facebook"></span></a>
+                                        <a href="https://www.facebook.com/share/1CZS21MFpb/?mibextid=wwXIfr"><span class="bi bi-facebook"></span></a>
                                         <a href="#"><span class="bi bi-twitter-x"></span></a>
-                                        <a href="#"><span class="bi bi-linkedin"></span></a>
+                                        <a href="https://www.linkedin.com/in/miriam-clarissa-de-le%C3%B3n-morales-064b97141?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><span class="bi bi-linkedin"></span></a>
                                     </div>
                                 </figure>
                                 <div class="person-contents">
-                                    <h3>Sheena Anderson</h3>
-                                    <span class="position">Bibliotecaria</span>
+                                    <h3>Licenciada Miriam Clarissa de León Morales</h3>
+                                    <span class="position"> Presidenta de la junta Directiva.</span>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Miembro 2 -->
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="person">
-                                <figure>
-                                    <img src="assets/img/team/team-3.jpg" alt="Image" class="img-fluid">
+                            <div class="person text-center">
+                                <figure class="person-figure">
+                                    <img src="assets/img/team/team-2.jpg" alt="Image"
+                                        class="img-fluid team-photo">
                                     <div class="social">
                                         <a href="#"><span class="bi bi-facebook"></span></a>
                                         <a href="#"><span class="bi bi-twitter-x"></span></a>
@@ -221,8 +225,46 @@
                                     </div>
                                 </figure>
                                 <div class="person-contents">
-                                    <h3> Emerson Kevin Jose Jimenez</h3>
+                                    <h3>Patricia Luna Castellanos</h3>
+                                    <span class="position">Voluntaria en la biblioteca.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Miembro 3 -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="person text-center">
+                                <figure class="person-figure">
+                                    <img src="assets/img/team/team-3.jpg" alt="Image"
+                                        class="img-fluid team-photo">
+                                    <div class="social">
+                                        <a href="#"><span class="bi bi-facebook"></span></a>
+                                        <a href="#"><span class="bi bi-twitter-x"></span></a>
+                                        <a href="#"><span class="bi bi-linkedin"></span></a>
+                                    </div>
+                                </figure>
+                                <div class="person-contents">
+                                    <h3>Emerson Kevin Jose Jimenez</h3>
                                     <span class="position">Profesor</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Miembro 4 -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="person text-center">
+                                <figure class="person-figure">
+                                    <img src="assets/img/team/team-4.jpg" alt="Image"
+                                        class="img-fluid team-photo">
+                                    <div class="social">
+                                        <a href="https://www.facebook.com/share/19iJUJyKfj/"><span class="bi bi-facebook"></span></a>
+                                        <a href="#"><span class="bi bi-twitter-x"></span></a>
+                                        <a href="#"><span class="bi bi-linkedin"></span></a>
+                                    </div>
+                                </figure>
+                                <div class="person-contents">
+                                    <h3>Marisela Isabel Velásquez Avila. </h3>
+                                    <span class="position">Biblioteria</span>
                                 </div>
                             </div>
                         </div>
@@ -230,8 +272,72 @@
                     </div>
                 </div>
             </div>
+        </section>
 
-        </section><!-- /Team Section -->
+        <style>
+            /* Asegura que todas las imágenes tengan el mismo tamaño */
+            .team-photo {
+                width: 100%;
+                height: 350px;
+                /* puedes ajustar este valor (ej. 250px o 350px) */
+                object-fit: cover;
+                /* mantiene proporción y recorta si es necesario */
+                border-radius: 10px;
+                transition: transform 0.3s ease;
+            }
+
+            .team-photo:hover {
+                transform: scale(1.05);
+            }
+
+            .person-figure {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+            }
+
+            .person .social {
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .person:hover .social {
+                opacity: 1;
+            }
+
+            .person .social a {
+                color: #000000;
+                background: rgba(0, 0, 0, 0.6);
+                margin: 0 5px;
+                border-radius: 50%;
+                padding: 8px;
+                display: inline-block;
+                transition: background 0.3s;
+            }
+
+            .person .social a:hover {
+                background: #007bff;
+            }
+
+            .person-contents {
+                margin-top: 10px;
+            }
+
+            .person-contents h3 {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+
+            .person-contents .position {
+                color: #888;
+                font-size: 0.95rem;
+            }
+        </style>
+
     </main>
 
 

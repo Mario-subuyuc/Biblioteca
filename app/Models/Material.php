@@ -21,4 +21,10 @@ class Material extends Model
     ];
 
     protected $dates = ['discard_or_sale_date', 'deleted_at'];//sofdele
+
+    // Relación con usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

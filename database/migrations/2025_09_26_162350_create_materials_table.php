@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('materials', function (Blueprint $table) {
+        Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('responsible')->nullable();
             $table->string('discard_or_sale')->nullable();
             $table->date('discard_or_sale_date')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->softDeletes(); // esto crea la columna deleted_at nullable
             $table->timestamps();
         });

@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $this->hasOne(Directive::class);
     }
 
+    // Relación con material de 1a1
+    public function materials()
+    {
+        return $this->hasMany(Material::class, 'user_id');
+    }
+
     // Relación con visitantes de 1 a muchos
     public function visitors()
     {
