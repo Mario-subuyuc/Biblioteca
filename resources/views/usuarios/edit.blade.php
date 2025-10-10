@@ -25,7 +25,7 @@
         <div class="col-md-3">
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>Q{{ 0 }}</h3>
+                    <h3>{{ $librosAtrasados ?? 0 }}</h3>
                     <p>Multas</p>
                 </div>
                 <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Book;
+use App\Models\Computer;
+use App\Models\Donation;
 use App\Models\Loan;
 
 class AdminController extends Controller
@@ -14,6 +16,8 @@ class AdminController extends Controller
     public function index()
     {
         $total_visitantes = Visitor::count();
+        $total_computadoras = Computer::count();
+        $total_donaciones = Donation::count();
 
         $year = Carbon::now()->year;
 
@@ -40,14 +44,17 @@ class AdminController extends Controller
         })->count();
         $libros_prestados = Loan::where('status', 'activo')->count(); // préstamos activos
         $libros_atrasados = Loan::where('status', 'atrasado')->count(); // préstamos atrasados
+
         // Enviar $datos a la vista
         return view('admin.index', compact(
             'total_visitantes',
+            'total_computadoras',
+            'total_donaciones',
             'datos',
             'total_libros',
             'libros_disponibles',
             'libros_prestados',
-            'libros_atrasados'
+            'libros_atrasados',
         ));
     }
 }

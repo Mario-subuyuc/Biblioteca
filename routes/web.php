@@ -242,10 +242,22 @@ Route::get('/admin/multas/generar', [App\Http\Controllers\FineController::class,
 // rutas para la gestion de computadoras
 //====================================================
 // Ruta para inventario/computadoras
-Route::get('admin/computadoras', [App\Http\Controllers\MaterialController::class, 'index'])->name('admin.computadoras.index')->middleware(['auth', 'two.factor']);
+Route::get('admin/computadoras', [App\Http\Controllers\ComputerController::class, 'index'])->name('admin.computadoras.index')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de computadoras panel crear
-Route::get('admin/computadoras/create', [App\Http\Controllers\MaterialController::class, 'create'])->name('admin.computadoras.create')->middleware(['auth', 'two.factor']);
+Route::get('admin/computadoras/create', [App\Http\Controllers\ComputerController::class, 'create'])->name('admin.computadoras.create')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de envio de formulario crear
+Route::post('admin/computadoras/create', [App\Http\Controllers\ComputerController::class, 'store'])->name('admin.computadoras.store')->middleware(['auth', 'two.factor']);
+// Ruta para ver usuario por id
+Route::get('admin/computadoras/{id}', [App\Http\Controllers\ComputerController::class, 'show'])->name('admin.computadoras.show')->middleware(['auth', 'two.factor']);
+// Ruta para ver editar usuario
+Route::get('admin/computadoras/{id}/edit', [App\Http\Controllers\ComputerController::class, 'edit'])->name('admin.computadoras.edit')->middleware(['auth', 'two.factor']);
+// Ruta para enviar la actualizacion de usuario
+Route::put('admin/computadoras/{id}', [App\Http\Controllers\ComputerController::class, 'update'])->name('admin.computadoras.update')->middleware(['auth', 'two.factor']);
+// Ruta para ver eliminar usuario
+Route::get('admin/computadoras/{id}/confirm-delete', [App\Http\Controllers\ComputerController::class, 'confirmDelete'])->name('admin.computadoras.confirmDelete')->middleware(['auth', 'two.factor']);
+// Ruta para mandar la eliminacion
+Route::delete('admin/computadoras/{id}', [App\Http\Controllers\ComputerController::class, 'destroy'])->name('admin.computadoras.destroy')->middleware(['auth', 'two.factor']);
+
 
 //====================================================
 // rutas para la gestion de reportes

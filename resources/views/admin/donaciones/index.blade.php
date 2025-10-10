@@ -23,7 +23,6 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th style="text-align: center">#</th>
-                                <th style="text-align: center">ID</th>
                                 <th style="text-align: center">Lector</th>
                                 <th style="text-align: center">Directiva</th>
                                 <th style="text-align: center">Monto</th>
@@ -37,7 +36,6 @@
                             @foreach ($donations as $donation)
                                 <tr>
                                     <td style="text-align: center">{{ $loop->iteration }}</td>
-                                    <td style="text-align: center">{{ $donation->id }}</td>
                                     <td style="text-align: center"> {{ $donation->reader->name ?? 'Anónimo / Organización' }}</td>
                                     <td style="text-align: center">{{ $donation->directive->name }}</td>
                                     <td style="text-align: center">${{ number_format($donation->amount, 2) }}</td>

@@ -1,82 +1,80 @@
 @extends('layouts.admin')
-@section('title', 'Mostrar Visitante')
+@section('title', 'Mostrar Donación')
 @section('content')
     <div class="row mb-3">
         <div class="col">
-            <h1><i class="bi bi-person-badge"></i> Visitante: {{ $visitante->name }}</h1>
-            <p class="text-muted">Detalles completos del registro del visitante</p>
+            <h1><i class="bi bi-cash-stack"></i> Donación #{{ $donacion->id }}</h1>
+            <p class="text-muted">Detalles completos del registro de la donación</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10">
-            <div class="card shadow-sm border-info">
+            <div class="card shadow-sm border-success">
                 <div class="card-header bg-info text-white">
-                    <h3 class="card-title mb-0"><i class="bi bi-card-list"></i> Datos Registrados</h3>
+                    <h3 class="card-title mb-0"><i class="bi bi-card-list"></i> Datos de la Donación</h3>
                 </div>
+
                 <div class="card-body">
 
-                    {{-- DATOS PERSONALES --}}
-                    <h5 class="mb-3">👤 Datos Personales</h5>
+                    {{-- DATOS DE DONANTES Y RECEPTORES --}}
+                    <h5 class="mb-3">👥 Participantes</h5>
                     <dl class="row">
-                        <dt class="col-sm-4">Nombre</dt>
-                        <dd class="col-sm-8">{{ $visitante->name }}</dd>
-
-                        <dt class="col-sm-4">Ubicación</dt>
-                        <dd class="col-sm-8">{{ $visitante->location ?? '—' }}</dd>
-
-                        <dt class="col-sm-4">Edad</dt>
+                        <dt class="col-sm-4">Usuario que dona (lector)</dt>
                         <dd class="col-sm-8">
-                            {{ $visitante->birth_year ? \Carbon\Carbon::now()->year - $visitante->birth_year . ' años' : '—' }}
+                            @if ($donacion->reader)
+                                <i class="bi bi-person-heart"></i> {{ $donacion->reader->name }}
+                            @else
+                                — No especificado
+                            @endif
                         </dd>
 
-                        <dt class="col-sm-4">Año de nacimiento</dt>
-                        <dd class="col-sm-8">{{ $visitante->birth_year ?? '—' }}</dd>
-
-                        <dt class="col-sm-4">Género</dt>
-                        <dd class="col-sm-8">{{ ucfirst($visitante->gender ?? '—') }}</dd>
-
-                        <dt class="col-sm-4">Etnicidad</dt>
-                        <dd class="col-sm-8">{{ ucfirst($visitante->ethnicity ?? '—') }}</dd>
-
-                        <dt class="col-sm-4">Ocupación</dt>
-                        <dd class="col-sm-8">{{ $visitante->occupation ?? '—' }}</dd>
-                    </dl>
-
-                    {{-- DATOS DE VISITA --}}
-                    <hr class="my-4">
-                    <h5 class="mb-3">📅 Datos de Visita</h5>
-                    <dl class="row">
-                        <dt class="col-sm-4">Fecha de visita</dt>
-                        <dd class="col-sm-8">{{ \Carbon\Carbon::parse($visitante->visit_date)->format('d/m/Y') }}</dd>
-
-                        <dt class="col-sm-4">Hora de visita</dt>
-                        <dd class="col-sm-8">{{ \Carbon\Carbon::parse($visitante->visit_time)->format('H:i') }}</dd>
-
-                        <dt class="col-sm-4">Usuario asociado</dt>
+                        <dt class="col-sm-4">Usuario que recibe (directivo)</dt>
                         <dd class="col-sm-8">
-                            @if ($visitante->user)
-                                <i class="bi bi-person-check"></i> {{ $visitante->user->name }}
+                            @if ($donacion->directive)
+                                <i class="bi bi-person-check"></i> {{ $donacion->directive->name }}
                             @else
-                                — No registrado
+                                — No especificado
                             @endif
                         </dd>
                     </dl>
 
-                    {{-- FECHAS DE REGISTRO --}}
+                    {{-- DETALLES DE LA DONACIÓN --}}
                     <hr class="my-4">
-                    <h5 class="mb-3">⏱️ Fechas</h5>
+                    <h5 class="mb-3">💰 Detalles de la Donación</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Monto</dt>
+                        <dd class="col-sm-8">Q{{ number_format($donacion->amount, 2) }}</dd>
+
+                        <dt class="col-sm-4">Método de pago</dt>
+                        <dd class="col-sm-8">{{ $donacion->method }}</dd>
+
+                        <dt class="col-sm-4">Fecha de donación</dt>
+                        <dd class="col-sm-8">{{ \Carbon\Carbon::parse($donacion->donation_date)->format('d/m/Y') }}</dd>
+
+                        <dt class="col-sm-4">Nota</dt>
+                        <dd class="col-sm-8">{{ $donacion->note ?? '—' }}</dd>
+                    </dl>
+
+                    {{-- FECHAS DEL REGISTRO --}}
+                    <hr class="my-4">
+                    <h5 class="mb-3">⏱️ Fechas del registro</h5>
                     <dl class="row">
                         <dt class="col-sm-4">Fecha de creación</dt>
-                        <dd class="col-sm-8">{{ $visitante->created_at->format('d/m/Y H:i:s') }}</dd>
+                        <dd class="col-sm-8">
+                            {{ optional($donacion->created_at)->format('d/m/Y H:i:s') ?? 'No disponible' }}
+                        </dd>
 
                         <dt class="col-sm-4">Última actualización</dt>
-                        <dd class="col-sm-8">{{ $visitante->updated_at->format('d/m/Y H:i:s') }}</dd>
+                        <dd class="col-sm-8">
+                            {{ optional($donacion->updated_at)->format('d/m/Y H:i:s') ?? 'No disponible' }}
+                        </dd>
                     </dl>
 
                 </div>
+
                 <div class="card-footer text-end">
-                    <a href="{{ route('admin.visitantes.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.donaciones.index') }}" class="btn btn-secondary">
                         <i class="bi bi-arrow-left"></i> Regresar
                     </a>
                 </div>

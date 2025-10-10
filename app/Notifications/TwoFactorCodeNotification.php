@@ -39,7 +39,9 @@ class TwoFactorCodeNotification extends Notification
         ->line($notifiable->two_factor_code)
         //->action('Verificar aquí', route('verify'))
         ->line('Si no solicitaste este código, puedes ignorar este correo.')
-        ->line('Tu código expira en 10 minutos.');
+        ->line('Tu código expira en 10 minutos.')
+        ->line(' ')
+        ->line(' ');
     }
     /**
      * Get the array representation of the notification.

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-        public function edit(string $id)
+    public function edit(string $id)
     {
         $user = Auth::user();
 
@@ -31,6 +31,13 @@ class UserController extends Controller
             $query->where('user_id', $user->id);
         })->count();
 
+        // Contar los libros atrasados del usuario
+        $librosAtrasados = Loan::whereHas('reader', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })
+            ->where('status', 'atrasado') // solo los que están atrasados
+            ->count();
+
         $multas = 0; // aquí puedes agregar la lógica para contar multas si la tienes
         $eventos = $user->events()->count();
 
@@ -38,6 +45,7 @@ class UserController extends Controller
             'user',
             'visitas',
             'librosPrestados',
+            'librosAtrasados',
             'multas',
             'eventos'
         ));

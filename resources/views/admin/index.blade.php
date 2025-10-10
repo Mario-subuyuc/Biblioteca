@@ -78,7 +78,7 @@
         <div class="col-lg-4 col-4">
             <div class="small-box bg-olive">
                 <div class="inner">
-                    <h3>{{ 10 }}</h3>
+                    <h3>{{ $total_computadoras ?? '0'  }}</h3>
                     <p>Servicios computadora</p>
                 </div>
                 <div class="icon">
@@ -93,7 +93,7 @@
         <div class="col-lg-4 col-4">
             <div class="small-box bg-gray">
                 <div class="inner">
-                    <h3>{{ 10 }}</h3>
+                    <h3>{{ $total_donaciones ?? '0'  }}</h3>
                     <p>Donaciones</p>
                 </div>
                 <div class="icon">

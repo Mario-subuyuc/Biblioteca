@@ -1,8 +1,9 @@
 @extends('layouts.admin')
-@section('title', 'Crear Visitante')
+@section('title', 'Registrar Donación')
+
 @section('content')
     <div class="row mb-3">
-        <h1>Registro de un nuevo visitante</h1>
+        <h1>Registro de una nueva donación</h1>
     </div>
     <hr>
 
@@ -10,122 +11,90 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Llene los datos</h3>
+                    <h3 class="card-title">Llene los datos de la donación</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.visitantes.store') }}" method="POST">
+                    <form action="{{ route('admin.donaciones.store') }}" method="POST">
                         @csrf
 
                         <div class="row">
-                            {{-- Nombre --}}
+                            {{-- Donante --}}
                             <div class="col-md-6 mb-3">
-                                <label>Nombre del visitante <b>*</b></label>
-                                <input type="text" value="{{ old('name') }}" name="name" class="form-control"
-                                    required>
-                                @error('name')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Ubicación --}}
-                            <div class="col-md-6 mb-3">
-                                <label>Ubicación</label>
-                                <input type="text" value="{{ old('location') }}" name="location" class="form-control">
-                                @error('location')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Año de nacimiento --}}
-                            <div class="col-md-6 mb-3">
-                                <label>Año de nacimiento</label>
-                                <input type="number" value="{{ old('birth_year') }}" name="birth_year" class="form-control"
-                                    min="1900" max="{{ date('Y') }}">
-                                @error('birth_year')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Género --}}
-                            <div class="col-md-6 mb-3">
-                                <label>Género</label>
-                                <select name="gender" class="form-control">
-                                    <option value="">-- Seleccione --</option>
-                                    <option value="Masculino" {{ old('gender') == 'Masculino' ? 'selected' : '' }}>Masculino
-                                    </option>
-                                    <option value="Femenino" {{ old('gender') == 'Femenino' ? 'selected' : '' }}>Femenino
-                                    </option>
-                                    <option value="Otro" {{ old('gender') == 'Otro' ? 'selected' : '' }}>Otro</option>
-                                </select>
-                                @error('gender')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Etnicidad --}}
-                            <div class="col-md-6 mb-3">
-                                <label for="ethnicity">Etnicidad</label>
-                                <select id="ethnicity" name="ethnicity" class="form-control">
-                                    <option value="" disabled selected>-- Selecciona una etnia --</option>
-                                    <option value="maya" {{ old('ethnicity') == 'maya' ? 'selected' : '' }}>Maya</option>
-                                    <option value="ladina" {{ old('ethnicity') == 'ladina' ? 'selected' : '' }}>Ladina
-                                    </option>
-                                    <option value="garifuna" {{ old('ethnicity') == 'garifuna' ? 'selected' : '' }}>
-                                        Garífuna</option>
-                                    <option value="xinca" {{ old('ethnicity') == 'xinca' ? 'selected' : '' }}>Xinca
-                                    </option>
-                                    <option value="mestizo" {{ old('ethnicity') == 'mestizo' ? 'selected' : '' }}>Mestizo
-                                    </option>
-                                    <option value="otro" {{ old('ethnicity') == 'otro' ? 'selected' : '' }}>Otro</option>
-                                </select>
-                                @error('ethnicity')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Ocupación --}}
-                            <div class="col-md-6 mb-3">
-                                <label>Ocupación</label>
-                                <input type="text" value="{{ old('occupation') }}" name="occupation"
-                                    class="form-control">
-                                @error('occupation')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Fecha de visita --}}
-                            <div class="col-md-6 mb-3">
-                                <label>Fecha de visita <b>*</b></label>
-                                <input type="date" value="{{ old('visit_date') }}" name="visit_date"
-                                    class="form-control" required>
-                                @error('visit_date')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Hora de visita --}}
-                            <div class="col-md-6 mb-3">
-                                <label>Hora de visita <b>*</b></label>
-                                <input type="time" value="{{ old('visit_time') }}" name="visit_time"
-                                    class="form-control" required>
-                                @error('visit_time')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            {{-- Usuario asociado --}}
-                            <div class="col-md-12 mb-3">
-                                <label>Usuario asociado</label>
-                                <select name="user_id" class="form-control">
-                                    <option value="">-- Ninguno --</option>
-                                    @foreach ($usuarios as $usuario)
-                                        <option value="{{ $usuario->id }}"
-                                            {{ old('user_id') == $usuario->id ? 'selected' : '' }}>
-                                            {{ $usuario->name }}
+                                <label>Usuario que dona (lector)</label>
+                                <select name="reader_id" class="form-control">
+                                    <option value="">-- Seleccione un lector donante --</option>
+                                    @foreach ($readers as $reader)
+                                        <option value="{{ $reader->id }}"
+                                            {{ old('reader_id') == $reader->id ? 'selected' : '' }}>
+                                            {{ $reader->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('user_id')
+                                @error('reader_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            {{-- Receptor --}}
+                            <div class="col-md-6 mb-3">
+                                <label>Usuario que recibe (directivo) <b>*</b></label>
+                                <select name="directive_id" class="form-control" required>
+                                    <option value="">-- Seleccione un directivo --</option>
+                                    @foreach ($directives as $directive)
+                                        <option value="{{ $directive->id }}"
+                                            {{ old('directive_id') == $directive->id ? 'selected' : '' }}>
+                                            {{ $directive->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('directive_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            {{-- Monto --}}
+                            <div class="col-md-6 mb-3">
+                                <label>Monto de la donación <b>*</b></label>
+                                <input type="number" step="0.01" value="{{ old('amount') }}" name="amount"
+                                    class="form-control" required>
+                                @error('amount')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            {{-- Método --}}
+                            <div class="col-md-6 mb-3">
+                                <label>Método de pago <b>*</b></label>
+                                <select name="method" class="form-control" required>
+                                    <option value="">-- Seleccione --</option>
+                                    <option value="Efectivo" {{ old('method') == 'Efectivo' ? 'selected' : '' }}>Efectivo
+                                    </option>
+                                    <option value="Transferencia" {{ old('method') == 'Transferencia' ? 'selected' : '' }}>
+                                        Transferencia</option>
+                                    <option value="Cheque" {{ old('method') == 'Cheque' ? 'selected' : '' }}>Cheque
+                                    </option>
+                                    <option value="Otro" {{ old('method') == 'Otro' ? 'selected' : '' }}>Otro</option>
+                                </select>
+                                @error('method')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            {{-- Fecha --}}
+                            <div class="col-md-6 mb-3">
+                                <label>Fecha de donación <b>*</b></label>
+                                <input type="date" value="{{ old('donation_date') }}" name="donation_date"
+                                    class="form-control" required>
+                                @error('donation_date')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            {{-- Nota --}}
+                            <div class="col-md-12 mb-3">
+                                <label>Nota adicional</label>
+                                <textarea name="note" rows="3" class="form-control" placeholder="Detalles de la donación">{{ old('note') }}</textarea>
+                                @error('note')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -133,8 +102,8 @@
 
                         <hr>
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('admin.visitantes.index') }}" class="btn btn-secondary">Cancelar</a>
-                            <button type="submit" class="btn btn-primary">Registrar Visitante</button>
+                            <a href="{{ route('admin.donaciones.index') }}" class="btn btn-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">Registrar Donación</button>
                         </div>
                     </form>
                 </div>
