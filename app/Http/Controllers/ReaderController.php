@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 
 class ReaderController extends Controller
 {
@@ -53,6 +54,10 @@ class ReaderController extends Controller
             'gender' => $request->gender,
             'password' => Hash::make($request->password),
         ]);
+        // Asignar rol de Spatie
+        // Obtener o crear el rol "director"
+        $lectorRole   = Role::firstOrCreate(['name' => 'lector']);
+        $user->assignRole($lectorRole);
 
         Reader::create([
             'user_id' => $user->id,
@@ -115,5 +120,4 @@ class ReaderController extends Controller
             ->with('mensaje', 'Lector actualizado correctamente.')
             ->with('icono', 'success');
     }
-
 }

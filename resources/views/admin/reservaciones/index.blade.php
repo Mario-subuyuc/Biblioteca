@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <p>Realiza la reserva de libro que decese a la fehca que deces , consulta tu historial de prestamos </p>
+    <p>Realiza la reserva de libro que decese para el dia actual</p>
     <hr>
 
     {{-- ============================= --}}
@@ -39,31 +39,34 @@
                                     <td>{{ $r->book->title ?? '—' }}</td>
                                     <td>{{ $r->date }}</td>
                                     <td>
-                                        <form action="{{ route('admin.reservas.updateState', $r->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @php
-                                                $color = match ($r->state) {
-                                                    'pendiente' => 'warning',
-                                                    'confirmada' => 'success',
-                                                    'cancelada' => 'danger',
-                                                    default => 'secondary',
-                                                };
-                                            @endphp
-                                            <select name="state"
-                                                class="form-select form-select-sm bg-{{ $color }} text-white"
-                                                onchange="this.form.submit()">
-                                                <option value="pendiente" {{ $r->state == 'pendiente' ? 'selected' : '' }}>
-                                                    Pendiente</option>
-                                                <option value="confirmada"
-                                                    {{ $r->state == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
-                                                <option value="cancelada" {{ $r->state == 'cancelada' ? 'selected' : '' }}>
-                                                    Cancelada</option>
-                                            </select>
-                                        </form>
+                                        @php
+                                            $color = match ($r->state) {
+                                                'pendiente' => 'warning',
+                                                'confirmada' => 'success',
+                                                'cancelada' => 'danger',
+                                                default => 'secondary',
+                                            };
+                                        @endphp
 
+                                        @can('admin.usuarios.index')
+                                            <form action="{{ route('admin.reservas.updateState', $r->id) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                <select name="state"
+                                                    class="form-select form-select-sm bg-{{ $color }} text-white"
+                                                    onchange="this.form.submit()">
+                                                    <option value="pendiente" {{ $r->state == 'pendiente' ? 'selected' : '' }}>
+                                                        Pendiente</option>
+                                                    <option value="confirmada"
+                                                        {{ $r->state == 'confirmada' ? 'selected' : '' }}>Confirmada</option>
+                                                    <option value="cancelada" {{ $r->state == 'cancelada' ? 'selected' : '' }}>
+                                                        Cancelada</option>
+                                                </select>
+                                            </form>
+                                        @else
+                                            <span class="badge bg-{{ $color }}">{{ ucfirst($r->state) }}</span>
+                                        @endcan
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>
@@ -268,58 +271,70 @@
     </script>
 
 
-    {{--model de datatables--}}
+    {{-- model de datatables --}}
     <script>
-    $(document).ready(function() {
-        // Historial de reservas
-        $('#historial').DataTable({
-            paging: true,
-            pageLength: 10,
-            lengthMenu: [5, 10, 25, 50],
-            searching: true,
-            ordering: true,
-            order: [[3, "desc"]],
-            columnDefs: [
-                { orderable: false, targets: 4 } // columna de acciones
-            ],
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-            }
-        });
+        $(document).ready(function() {
+            // Historial de reservas
+            $('#historial').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                searching: true,
+                ordering: true,
+                order: [
+                    [3, "desc"]
+                ],
+                columnDefs: [{
+                        orderable: false,
+                        targets: 4
+                    } // columna de acciones
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+                }
+            });
 
-        // Mis reservas
-        $('#personales').DataTable({
-            paging: true,
-            pageLength: 10,
-            lengthMenu: [5, 10, 25, 50],
-            searching: true,
-            ordering: true,
-            order: [[2, "asc"]],
-            columnDefs: [
-                { orderable: false, targets: 4 } // columna de acciones
-            ],
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-            }
-        });
+            // Mis reservas
+            $('#personales').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                searching: true,
+                ordering: true,
+                order: [
+                    [2, "asc"]
+                ],
+                columnDefs: [{
+                        orderable: false,
+                        targets: 4
+                    } // columna de acciones
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+                }
+            });
 
-        // Libros disponibles
-        $('#libros').DataTable({
-            paging: true,
-            pageLength: 10,
-            lengthMenu: [5, 10, 25, 50],
-            searching: true,
-            ordering: true,
-            order: [[0, "asc"]],
-            columnDefs: [
-                { orderable: false, targets: 3 } // columna de acciones
-            ],
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-            }
+            // Libros disponibles
+            $('#libros').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                searching: true,
+                ordering: true,
+                order: [
+                    [0, "asc"]
+                ],
+                columnDefs: [{
+                        orderable: false,
+                        targets: 3
+                    } // columna de acciones
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 
 

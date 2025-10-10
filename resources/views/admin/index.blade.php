@@ -5,8 +5,9 @@
 @endsection
 @section('content')
     <div class="row">
-        <h1>Bienvenido {{ Auth::user()->email }}</h1>
+        <h1>Bienvenido {{ Auth::user()->name }}</h1>
     </div>
+    <p>Rol: {{ Auth::user()->roles->pluck('name')->first() }}</p>
     <hr>
     <!-- resumen libros -->
     <div class="row">
@@ -59,74 +60,76 @@
     </div>
 
     <!-- cards -->
-    <div class="row">
-        <div class="col-lg-4 col-4">
-            <div class="small-box bg-lightblue">
-                <div class="inner">
-                    <h3>{{ $total_visitantes ?? '0' }}</h3>
-                    <p>Visitantes</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fas bi bi-person-arms-up"></i>
-                </div>
-                <a href="{{ url('admin/visitantes') }}" class="small-box-footer">Más Información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-4">
-            <div class="small-box bg-olive">
-                <div class="inner">
-                    <h3>{{ $total_computadoras ?? '0'  }}</h3>
-                    <p>Servicios computadora</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fas bi bi-pc-display"></i>
-                </div>
-                <a href="{{ url('admin/computadoras') }}" class="small-box-footer">Más Información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-4">
-            <div class="small-box bg-gray">
-                <div class="inner">
-                    <h3>{{ $total_donaciones ?? '0'  }}</h3>
-                    <p>Donaciones</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fas bi bi-piggy-bank"></i>
-                </div>
-                <a href="{{ url('admin/donaciones') }}" class="small-box-footer">Más Información <i
-                        class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <!-- grafico -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header ui-sortable-handle" style="cursor: move;">
-                    <h3 class="card-title">
-                        <i class="fas fa bi bi-person-heart mr-1"></i>
-                        Visitantes
-                    </h3>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                    <div class="tab-content p-0">
-                        <!-- Gráfico de Área -->
-                        <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                            <canvas id="revenue-chart-canvas"></canvas>
-                        </div>
+    @can('admin.visitantes.index')
+        <div class="row">
+            <div class="col-lg-4 col-4">
+                <div class="small-box bg-lightblue">
+                    <div class="inner">
+                        <h3>{{ $total_visitantes ?? '0' }}</h3>
+                        <p>Visitantes</p>
                     </div>
-                </div><!-- /.card-body -->
+                    <div class="icon">
+                        <i class="ion fas bi bi-person-arms-up"></i>
+                    </div>
+                    <a href="{{ url('admin/visitantes') }}" class="small-box-footer">Más Información <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-4">
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>{{ $total_computadoras ?? '0' }}</h3>
+                        <p>Servicios computadora</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion fas bi bi-pc-display"></i>
+                    </div>
+                    <a href="{{ url('admin/computadoras') }}" class="small-box-footer">Más Información <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-4">
+                <div class="small-box bg-gray">
+                    <div class="inner">
+                        <h3>{{ $total_donaciones ?? '0' }}</h3>
+                        <p>Donaciones</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion fas bi bi-piggy-bank"></i>
+                    </div>
+                    <a href="{{ url('admin/donaciones') }}" class="small-box-footer">Más Información <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
             </div>
         </div>
-    </div>
+        <hr>
 
+        <!-- grafico -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">
+                            <i class="fas fa bi bi-person-heart mr-1"></i>
+                            Visitantes
+                        </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content p-0">
+                            <!-- Gráfico de Área -->
+                            <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
+                                <canvas id="revenue-chart-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    @endcan
     <!-- marca de agua -->
     <div class="watermark-container"
         style="

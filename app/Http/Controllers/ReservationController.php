@@ -51,10 +51,6 @@ class ReservationController extends Controller
                 ->with('icono', 'error');
         }
 
-
-
-
-
         // Validar domingo
         if ($fechaReserva->isSunday()) {
             return redirect()->back()
@@ -62,25 +58,18 @@ class ReservationController extends Controller
                 ->with('icono', 'error');
         }
 
-        // Validar días suspendidos por administrador
-        $suspendedDays = ['2025-10-12', '2025-12-25']; // ejemplo, luego puede venir de DB
-        if (in_array($fechaReserva->toDateString(), $suspendedDays)) {
-            return redirect()->back()
-                ->with('mensaje', 'Ese día el servicio de reservas está suspendido.')
-                ->with('icono', 'error');
-        }
-
         // Verificar si el libro ya está reservado para esa fecha
         $existing = Reservation::where('book_id', $request->book_id)
-            ->where('state', 'pendiente')
-            ->where('date', $fechaReserva->toDateString())
-            ->first();
+            ->whereDate('date', $fechaReserva->toDateString())
+            ->whereIn('state', ['pendiente', 'confirmada']) // ✅ bloquea si ya está reservado
+            ->exists();
 
         if ($existing) {
             return redirect()->back()
-                ->with('mensaje', 'El libro ya está reservado por otro usuario para esa fecha.')
+                ->with('mensaje', 'El libro ya está reservado para esa fecha.')
                 ->with('icono', 'error');
         }
+
 
         // Crear reserva
         Reservation::create([

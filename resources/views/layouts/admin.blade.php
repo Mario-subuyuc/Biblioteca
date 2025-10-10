@@ -45,59 +45,60 @@
 
 <body class="hold-transition sidebar-mini ">
     <div class="wrapper">
+        @can('admin.reportes.index')
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                                class="fas fa-bars"></i></a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href={{ url('/admin') }} class="nav-link">Biblioteca Comunitaria Forjando Mentes Brillantes</a>
+                    </li>
+                </ul>
 
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href={{ url('/admin') }} class="nav-link">Biblioteca Comunitaria Forjando Mentes Brillantes</a>
-                </li>
-            </ul>
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
 
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-danger navbar-badge">!!</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header">Notificaciones de prestamos</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ url('admin/multas') }}" class="dropdown-item">
-                            <i class="fas bi bi-ban mr-2"></i>Multas
-
+                    <!-- Notifications Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="far fa-bell"></i>
+                            <span class="badge badge-danger navbar-badge">!!</span>
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ url('admin/reservaciones') }}" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i>Reservas
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-header">Notificaciones de prestamos</span>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url('admin/multas') }}" class="dropdown-item">
+                                <i class="fas bi bi-ban mr-2"></i>Multas
 
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url('admin/reservaciones') }}" class="dropdown-item">
+                                <i class="fas fa-users mr-2"></i>Reservas
+
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url('admin/reportes') }}" class="dropdown-item">
+                                <i class="fas fa-file mr-2"></i>Reportes
+
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url('admin/prestamos') }}" class="dropdown-item dropdown-footer">ver más</a>
+                        </div>
+                    </li>
+
+                    <!-- full scream -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                            <i class="fas fa-expand-arrows-alt"></i>
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ url('admin/reportes') }}" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i>Reportes
+                    </li>
 
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ url('admin/prestamos') }}" class="dropdown-item dropdown-footer">ver más</a>
-                    </div>
-                </li>
-
-                <!-- full scream -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-
-            </ul>
+                </ul>
+            @endcan
         </nav>
         <!-- /.navbar -->
 
@@ -140,7 +141,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-
+                         @can('admin.usuarios.index')
                         <!-- boton usuarios -->
                         <li class="nav-item menu">
                             <a href="#" class="nav-link active bg-pink">
@@ -171,7 +172,7 @@
                                 </li>
                             </ul>
                         </li>
-
+                        @endcan
                         <!-- boton Prestamo -->
                         <li class="nav-item menu">
                             <a href="#" class="nav-link active bg-primary">
@@ -182,30 +183,32 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                 @can('admin.multas.index')
                                 <li class="nav-item">
-                                    <a  href={{ url('admin/multas') }}  class="nav-link active">
+                                    <a href={{ url('admin/multas') }} class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Multas</p>
                                     </a>
                                 </li>
+                                @endcan
                                 <li class="nav-item">
-                                    <a  href={{ url('admin/reservaciones') }}  class="nav-link active">
+                                    <a href={{ url('admin/reservaciones') }} class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Reservas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a  href={{ url('admin/prestamos') }}  class="nav-link active">
+                                    <a href={{ url('admin/prestamos') }} class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Prestamos</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-
+                         @can('admin.reportes.index')
                         <!-- boton Reportes -->
                         <li class="nav-item menu">
-                            <a  href={{ url('admin/reportes') }}  class="nav-link active bg-indigo">
+                            <a href={{ url('admin/reportes') }} class="nav-link active bg-indigo">
                                 <i class="nav-icon fas bi bi-file-bar-graph"></i>
                                 <p>
                                     Reportes
@@ -213,10 +216,10 @@
                                 </p>
                             </a>
                         </li>
-
+                        @endcan
                         <!-- boton Recomendaciones -->
                         <li class="nav-item menu">
-                            <a  href={{ url('admin/recomendaciones') }}  class="nav-link active bg-purple">
+                            <a href={{ url('admin/recomendaciones') }} class="nav-link active bg-purple">
                                 <i class="nav-icon fas bi-hand-thumbs-up"></i>
                                 <p>
                                     Recomendaciones
@@ -241,12 +244,14 @@
                                         <p>Libros</p>
                                     </a>
                                 </li>
+                                 @can('admin.materiales.index')
                                 <li class="nav-item">
                                     <a href={{ url('admin/materiales') }} class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Material</p>
                                     </a>
                                 </li>
+                                @endcan
                             </ul>
                         </li>
 
@@ -260,7 +265,7 @@
                                 </p>
                             </a>
                         </li>
-
+                         @can('admin.usuarios.index')
                         <!-- boton en linea -->
                         <li class="nav-item menu">
                             <a href={{ url('/admin/sesiones') }} class="nav-link active bg-cyan">
@@ -271,6 +276,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endcan
                         <br>
                         <br>
 

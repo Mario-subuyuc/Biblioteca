@@ -14,13 +14,15 @@
                     <h3 class="card-title mb-2">
                         <i class="bi bi-calendar-event"></i> Calendario de Eventos
                     </h3>
-                    <div class="card-tools d-flex justify-content-end">
+                </div>
+                @can('admin.usuarios.index')
+                    <div class="card-tools d-flex justify-content-first">
                         <button type="button" class="btn btn-light btn-sm d-flex align-items-center bg-success text-white"
                             style="gap: 0.5rem;" data-bs-toggle="modal" data-bs-target="#eventModal">
                             <i class="bi bi-plus-circle"></i> Nuevo Evento
                         </button>
                     </div>
-                </div>
+                @endcan
                 <div class="card-body p-3">
                     <div id="calendar"></div>
                 </div>
@@ -45,7 +47,9 @@
                                     <th>Título</th>
                                     <th>Inicio</th>
                                     <th>Fin</th>
+                                    @can('admin.usuarios.index')
                                     <th>Acciones</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,148 +61,154 @@
                                         <td>{{ \Carbon\Carbon::parse($event->end)->format('d/m/Y H:i') }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Acciones">
-                                                <button class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                    data-bs-target="#assignUserModal{{ $event->id }}">
-                                                    <i class="bi bi-person-plus"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                                    data-bs-target="#viewUsersModal{{ $event->id }}">
-                                                    <i class="bi bi-people"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#removeUserModal{{ $event->id }}">
-                                                    <i class="bi bi-person-dash"></i>
-                                                </button>
+                                                @can('admin.usuarios.index')
+                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#assignUserModal{{ $event->id }}">
+                                                        <i class="bi bi-person-plus"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                        data-bs-target="#viewUsersModal{{ $event->id }}">
+                                                        <i class="bi bi-people"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#removeUserModal{{ $event->id }}">
+                                                        <i class="bi bi-person-dash"></i>
+                                                    </button>
+                                                @endcan
                                             </div>
                                         </td>
                                     </tr>
-
-                                    {{-- Modal Asignar Usuario --}}
-                                    <div class="modal fade" id="assignUserModal{{ $event->id }}" tabindex="-1"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-success text-white">
-                                                    <h5 class="modal-title">Asignar usuario a: {{ $event->title }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Cerrar"></button>
-                                                </div>
-                                                <form action="{{ route('events.assignUser', $event->id) }}" method="POST">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="user_id" class="form-label">Seleccionar
-                                                                Usuario</label>
-                                                            <select name="user_id" id="user_id" class="form-control"
-                                                                required>
-                                                                <option value="">-- Selecciona un usuario --</option>
-                                                                @foreach ($users as $user)
-                                                                    <option value="{{ $user->id }}">
-                                                                        {{ $user->name }}
-                                                                        ({{ $user->email }})
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                    @can('admin.usuarios.index')
+                                        {{-- Modal Asignar Usuario --}}
+                                        <div class="modal fade" id="assignUserModal{{ $event->id }}" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-success text-white">
+                                                        <h5 class="modal-title">Asignar usuario a: {{ $event->title }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Cerrar"></button>
+                                                    </div>
+                                                    <form action="{{ route('events.assignUser', $event->id) }}" method="POST">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="user_id" class="form-label">Seleccionar
+                                                                    Usuario</label>
+                                                                <select name="user_id" id="user_id" class="form-control"
+                                                                    required>
+                                                                    <option value="">-- Selecciona un usuario --</option>
+                                                                    @foreach ($users as $user)
+                                                                        <option value="{{ $user->id }}">
+                                                                            {{ $user->name }}
+                                                                            ({{ $user->email }})
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-success">Asignar</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {{-- Modal Ver Usuarios --}}
-                                    {{-- Modal Ver Usuarios --}}
-                                    <div class="modal fade" id="viewUsersModal{{ $event->id }}" tabindex="-1"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-info text-white">
-                                                    <h5 class="modal-title">Usuarios en: {{ $event->title }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Cerrar"></button>
-                                                </div>
-
-                                                <div class="d-flex justify-content-end mb-2">
-                                                    <button class="btn btn-secondary btn-sm"
-                                                        onclick="printModal('modalBody{{ $event->id }}')">
-                                                        <i class="bi bi-printer"></i> Imprimir
-                                                    </button>
-                                                </div>
-
-                                                <div class="modal-body" id="modalBody{{ $event->id }}">
-                                                    @if ($event->users->count() > 0)
-                                                        <p><strong>Total de inscritos:</strong>
-                                                            {{ $event->users->count() }}</p>
-                                                        <p><strong>Total de inscritos mujeres:</strong>
-                                                            {{ $event->users->where('gender', 'femenino')->count() }}</p>
-                                                        <p><strong>Total de inscritos hombres:</strong>
-                                                            {{ $event->users->where('gender', 'masculino')->count() }}</p>
-                                                        <ul class="list-group">
-                                                            @foreach ($event->users as $user)
-                                                                <li class="list-group-item d-flex justify-content-between">
-                                                                    <div>
-                                                                        <strong>{{ $user->name }}</strong><br>
-                                                                        correo: 📧 {{ $user->email }}<br>
-                                                                        telefono: 📞
-                                                                        {{ $user->phone ?? 'No registrado' }}<br>
-                                                                        género: ⚥ {{ $user->gender ?? 'Sin especificar' }}
-                                                                    </div>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @else
-                                                        <p class="text-muted">No hay usuarios asignados a este evento.</p>
-                                                    @endif
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="submit" class="btn btn-success">Asignar</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
 
-                                    {{-- Modal Eliminar Usuario --}}
-                                    <div class="modal fade" id="removeUserModal{{ $event->id }}" tabindex="-1"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header bg-danger text-white">
-                                                    <h5 class="modal-title">Eliminar usuario de: {{ $event->title }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Cerrar"></button>
-                                                </div>
-                                                <form action="{{ route('events.removeUser', $event->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="user_id" class="form-label">Seleccionar
-                                                                Usuario</label>
-                                                            <select name="user_id" id="user_id" class="form-control"
-                                                                required>
-                                                                <option value="">-- Selecciona un usuario --</option>
+                                        {{-- Modal Ver Usuarios --}}
+                                        <div class="modal fade" id="viewUsersModal{{ $event->id }}" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-info text-white">
+                                                        <h5 class="modal-title">Usuarios en: {{ $event->title }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Cerrar"></button>
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-end mb-2">
+                                                        <button class="btn btn-secondary btn-sm"
+                                                            onclick="printModal('modalBody{{ $event->id }}')">
+                                                            <i class="bi bi-printer"></i> Imprimir
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body" id="modalBody{{ $event->id }}">
+                                                        @if ($event->users->count() > 0)
+                                                            <p><strong>Total de inscritos:</strong>
+                                                                {{ $event->users->count() }}</p>
+                                                            <p><strong>Total de inscritos mujeres:</strong>
+                                                                {{ $event->users->where('gender', 'femenino')->count() }}</p>
+                                                            <p><strong>Total de inscritos hombres:</strong>
+                                                                {{ $event->users->where('gender', 'masculino')->count() }}</p>
+                                                            <ul class="list-group">
                                                                 @foreach ($event->users as $user)
-                                                                    <option value="{{ $user->id }}">
-                                                                        {{ $user->name }}
-                                                                        ({{ $user->email }})
-                                                                    </option>
+                                                                    <li class="list-group-item d-flex justify-content-between">
+                                                                        <div>
+                                                                            <strong>{{ $user->name }}</strong><br>
+                                                                            correo: 📧 {{ $user->email }}<br>
+                                                                            telefono: 📞
+                                                                            {{ $user->phone ?? 'No registrado' }}<br>
+                                                                            género: ⚥ {{ $user->gender ?? 'Sin especificar' }}
+                                                                        </div>
+                                                                    </li>
                                                                 @endforeach
-                                                            </select>
-                                                        </div>
+                                                            </ul>
+                                                        @else
+                                                            <p class="text-muted">No hay usuarios asignados a este evento.</p>
+                                                        @endif
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                    </div>
-                                                </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+
+                                        {{-- Modal Eliminar Usuario --}}
+                                        <div class="modal fade" id="removeUserModal{{ $event->id }}" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title">Eliminar usuario de: {{ $event->title }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Cerrar"></button>
+                                                    </div>
+                                                    <form action="{{ route('events.removeUser', $event->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="user_id" class="form-label">Seleccionar
+                                                                    Usuario</label>
+                                                                <select name="user_id" id="user_id" class="form-control"
+                                                                    required>
+                                                                    <option value="">-- Selecciona un usuario --</option>
+                                                                    @foreach ($event->users as $user)
+                                                                        <option value="{{ $user->id }}">
+                                                                            {{ $user->name }}
+                                                                            ({{ $user->email }})
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endcan
+
                                 @empty
                                     <tr>
                                         <td colspan="7" class="text-center text-muted">No hay eventos registrados.</td>
@@ -214,52 +224,54 @@
     </div>
 
 
-    <!-- Modal Bootstrap -->
+    <!-- Modal crear evento -->
     <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="eventForm" method="POST">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header bg-navy text-white">
-                        <h5 class="modal-title" id="eventModalLabel">Agregar Evento</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Título</label>
-                            <input type="text" class="form-control" name="title" required>
+            @can('admin.usuarios.index')
+                <form id="eventForm" method="POST">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header bg-navy text-white">
+                            <h5 class="modal-title" id="eventModalLabel">Agregar Evento</h5>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <textarea class="form-control" name="description"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Fecha Inicio</label>
-                            <input type="datetime-local" class="form-control" name="start"
-                                value="{{ old('start') }}" required>
-                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Título</label>
+                                <input type="text" class="form-control" name="title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Descripción</label>
+                                <textarea class="form-control" name="description"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Fecha Inicio</label>
+                                <input type="datetime-local" class="form-control" name="start"
+                                    value="{{ old('start') }}" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Fecha Fin</label>
-                            <input type="datetime-local" class="form-control" name="end"
-                                value="{{ old('end') }}">
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Fecha Fin</label>
+                                <input type="datetime-local" class="form-control" name="end"
+                                    value="{{ old('end') }}">
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Color</label>
-                            <input type="color" class="form-control form-control-color" name="color"
-                                value="{{ old('color', '#000080') }}">
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Color</label>
+                                <input type="color" class="form-control form-control-color" name="color"
+                                    value="{{ old('color', '#000080') }}">
+                            </div>
 
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <button type="button" class="btn btn-danger" id="deleteEventBtn"
-                            style="display:none;">Eliminar</button>
-                        <div class="ms-auto">
-                            <button type="submit" class="btn btn-success">Guardar Evento</button>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <button type="button" class="btn btn-danger" id="deleteEventBtn"
+                                style="display:none;">Eliminar</button>
+                            <div class="ms-auto">
+                                <button type="submit" class="btn btn-success">Guardar Evento</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            @endcan
         </div>
     </div>
 

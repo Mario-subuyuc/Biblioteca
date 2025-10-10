@@ -39,9 +39,7 @@ Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 //====================================================
 //vitas para dashboard principal
 //====================================================
-Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])
-    ->middleware(['auth','two.factor'])
-    ->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->middleware(['auth','two.factor'])->name('dashboard');
 
 //===========================================
 //vistas para el dashboard principal/layoupt
@@ -142,13 +140,13 @@ Route::get('/admin/donaciones', [App\Http\Controllers\DonationController::class,
 Route::get('/admin/donaciones/create', [App\Http\Controllers\DonationController::class, 'create'])->name('admin.donaciones.create')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de envio de formulario crear
 Route::post('/admin/donaciones/create', [App\Http\Controllers\DonationController::class, 'store'])->name('admin.donaciones.store')->middleware(['auth', 'two.factor']);
-// Ruta para ver visitante por id
+// Ruta para ver donaciones por id
 Route::get('/admin/donaciones/{id}', [App\Http\Controllers\DonationController::class, 'show'])->name('admin.donaciones.show')->middleware(['auth', 'two.factor']);
-// Ruta para ver editar visitante
+// Ruta para ver editar donaciones
 Route::get('/admin/donaciones/{id}/edit', [App\Http\Controllers\DonationController::class, 'edit'])->name('admin.donaciones.edit')->middleware(['auth', 'two.factor']);
-// Ruta para enviar la actualizacion de visitante
+// Ruta para enviar la actualizacion de donaciones
 Route::put('/admin/donaciones/{id}', [App\Http\Controllers\DonationController::class, 'update'])->name('admin.donaciones.update')->middleware(['auth', 'two.factor']);
-// Ruta para ver eliminar visitante
+// Ruta para ver eliminar donaciones
 Route::get('/admin/donaciones/{id}/confirm-delete', [App\Http\Controllers\DonationController::class, 'confirmDelete'])->name('admin.donaciones.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('/admin/donaciones/{id}', [App\Http\Controllers\DonationController::class, 'destroy'])->name('admin.donaciones.destroy')->middleware(['auth', 'two.factor']);
@@ -162,7 +160,7 @@ Route::get('admin/libros', [App\Http\Controllers\BookController::class, 'index']
 Route::get('admin/libros/create', [App\Http\Controllers\BookController::class, 'create'])->name('admin.libros.create')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de envio de formulario crear
 Route::post('admin/libros/create', [App\Http\Controllers\BookController::class, 'store'])->name('admin.libros.store')->middleware(['auth', 'two.factor']);
-// Ruta para ver usuario por id
+// Ruta para ver libros por id
 Route::get('admin/libros/{id}', [App\Http\Controllers\BookController::class, 'show'])->name('admin.libros.show')->middleware(['auth', 'two.factor']);
 // Ruta para ver editar
 Route::get('admin/libros/{id}/edit', [App\Http\Controllers\BookController::class, 'edit'])->name('admin.libros.edit')->middleware(['auth', 'two.factor']);
@@ -172,7 +170,7 @@ Route::put('admin/libros/{id}', [App\Http\Controllers\BookController::class, 'up
 Route::get('admin/libros/{id}/confirm-delete', [App\Http\Controllers\BookController::class, 'confirmDelete'])->name('admin.libros.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('admin/libros/{id}', [App\Http\Controllers\BookController::class, 'destroy'])->name('admin.libros.destroy')->middleware(['auth', 'two.factor']);
-//ruta para deshabilitar usuario
+//ruta para deshabilitar libros
 Route::patch('/admin/libros/{id}/enable', [App\Http\Controllers\BookController::class, 'enable'])->name('admin.libros.enable')->middleware(['auth', 'two.factor']);
 
 
@@ -185,13 +183,13 @@ Route::get('admin/materiales', [App\Http\Controllers\MaterialController::class, 
 Route::get('admin/materiales/create', [App\Http\Controllers\MaterialController::class, 'create'])->name('admin.materiales.create')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de envio de formulario crear
 Route::post('admin/materiales/create', [App\Http\Controllers\MaterialController::class, 'store'])->name('admin.materiales.store')->middleware(['auth', 'two.factor']);
-// Ruta para ver usuario por id
+// Ruta para ver materiales por id
 Route::get('admin/materiales/{id}', [App\Http\Controllers\MaterialController::class, 'show'])->name('admin.materiales.show')->middleware(['auth', 'two.factor']);
-// Ruta para ver editar usuario
+// Ruta para ver editar materiales
 Route::get('admin/materiales/{id}/edit', [App\Http\Controllers\MaterialController::class, 'edit'])->name('admin.materiales.edit')->middleware(['auth', 'two.factor']);
-// Ruta para enviar la actualizacion de usuario
+// Ruta para enviar la actualizacion de materiales
 Route::put('admin/materiales/{id}', [App\Http\Controllers\MaterialController::class, 'update'])->name('admin.materiales.update')->middleware(['auth', 'two.factor']);
-// Ruta para ver eliminar usuario
+// Ruta para ver eliminar materiales
 Route::get('admin/materiales/{id}/confirm-delete', [App\Http\Controllers\MaterialController::class, 'confirmDelete'])->name('admin.materiales.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('admin/materiales/{id}', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('admin.materiales.destroy')->middleware(['auth', 'two.factor']);
@@ -217,15 +215,15 @@ Route::put('admin/reservas/{reservation}', [App\Http\Controllers\ReservationCont
 // =============================================
 
 // Página principal
-Route::get('admin/prestamos', [App\Http\Controllers\LoanController::class, 'index'])->name('admin.prestamos.index');
+Route::get('admin/prestamos', [App\Http\Controllers\LoanController::class, 'index'])->name('admin.prestamos.index')->middleware(['auth', 'two.factor']);
 // Crear préstamo (desde modal)
-Route::post('admin/prestamos', [App\Http\Controllers\LoanController::class, 'store'])->name('admin.prestamos.store');
+Route::post('admin/prestamos', [App\Http\Controllers\LoanController::class, 'store'])->name('admin.prestamos.store')->middleware(['auth', 'two.factor']);
 // Cancelar préstamo
-Route::post('admin/prestamos/{loan}/cancel', [App\Http\Controllers\LoanController::class, 'cancel'])->name('admin.prestamos.cancel');
+Route::post('admin/prestamos/{loan}/cancel', [App\Http\Controllers\LoanController::class, 'cancel'])->name('admin.prestamos.cancel')->middleware(['auth', 'two.factor']);
 // Cambiar estado desde historial
-Route::post('admin/prestamos/{loan}/update-state', [App\Http\Controllers\LoanController::class, 'updateState'])->name('admin.prestamos.updateState');
+Route::post('admin/prestamos/{loan}/update-state', [App\Http\Controllers\LoanController::class, 'updateState'])->name('admin.prestamos.updateState')->middleware(['auth', 'two.factor']);
 // Editar préstamo (solo fecha de devolución)
-Route::put('admin/prestamos/{loan}', [App\Http\Controllers\LoanController::class, 'update'])->name('admin.prestamos.update');
+Route::put('admin/prestamos/{loan}', [App\Http\Controllers\LoanController::class, 'update'])->name('admin.prestamos.update')->middleware(['auth', 'two.factor']);
 
 
 //====================================================
@@ -247,13 +245,13 @@ Route::get('admin/computadoras', [App\Http\Controllers\ComputerController::class
 Route::get('admin/computadoras/create', [App\Http\Controllers\ComputerController::class, 'create'])->name('admin.computadoras.create')->middleware(['auth', 'two.factor']);
 // Ruta para gestión de envio de formulario crear
 Route::post('admin/computadoras/create', [App\Http\Controllers\ComputerController::class, 'store'])->name('admin.computadoras.store')->middleware(['auth', 'two.factor']);
-// Ruta para ver usuario por id
+// Ruta para ver computadoras por id
 Route::get('admin/computadoras/{id}', [App\Http\Controllers\ComputerController::class, 'show'])->name('admin.computadoras.show')->middleware(['auth', 'two.factor']);
-// Ruta para ver editar usuario
+// Ruta para ver editar computadoras
 Route::get('admin/computadoras/{id}/edit', [App\Http\Controllers\ComputerController::class, 'edit'])->name('admin.computadoras.edit')->middleware(['auth', 'two.factor']);
-// Ruta para enviar la actualizacion de usuario
+// Ruta para enviar la actualizacion de computadoras
 Route::put('admin/computadoras/{id}', [App\Http\Controllers\ComputerController::class, 'update'])->name('admin.computadoras.update')->middleware(['auth', 'two.factor']);
-// Ruta para ver eliminar usuario
+// Ruta para ver eliminar computadoras
 Route::get('admin/computadoras/{id}/confirm-delete', [App\Http\Controllers\ComputerController::class, 'confirmDelete'])->name('admin.computadoras.confirmDelete')->middleware(['auth', 'two.factor']);
 // Ruta para mandar la eliminacion
 Route::delete('admin/computadoras/{id}', [App\Http\Controllers\ComputerController::class, 'destroy'])->name('admin.computadoras.destroy')->middleware(['auth', 'two.factor']);
@@ -269,8 +267,8 @@ Route::get('admin/reportes', [App\Http\Controllers\ReportController::class, 'ind
 //====================================================
 // rutas para la gestion de recomendaciones
 //====================================================
-// Ruta para Reporte
-Route::get('admin/recomendaciones', [App\Http\Controllers\RecomendationController::class, 'index'])->name('admin.reportes.index')->middleware(['auth', 'two.factor']);
+// Ruta para Recomendaciones
+Route::get('admin/recomendaciones', [App\Http\Controllers\RecomendationController::class, 'index'])->name('admin.recomendaciones.index')->middleware(['auth', 'two.factor']);
 
 
 //====================================================
@@ -285,9 +283,9 @@ Route::post('events/create', [App\Http\Controllers\EventController::class, 'stor
 Route::post('events/{id}/update', [App\Http\Controllers\EventController::class, 'update'])->name('admin.events.update')->middleware(['auth', 'two.factor']);
 // Nueva ruta para eliminar
 Route::delete('events/{id}/delete', [App\Http\Controllers\EventController::class, 'destroy'])->name('admin.events.destroy');
-// Asignar usuario a evento
+// Asignar eventos a evento
 Route::post('events/{id}/assign-user', [App\Http\Controllers\EventController::class, 'assignUser'])->name('events.assignUser')->middleware(['auth', 'two.factor']);
-// Eliminar usuario de evento
+// Eliminar eventos de evento
 Route::delete('events/{id}/remove-user', [App\Http\Controllers\EventController::class, 'removeUser'])->name('events.removeUser')->middleware(['auth', 'two.factor']);
 
 //====================================================

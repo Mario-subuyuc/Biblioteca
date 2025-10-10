@@ -11,9 +11,11 @@
                 <div class="card-header ">
                     <h3 class="card-title">Libros Registrados</h3>
                     <div class="card-tools">
+                        @can('admin.usuarios.index')
                         <a href="{{ route('admin.libros.create') }}" class="btn btn-primary">
                             Registrar nuevo
                         </a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -27,7 +29,9 @@
                                 <th style="text-align: center">Dewey</th>
                                 <th style="text-align: center">ISBN</th>
                                 <th style="text-align: center">Estado</th>
-                                <th style="text-align: center">Acciones</th>
+                                @can('admin.usuarios.index')
+                                    <th style="text-align: center">Acciones</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +52,8 @@
                                             <span class="badge bg-success">Habilitado</span>
                                         @endif
                                     </td>
+                                    @can('admin.usuarios.index')
+
 
                                     <td style="text-align: center">
                                         <div class="btn-group" role="group">
@@ -78,6 +84,7 @@
                                             @endif
                                         </div>
                                     </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

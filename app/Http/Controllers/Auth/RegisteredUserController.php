@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Notifications\TwoFactorCodeNotification;
 use App\Models\Reader;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -54,6 +55,10 @@ class RegisteredUserController extends Controller
             'gender' => $request->gender,
             'password' => Hash::make($request->password),
         ]);
+        // Asignar rol de Spatie
+        // Obtener o crear el rol "director"
+        $lectorRole   = Role::firstOrCreate(['name' => 'lector']);
+        $user->assignRole($lectorRole);
 
         Reader::create([
             'user_id' => $user->id,

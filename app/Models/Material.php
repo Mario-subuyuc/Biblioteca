@@ -25,6 +25,8 @@ class Material extends Model
     // Relación con usuario
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id')->withDefault([
+            'name' => 'Visitante no registrado',
+        ]);;
     }
 }

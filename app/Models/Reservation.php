@@ -16,7 +16,7 @@ class Reservation extends Model
         'reader_id',
         'book_id',
         'date',
-        'status',
+        'state',
     ];
 
     /**

@@ -10,12 +10,15 @@
         <div class="col-md-6">
             <h2><i class="bi bi-book-half"></i> Gestión de Préstamos</h2>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-6 text-end">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearPrestamo">
+            <button class="btn bg-indigo" data-bs-toggle="modal" data-bs-target="#modalCrearPrestamo">
                 <i class="bi bi-plus-circle"></i> Nuevo Préstamo
             </button>
         </div>
     </div>
+    <br>
 
     <!-- Tabla de TODOS LOS PRÉSTAMOS -->
     <div class="row mb-4">
@@ -34,7 +37,9 @@
                                 <th>Fecha Préstamo</th>
                                 <th>Fecha Devolución</th>
                                 <th>Estado</th>
+                                @can('admin.usuarios.index')
                                 <th>Acciones</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -45,6 +50,7 @@
                                     <td>{{ $loan->book->title ?? 'Libro eliminado' }}</td>
                                     <td>{{ \Carbon\Carbon::parse($loan->loan_date)->format('d/m/Y') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($loan->return_date)->format('d/m/Y') }}</td>
+
                                     <td>
                                         @php
                                             $badge = match ($loan->status) {
@@ -57,12 +63,14 @@
                                         @endphp
                                         <span class="badge bg-{{ $badge }}">{{ ucfirst($loan->status) }}</span>
                                     </td>
+                                    @can('admin.usuarios.index')
                                     <td>
                                         <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
                                                 data-bs-target="#modalEstado{{ $loan->id }}">
                                             <i class="bi bi-arrow-repeat"></i> Estado
                                         </button>
                                     </td>
+                                    @endcan
                                 </tr>
 
                                 <!-- Modal actualizar estado -->

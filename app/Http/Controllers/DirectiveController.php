@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class DirectiveController  extends Controller
 {
@@ -52,6 +53,10 @@ class DirectiveController  extends Controller
             'gender'   => $request->gender,
             'password' => Hash::make($request->password),
         ]);
+        // Asignar rol de Spatie
+        // Obtener o crear el rol "director"
+        $directorRole = Role::firstOrCreate(['name' => 'director']);
+        $user->assignRole($directorRole);
 
         // Crear director ligado al usuario
         Directive::create([
